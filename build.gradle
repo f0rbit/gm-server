@@ -1,0 +1,53 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation
+
+
+plugins {
+    id 'java'
+    id "com.github.johnrengelman.shadow" version "7.0.0"
+}
+
+group 'dev.forbit'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    shadow localGroovy()
+    shadow gradleApi()
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.14.1'
+    compileOnly group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.14.1'
+
+}
+
+test {
+    useJUnitPlatform()
+}
+
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'dev.forbit.server.Test'
+    }
+}
+
+shadowJar {
+    archiveClassifier.set("shaded")
+}
+
+task relocateShadowJar(type: ConfigureShadowRelocation) {
+    target = tasks.shadowJar
+}
+
+task install {
+    dependsOn build
+    dependsOn shadowJar
+}
+
+tasks.shadowJar.dependsOn tasks.relocateShadowJar
+
+
