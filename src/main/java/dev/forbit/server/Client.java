@@ -26,20 +26,15 @@ public @Data class Client {
      */
     SocketAddress address;
 
+    /**
+     * The ping of the client to the server, depends on the usage of {@link dev.forbit.server.packets.PingPacket}
+     *
+     * Note: This ping is not the total ping, but rather the time taken from the client to the server.
+     */
+    long ping;
+
 
     public Client() {
         setId(UUID.randomUUID());
-    }
-
-    public void sendUDP(UDPServer server, ByteBuffer buffer) {
-        server.sendPacket(this, buffer);
-    }
-
-    public void sendTCP(ByteBuffer buffer) {
-        try {
-            channel.write(buffer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

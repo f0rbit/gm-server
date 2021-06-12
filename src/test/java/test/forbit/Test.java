@@ -1,5 +1,7 @@
-package dev.forbit.server;
+package test.forbit;
 
+
+import dev.forbit.server.ServerInstance;
 
 import java.util.logging.Level;
 

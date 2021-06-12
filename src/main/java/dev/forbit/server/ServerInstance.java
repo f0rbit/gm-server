@@ -1,9 +1,12 @@
 package dev.forbit.server;
 
 import dev.forbit.server.logging.LogFormatter;
+import dev.forbit.server.logging.NotImplementedException;
 import dev.forbit.server.networks.QueryServer;
 import dev.forbit.server.networks.TCPServer;
 import dev.forbit.server.networks.UDPServer;
+import dev.forbit.server.packets.Packet;
+import dev.forbit.server.packets.PingPacket;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -81,5 +84,20 @@ public class ServerInstance {
         assert (getClients().contains(c));
         clients.remove(c);
         getLogger().fine("Remove client: " + c);
+    }
+
+    public void startPinging(Client client) {
+        PingPacket packet = new PingPacket();
+        packet.setLastPing(System.currentTimeMillis());
+        getUDPServer().send(client, packet);
+
+    }
+
+    public void receivePacket(Client client, Packet packet) {
+        try {
+            packet.receive(client);
+        } catch (NotImplementedException e) {
+            e.printStackTrace();
+        }
     }
 }

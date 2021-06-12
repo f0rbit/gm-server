@@ -1,6 +1,10 @@
 package dev.forbit.server.packets;
 
+import dev.forbit.server.Client;
 import dev.forbit.server.logging.NotImplementedException;
+import dev.forbit.server.networks.DataServer;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -8,6 +12,8 @@ import java.nio.ByteOrder;
 public abstract class Packet {
 
     public static final int PACKET_SIZE = 128;
+
+    @Getter @Setter private DataServer dataServer;
 
 
     /**
@@ -27,6 +33,9 @@ public abstract class Packet {
      * @throws NotImplementedException throw this if body is empty.
      */
     abstract public void load(ByteBuffer buffer) throws NotImplementedException;
+
+
+    abstract public void receive(Client client) throws NotImplementedException;
 
 
     public ByteBuffer getBuffer() {

@@ -21,4 +21,10 @@ public class ConnectionPacket extends Packet {
     @Override public void load(ByteBuffer buffer) throws NotImplementedException {
         throw new NotImplementedException();
     }
+
+    @Override public void receive(Client client) throws NotImplementedException {
+        throw new NotImplementedException();
+    }
+
+
 }

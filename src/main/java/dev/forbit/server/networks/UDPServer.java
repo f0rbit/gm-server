@@ -3,9 +3,12 @@ package dev.forbit.server.networks;
 import dev.forbit.server.Client;
 import dev.forbit.server.ServerInstance;
 import dev.forbit.server.ServerUtils;
+import dev.forbit.server.packets.Packet;
 import dev.forbit.server.packets.RegisterPacket;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NonNull;
+import org.apache.logging.log4j.core.jmx.Server;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -16,7 +19,7 @@ import java.nio.channels.DatagramChannel;
 import java.util.Arrays;
 import java.util.UUID;
 
-@EqualsAndHashCode(callSuper = true) public @Data class UDPServer extends Thread {
+@EqualsAndHashCode(callSuper = true) public @Data class UDPServer extends Thread  implements DataServer {
 
     public static boolean running;
     String address;
@@ -41,12 +44,11 @@ import java.util.UUID;
             InetSocketAddress sAddr = new InetSocketAddress(getAddress(), getPort());
             server.bind(sAddr);
             ByteBuffer buffer = ByteBuffer.allocate(128);
-
+            buffer.order(ByteOrder.LITTLE_ENDIAN);
             while (running) {
                 SocketAddress remoteAddr = server.receive(buffer);
                 //printBuffer(buffer);
                 buffer.rewind();
-                buffer.order(ByteOrder.LITTLE_ENDIAN);
                 String header = ServerUtils.getNextString(buffer);
                 if (header.equals(RegisterPacket.class.getName().trim())) {
                     RegisterPacket packet = new RegisterPacket();
@@ -59,9 +61,17 @@ import java.util.UUID;
                     }
                     client.setAddress(remoteAddr);
                     getInstance().getLogger().info("Registered "+client+" to UDP Server");
+                    getInstance().startPinging(client);
+                } else {
+                    Client client = instance.getClient(remoteAddr);
+                    getInstance().getLogger().finest("Incoming UDP packet {\n\t\"client\": \""+client+"\"\n\t\"data\": ["+ServerUtils.getBuffer(buffer)+"]\n}");
+                    Packet packet = ServerUtils.getPacket(header);
+                    packet.setDataServer(this);
+                    packet.load(buffer);
+                    getInstance().receivePacket(client, packet);
+
                 }
-                Client client = instance.getClient(remoteAddr);
-                getInstance().getLogger().finest("Incoming UDP packet {\n\t\"client\": \""+client+"\"\n\t\"data\": ["+ServerUtils.getBuffer(buffer)+"]\n}");
+
                 buffer.clear();
             }
         } catch (Exception e) {
@@ -69,10 +79,11 @@ import java.util.UUID;
         }
     }
 
-    public void sendPacket(Client client, ByteBuffer buffer) {
+    @Override
+    public void send(@NonNull Client client, @NonNull Packet packet) {
         assert (client.getAddress() != null);
         try {
-            getServer().send(buffer, client.getAddress());
+            getServer().send(packet.getBuffer(), client.getAddress());
         } catch (IOException e) {
             e.printStackTrace();
         }

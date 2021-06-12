@@ -7,6 +7,7 @@ import dev.forbit.server.packets.ConnectionPacket;
 import dev.forbit.server.packets.Packet;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -20,7 +21,7 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
-@EqualsAndHashCode(callSuper = true) public @Data class TCPServer extends Thread {
+@EqualsAndHashCode(callSuper = true) public @Data class TCPServer extends Thread implements DataServer {
 
     public static boolean running;
     String address;
@@ -87,6 +88,13 @@ import java.util.Set;
                     sc.read(bb);
                     bb.rewind();
                     getInstance().getLogger().finest("Incoming TCP packet {\n\t\"client\": \""+client+"\"\n\t\"data\": ["+ServerUtils.getBuffer(bb)+"]\n}");
+
+                    String header = ServerUtils.getNextString(bb);
+                    Packet packet = ServerUtils.getPacket(header);
+                    packet.setDataServer(this);
+                    packet.load(bb);
+                    getInstance().receivePacket(client, packet);
+
                 } catch (Exception e) {
                     getInstance().removeClient(client);
                     try {
@@ -99,12 +107,12 @@ import java.util.Set;
         }
     }
 
-    public void send(Client client, Packet packet) {
+    @Override
+    public void send(@NonNull Client client, @NonNull Packet packet) {
         try {
             client.getChannel().write(packet.getBuffer());
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

@@ -1,5 +1,6 @@
 package dev.forbit.server.packets;
 
+import dev.forbit.server.Client;
 import dev.forbit.server.ServerUtils;
 import dev.forbit.server.logging.NotImplementedException;
 import lombok.Getter;
@@ -24,5 +25,9 @@ public class RegisterPacket extends Packet {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override public void receive(Client client) throws NotImplementedException {
+        throw new NotImplementedException();
     }
 }

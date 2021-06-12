@@ -1,5 +1,7 @@
 package dev.forbit.server;
 
+import dev.forbit.server.packets.Packet;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -30,6 +32,11 @@ public class ServerUtils {
         }
         return builder.toString().trim();
 
+    }
+
+
+    public static Packet getPacket(String packetName) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+        return (Packet) Class.forName(packetName).newInstance();
     }
 
 }
