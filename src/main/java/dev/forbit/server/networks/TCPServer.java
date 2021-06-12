@@ -3,6 +3,8 @@ package dev.forbit.server.networks;
 import dev.forbit.server.Client;
 import dev.forbit.server.ServerInstance;
 import dev.forbit.server.ServerUtils;
+import dev.forbit.server.packets.ConnectionPacket;
+import dev.forbit.server.packets.Packet;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -69,6 +71,8 @@ import java.util.Set;
                     Client client = new Client();
                     client.setChannel(socketChannel);
                     getInstance().addClient(client);
+
+                    send(client, new ConnectionPacket(client));
                 }
             } catch (IOException exception) {
                 exception.printStackTrace();
@@ -76,12 +80,13 @@ import java.util.Set;
         } else if (key.isReadable()) {
             SocketChannel sc = (SocketChannel) key.channel();
             ByteBuffer bb = ByteBuffer.allocate(128);
-            //bb.order(ByteOrder.LITTLE_ENDIAN);
+            bb.order(ByteOrder.LITTLE_ENDIAN);
             Client client = getInstance().getClient(sc);
             if (sc.isConnected() && sc.isOpen()) {
                 try {
                     sc.read(bb);
                     bb.rewind();
+                    getInstance().getLogger().finest("Incoming TCP packet {\n\t\"client\": \""+client+"\"\n\t\"data\": ["+ServerUtils.getBuffer(bb)+"]\n}");
                 } catch (Exception e) {
                     getInstance().removeClient(client);
                     try {
@@ -91,6 +96,14 @@ import java.util.Set;
                     }
                 }
             }
+        }
+    }
+
+    public void send(Client client, Packet packet) {
+        try {
+            client.getChannel().write(packet.getBuffer());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }

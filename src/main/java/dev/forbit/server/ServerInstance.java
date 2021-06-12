@@ -1,27 +1,41 @@
 package dev.forbit.server;
 
+import dev.forbit.server.logging.LogFormatter;
 import dev.forbit.server.networks.QueryServer;
 import dev.forbit.server.networks.TCPServer;
 import dev.forbit.server.networks.UDPServer;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.annotation.Nullable;
+import java.net.SocketAddress;
 import java.nio.channels.SocketChannel;
 import java.util.HashSet;
 import java.util.UUID;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Formatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ServerInstance {
+    @Getter private final Logger logger;
     @Getter private final HashSet<Client> clients = new HashSet<>();
-
     @Getter @Setter private QueryServer queryServer;
     @Getter @Setter private TCPServer TCPServer;
     @Getter @Setter private UDPServer UDPServer;
 
-    public ServerInstance() {
+    public ServerInstance(Level logLevel) {
+        logger = Logger.getLogger(ServerInstance.class.getName());
+        getLogger().setUseParentHandlers(false);
+        getLogger().setLevel(logLevel);
+        getLogger().addHandler(new ConsoleHandler() {
+            @Override public synchronized void setFormatter(Formatter newFormatter) throws SecurityException {
+                this.setLevel(Level.ALL);
+                super.setFormatter(new LogFormatter());
+            }
+        });
         ServerProperties properties = new ServerProperties(System.getenv());
-        System.out.println(properties);
+        getLogger().info("properties: " + properties);
 
         this.queryServer = new QueryServer(this, properties.getAddress(), properties.getPort(ServerType.QUERY));
         this.UDPServer = new UDPServer(this, properties.getAddress(), properties.getPort(ServerType.UDP));
@@ -29,14 +43,14 @@ public class ServerInstance {
 
         getTCPServer().start();
         getUDPServer().start();
-        ;
+
         getQueryServer().start();
     }
 
 
     public void addClient(Client c) {
         getClients().add(c);
-        System.out.println("added client" + c+", size: "+getClients().size());
+        getLogger().fine("Client added: " + c);
     }
 
     @Nullable public Client getClient(SocketChannel sc) {
@@ -58,9 +72,14 @@ public class ServerInstance {
     }
 
 
+    @Nullable public Client getClient(SocketAddress address) {
+        return getClients().stream().filter(client -> (client.getAddress() != null && client.getAddress().equals(address))).findAny().orElse(null);
+    }
+
+
     public void removeClient(Client c) {
         assert (getClients().contains(c));
         clients.remove(c);
-        System.out.println("removed client" + c+", size: "+getClients().size());
+        getLogger().fine("Remove client: " + c);
     }
 }

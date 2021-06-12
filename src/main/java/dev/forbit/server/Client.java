@@ -10,8 +10,20 @@ import java.nio.channels.SocketChannel;
 import java.util.UUID;
 
 public @Data class Client {
+
+    /**
+     * The ID of this client
+     */
     UUID id;
+
+    /**
+     * The channel that is connected to the {@link dev.forbit.server.networks.TCPServer}
+     */
     SocketChannel channel;
+
+    /**
+     * The address associated with the {@link dev.forbit.server.networks.UDPServer}
+     */
     SocketAddress address;
 
 

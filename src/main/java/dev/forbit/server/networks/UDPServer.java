@@ -3,6 +3,7 @@ package dev.forbit.server.networks;
 import dev.forbit.server.Client;
 import dev.forbit.server.ServerInstance;
 import dev.forbit.server.ServerUtils;
+import dev.forbit.server.packets.RegisterPacket;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -12,6 +13,7 @@ import java.net.SocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.DatagramChannel;
+import java.util.Arrays;
 import java.util.UUID;
 
 @EqualsAndHashCode(callSuper = true) public @Data class UDPServer extends Thread {
@@ -35,7 +37,6 @@ import java.util.UUID;
     @Override public void run() {
         running = true;
         try {
-            System.out.println("[UDP] Starting UDP Server");
             server = DatagramChannel.open();
             InetSocketAddress sAddr = new InetSocketAddress(getAddress(), getPort());
             server.bind(sAddr);
@@ -46,19 +47,21 @@ import java.util.UUID;
                 //printBuffer(buffer);
                 buffer.rewind();
                 buffer.order(ByteOrder.LITTLE_ENDIAN);
-                byte id = buffer.get();
-                Client c = instance.getClient(UUID.fromString(ServerUtils.getNextString(buffer)));
-                if (c == null) {
-                    // throw error
-                    continue;
+                String header = ServerUtils.getNextString(buffer);
+                if (header.equals(RegisterPacket.class.getName().trim())) {
+                    RegisterPacket packet = new RegisterPacket();
+                    packet.load(buffer);
+                    Client client = instance.getClient(packet.getId());
+                    if (client == null) {
+                        // client not connected
+                        getInstance().getLogger().warning("User on "+remoteAddr+" tried to register with UDP server before TCP server.");
+                        continue;
+                    }
+                    client.setAddress(remoteAddr);
+                    getInstance().getLogger().info("Registered "+client+" to UDP Server");
                 }
-                if (c.getAddress() == null) {
-                    c.setAddress(remoteAddr);
-                }
-                // OUTPUT packet recieved
-                System.out.println("udp packet recieved");
-                //Server.handlePacket(c, PacketID.fromID(id), buffer);
-                //server.send(Server.encoder.encode(CharBuffer.wrap("UDP Connected!")), remoteAddr);
+                Client client = instance.getClient(remoteAddr);
+                getInstance().getLogger().finest("Incoming UDP packet {\n\t\"client\": \""+client+"\"\n\t\"data\": ["+ServerUtils.getBuffer(buffer)+"]\n}");
                 buffer.clear();
             }
         } catch (Exception e) {
