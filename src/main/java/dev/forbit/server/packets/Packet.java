@@ -11,8 +11,14 @@ import java.nio.ByteOrder;
 
 public abstract class Packet {
 
-    public static final int PACKET_SIZE = 128;
+    /**
+     * The packet size of all packets
+     */
+    public static final int PACKET_SIZE = 1024;
 
+    /**
+     * The server that the packet was recived on
+     */
     @Getter @Setter private DataServer dataServer;
 
     /**
@@ -34,9 +40,21 @@ public abstract class Packet {
     abstract public void load(ByteBuffer buffer) throws NotImplementedException;
 
 
+    /**
+     * Event fired when the packet is recieved by a server.
+     *
+     * @param client the client that sent the packet
+     *
+     * @throws NotImplementedException throw this if body is empty.
+     */
     abstract public void receive(Client client) throws NotImplementedException;
 
 
+    /**
+     * Returns a sendable bufer with all the information, including header
+     *
+     * @return buffer to send to client
+     */
     public ByteBuffer getBuffer() {
         ByteBuffer buffer = ByteBuffer.allocate(PACKET_SIZE);
         buffer.order(ByteOrder.LITTLE_ENDIAN);

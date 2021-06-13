@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.UUID;
 
+
+/**
+ * Packet sent after the client recieves their UUID from the TCP server, and is sending it to the UDP server to register it's address with the correct client instance.
+ */
 public class RegisterPacket extends Packet {
 
     @Getter @Setter UUID id;

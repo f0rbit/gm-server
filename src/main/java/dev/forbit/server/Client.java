@@ -34,6 +34,11 @@ public @Data class Client {
     long ping;
 
 
+    /**
+     * Constructor of client
+     *
+     * It assigns this instance its own {@link UUID}
+     */
     public Client() {
         setId(UUID.randomUUID());
     }

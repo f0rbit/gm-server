@@ -87,12 +87,10 @@ public class TestServerUtils {
     }
 
     boolean packetTest(Class<? extends Packet> clazz) {
-        System.out.println("class: "+clazz.getName());
         Packet packet = null;
         try {
             packet = ServerUtils.getPacket(clazz.getName());
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
-            System.out.println("failed: "+clazz);
             Assertions.fail("Get Packet threw exception.");
             e.printStackTrace();
         }

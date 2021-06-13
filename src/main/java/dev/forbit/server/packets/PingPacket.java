@@ -8,6 +8,9 @@ import lombok.Setter;
 
 import java.nio.ByteBuffer;
 
+/**
+ * A basic implementation of a ping system.
+ */
 public class PingPacket extends Packet {
 
     @Getter @Setter Client client;

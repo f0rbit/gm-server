@@ -4,8 +4,10 @@ import dev.forbit.server.ServerInstance;
 import lombok.Getter;
 import lombok.Setter;
 
-
-// TODO REST API
+/**
+ * Query server that isn't implemented yet
+ * TODO implement this.
+ */
 public class QueryServer extends Thread {
 
     @Getter @Setter int port;

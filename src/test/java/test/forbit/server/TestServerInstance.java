@@ -2,6 +2,8 @@ package test.forbit.server;
 
 import dev.forbit.server.ServerInstance;
 import dev.forbit.server.ServerUtils;
+import dev.forbit.server.TestServer;
+import dev.forbit.server.packets.Packet;
 import dev.forbit.server.packets.PingPacket;
 import dev.forbit.server.packets.RegisterPacket;
 import lombok.Getter;
@@ -28,7 +30,7 @@ public class TestServerInstance {
         environment.put("UDP_PORT", "71");
         environment.put("QUERY_PORT", "69");
         environment.put("ADDRESS", "localhost");
-        instance = new ServerInstance(Level.ALL,environment);
+        instance = new TestServer(Level.ALL, environment);
     }
 
 
@@ -62,7 +64,7 @@ public class TestServerInstance {
         void connectTCP() throws IOException {
             InetSocketAddress socketAddress = new InetSocketAddress("localhost", 70);
             setChannel(SocketChannel.open(socketAddress));
-            ByteBuffer buffer = ByteBuffer.allocate(256);
+            ByteBuffer buffer = ByteBuffer.allocate(Packet.PACKET_SIZE);
             getChannel().read(buffer);
             buffer.rewind();
             String header = ServerUtils.getNextString(buffer);
@@ -75,7 +77,7 @@ public class TestServerInstance {
             datagramChannel.bind(null);
             datagramChannel.connect(getAddress());
             setDatagramChannel(datagramChannel);
-            ByteBuffer buffer = ByteBuffer.allocate(256);
+            ByteBuffer buffer = ByteBuffer.allocate(Packet.PACKET_SIZE);
             String register = RegisterPacket.class.getName();
             buffer.put(register.getBytes());
             buffer.put((byte) 0x00);
@@ -102,15 +104,15 @@ public class TestServerInstance {
 
         @Test
         void testPingPacket() throws IOException {
-            ByteBuffer buffer = ByteBuffer.allocate(256);
+            ByteBuffer buffer = ByteBuffer.allocate(Packet.PACKET_SIZE);
             String header = PingPacket.class.getName();
             buffer.put(header.getBytes());
             buffer.put((byte) 0x00);
-            buffer.putInt(81874);
+            buffer.putInt(81874); // random number
             buffer.flip();
             buffer.rewind();
             getDatagramChannel().write(buffer);
-            ByteBuffer recieve = ByteBuffer.allocate(256);
+            ByteBuffer recieve = ByteBuffer.allocate(Packet.PACKET_SIZE);
 
             Assertions.assertNotNull(recieve);
 

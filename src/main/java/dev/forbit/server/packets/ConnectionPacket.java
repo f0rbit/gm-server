@@ -7,6 +7,9 @@ import lombok.Setter;
 
 import java.nio.ByteBuffer;
 
+/**
+ * The packet sent to the client after connecting to the TCP server. Contains the client's UUID which will later be sent to the UDP server with {@link RegisterPacket}
+ */
 public class ConnectionPacket extends Packet {
     @Getter @Setter Client client;
 

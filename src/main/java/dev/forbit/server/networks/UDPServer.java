@@ -8,7 +8,6 @@ import dev.forbit.server.packets.RegisterPacket;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
-import org.apache.logging.log4j.core.jmx.Server;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -16,25 +15,50 @@ import java.net.SocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.DatagramChannel;
-import java.util.Arrays;
-import java.util.UUID;
 
-@EqualsAndHashCode(callSuper = true) public @Data class UDPServer extends Thread  implements DataServer {
+/**
+ * Implementaion of the UDP Server
+ * <p>
+ * Only uses one thread to handle all connections thanks to NIO.
+ */
+@EqualsAndHashCode(callSuper = true) public @Data class UDPServer extends Thread implements DataServer {
 
-
+    /**
+     * Whether the server is running or not
+     */
     public boolean running;
+
+    /**
+     * Gets the host address
+     */
     String address;
+
+    /**
+     * The port number to be hosting on
+     */
     int port;
+
+    /**
+     * The {@link DatagramChannel} the server is bound too
+     */
     private DatagramChannel server = null;
 
+    /**
+     * The parent {@link ServerInstance} that made this instance.
+     */
     private ServerInstance instance;
 
+    /**
+     * Constructor
+     *
+     * @param instance the parent instance which is creating this server
+     * @param ip       address to host on
+     * @param port     the port number
+     */
     public UDPServer(ServerInstance instance, String ip, int port) {
         this.instance = instance;
         setAddress(ip);
         setPort(port);
-
-
     }
 
 
@@ -44,7 +68,7 @@ import java.util.UUID;
             server = DatagramChannel.open();
             InetSocketAddress sAddr = new InetSocketAddress(getAddress(), getPort());
             server.bind(sAddr);
-            ByteBuffer buffer = ByteBuffer.allocate(128);
+            ByteBuffer buffer = ByteBuffer.allocate(Packet.PACKET_SIZE);
             buffer.order(ByteOrder.LITTLE_ENDIAN);
             while (running) {
                 SocketAddress remoteAddr = server.receive(buffer);
@@ -57,15 +81,17 @@ import java.util.UUID;
                     Client client = instance.getClient(packet.getId());
                     if (client == null) {
                         // client not connected
-                        getInstance().getLogger().warning("User on "+remoteAddr+" tried to register with UDP server before TCP server.");
+                        getInstance().getLogger().warning("User on " + remoteAddr + " tried to register with UDP server before TCP server.");
                         continue;
                     }
                     client.setAddress(remoteAddr);
-                    getInstance().getLogger().info("Registered "+client+" to UDP Server");
+                    getInstance().getLogger().info("Registered " + client + " to UDP Server");
                     getInstance().startPinging(client);
-                } else {
+                    getInstance().onConnect(client);
+                }
+                else {
                     Client client = instance.getClient(remoteAddr);
-                    getInstance().getLogger().finest("Incoming UDP packet {\n\t\"client\": \""+client+"\"\n\t\"data\": ["+ServerUtils.getBuffer(buffer)+"]\n}");
+                    getInstance().getLogger().finest("Incoming UDP packet {\n\t\"client\": \"" + client + "\"\n\t\"data\": [" + ServerUtils.getBuffer(buffer) + "]\n}");
                     Packet packet = ServerUtils.getPacket(header);
                     packet.setDataServer(this);
                     packet.load(buffer);
@@ -74,14 +100,15 @@ import java.util.UUID;
                 }
 
                 buffer.clear();
+
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    @Override
-    public void send(@NonNull Client client, @NonNull Packet packet) {
+
+    @Override public void send(@NonNull Client client, @NonNull Packet packet) {
         assert (client.getAddress() != null);
         try {
             getServer().send(packet.getBuffer(), client.getAddress());
@@ -90,8 +117,7 @@ import java.util.UUID;
         }
     }
 
-    @Override
-    public void shutdown() {
+    @Override public void shutdown() {
         setRunning(false);
     }
 

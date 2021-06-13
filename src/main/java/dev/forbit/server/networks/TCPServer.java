@@ -10,7 +10,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -23,12 +22,38 @@ import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true) public @Data class TCPServer extends Thread implements DataServer {
 
+    /**
+     * Whether the server is running or not
+     */
     public boolean running;
+
+    /**
+     * Gets the host address
+     */
     String address;
+
+    /**
+     * The port number to be hosting on
+     */
     int port;
+
+    /**
+     * The {@link ServerSocketChannel} the server is bound too
+     */
     private ServerSocketChannel channel;
+
+    /**
+     * The parent {@link ServerInstance} that made this instance.
+     */
     private ServerInstance instance;
 
+    /**
+     * Constructor
+     *
+     * @param instance the parent instance which is creating this server
+     * @param address  address to host on
+     * @param port     the port number
+     */
     public TCPServer(ServerInstance instance, String address, int port) {
         setAddress(address);
         setPort(port);
@@ -77,16 +102,17 @@ import java.util.Set;
             } catch (IOException exception) {
                 exception.printStackTrace();
             }
-        } else if (key.isReadable()) {
+        }
+        else if (key.isReadable()) {
             SocketChannel sc = (SocketChannel) key.channel();
-            ByteBuffer bb = ByteBuffer.allocate(128);
+            ByteBuffer bb = ByteBuffer.allocate(Packet.PACKET_SIZE);
             bb.order(ByteOrder.LITTLE_ENDIAN);
             Client client = getInstance().getClient(sc);
             if (sc.isConnected() && sc.isOpen()) {
                 try {
                     sc.read(bb);
                     bb.rewind();
-                    getInstance().getLogger().finest("Incoming TCP packet {\n\t\"client\": \""+client+"\"\n\t\"data\": ["+ServerUtils.getBuffer(bb)+"]\n}");
+                    getInstance().getLogger().finest("Incoming TCP packet {\n\t\"client\": \"" + client + "\"\n\t\"data\": [" + ServerUtils.getBuffer(bb) + "]\n}");
 
                     String header = ServerUtils.getNextString(bb);
                     Packet packet = ServerUtils.getPacket(header);
@@ -95,6 +121,7 @@ import java.util.Set;
                     getInstance().receivePacket(client, packet);
 
                 } catch (Exception e) {
+                    getInstance().onDisconnect(client);
                     getInstance().removeClient(client);
                     try {
                         sc.close();
@@ -106,8 +133,7 @@ import java.util.Set;
         }
     }
 
-    @Override
-    public void send(@NonNull Client client, @NonNull Packet packet) {
+    @Override public void send(@NonNull Client client, @NonNull Packet packet) {
         try {
             client.getChannel().write(packet.getBuffer());
         } catch (IOException e) {
