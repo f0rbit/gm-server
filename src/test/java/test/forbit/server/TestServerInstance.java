@@ -6,6 +6,7 @@ import dev.forbit.server.TestServer;
 import dev.forbit.server.packets.Packet;
 import dev.forbit.server.packets.PingPacket;
 import dev.forbit.server.packets.RegisterPacket;
+import dev.forbit.server.utility.GMLOutputBuffer;
 import lombok.Getter;
 import lombok.Setter;
 import org.junit.jupiter.api.*;
@@ -77,15 +78,11 @@ public class TestServerInstance {
             datagramChannel.bind(null);
             datagramChannel.connect(getAddress());
             setDatagramChannel(datagramChannel);
-            ByteBuffer buffer = ByteBuffer.allocate(Packet.PACKET_SIZE);
             String register = RegisterPacket.class.getName();
-            buffer.put(register.getBytes());
-            buffer.put((byte) 0x00);
-            buffer.put(getId().toString().getBytes());
-            buffer.put((byte) 0x00);
-            buffer.flip();
-            buffer.rewind();
-            getDatagramChannel().write(buffer);
+            GMLOutputBuffer buffer = new GMLOutputBuffer();
+            buffer.writeString(register);
+            buffer.writeString(getId().toString());
+            getDatagramChannel().write(buffer.getBuffer());
         }
 
         @Test
@@ -104,14 +101,11 @@ public class TestServerInstance {
 
         @Test
         void testPingPacket() throws IOException {
-            ByteBuffer buffer = ByteBuffer.allocate(Packet.PACKET_SIZE);
             String header = PingPacket.class.getName();
-            buffer.put(header.getBytes());
-            buffer.put((byte) 0x00);
-            buffer.putInt(81874); // random number
-            buffer.flip();
-            buffer.rewind();
-            getDatagramChannel().write(buffer);
+            GMLOutputBuffer buffer = new GMLOutputBuffer();
+            buffer.writeString(header);
+            buffer.writeS32(81874); // random number
+            getDatagramChannel().write(buffer.getBuffer());
             ByteBuffer recieve = ByteBuffer.allocate(Packet.PACKET_SIZE);
 
             Assertions.assertNotNull(recieve);

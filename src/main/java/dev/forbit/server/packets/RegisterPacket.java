@@ -3,6 +3,8 @@ package dev.forbit.server.packets;
 import dev.forbit.server.Client;
 import dev.forbit.server.ServerUtils;
 import dev.forbit.server.logging.NotImplementedException;
+import dev.forbit.server.utility.GMLInputBuffer;
+import dev.forbit.server.utility.GMLOutputBuffer;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,17 +20,18 @@ public class RegisterPacket extends Packet {
 
     @Getter @Setter UUID id;
 
-    @Override
-    public void fillBuffer(ByteBuffer buffer) throws NotImplementedException {
+
+    @Override public void fillBuffer(GMLOutputBuffer buffer) throws NotImplementedException {
         throw new NotImplementedException();
     }
 
-    @Override public void load(ByteBuffer buffer) {
+    @Override public void load(GMLInputBuffer buffer) throws NotImplementedException {
         try {
-            setId(UUID.fromString(ServerUtils.getNextString(buffer)));
+            setId(UUID.fromString(buffer.readString()));
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     @Override public void receive(Client client) throws NotImplementedException {

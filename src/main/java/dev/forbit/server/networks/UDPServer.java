@@ -5,6 +5,7 @@ import dev.forbit.server.ServerInstance;
 import dev.forbit.server.ServerUtils;
 import dev.forbit.server.packets.Packet;
 import dev.forbit.server.packets.RegisterPacket;
+import dev.forbit.server.utility.GMLInputBuffer;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
@@ -68,13 +69,15 @@ import java.nio.channels.DatagramChannel;
             server = DatagramChannel.open();
             InetSocketAddress sAddr = new InetSocketAddress(getAddress(), getPort());
             server.bind(sAddr);
-            ByteBuffer buffer = ByteBuffer.allocate(Packet.PACKET_SIZE);
-            buffer.order(ByteOrder.LITTLE_ENDIAN);
+            ByteBuffer bb = ByteBuffer.allocate(Packet.PACKET_SIZE);
+            bb.order(ByteOrder.LITTLE_ENDIAN);
             while (running) {
-                SocketAddress remoteAddr = server.receive(buffer);
+                SocketAddress remoteAddr = server.receive(bb);
                 //printBuffer(buffer);
-                buffer.rewind();
-                String header = ServerUtils.getNextString(buffer);
+                bb.rewind();
+                GMLInputBuffer buffer = new GMLInputBuffer(bb);
+
+                String header = buffer.readString();
                 if (header.equals(RegisterPacket.class.getName().trim())) {
                     RegisterPacket packet = new RegisterPacket();
                     packet.load(buffer);
@@ -91,7 +94,7 @@ import java.nio.channels.DatagramChannel;
                 }
                 else {
                     Client client = instance.getClient(remoteAddr);
-                    getInstance().getLogger().finest("Incoming UDP packet {\n\t\"client\": \"" + client + "\"\n\t\"data\": [" + ServerUtils.getBuffer(buffer) + "]\n}");
+                    getInstance().getLogger().finest("Incoming UDP packet {\n\t\"client\": \"" + client + "\"\n\t\"data\": [" + ServerUtils.getBuffer(bb) + "]\n}");
                     Packet packet = ServerUtils.getPacket(header);
                     packet.setDataServer(this);
                     packet.load(buffer);
@@ -99,7 +102,7 @@ import java.nio.channels.DatagramChannel;
 
                 }
 
-                buffer.clear();
+                bb.clear();
 
             }
         } catch (Exception e) {

@@ -3,6 +3,8 @@ package dev.forbit.server.packets;
 import dev.forbit.server.Client;
 import dev.forbit.server.logging.NotImplementedException;
 import dev.forbit.server.networks.DataServer;
+import dev.forbit.server.utility.GMLInputBuffer;
+import dev.forbit.server.utility.GMLOutputBuffer;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,7 +30,7 @@ public abstract class Packet {
      *
      * @throws NotImplementedException throw this if body is empty.
      */
-    abstract public void fillBuffer(ByteBuffer buffer) throws NotImplementedException;
+    abstract public void fillBuffer(GMLOutputBuffer buffer) throws NotImplementedException;
 
     /**
      * Load instance of this packet from byte buffer
@@ -37,7 +39,7 @@ public abstract class Packet {
      *
      * @throws NotImplementedException throw this if body is empty.
      */
-    abstract public void load(ByteBuffer buffer) throws NotImplementedException;
+    abstract public void load(GMLInputBuffer buffer) throws NotImplementedException;
 
 
     /**
@@ -56,20 +58,16 @@ public abstract class Packet {
      * @return buffer to send to client
      */
     public ByteBuffer getBuffer() {
-        ByteBuffer buffer = ByteBuffer.allocate(PACKET_SIZE);
-        buffer.order(ByteOrder.LITTLE_ENDIAN);
+        GMLOutputBuffer buffer = new GMLOutputBuffer();
         String className = this.getClass().getName();
-        buffer.put(className.getBytes());
-        buffer.put((byte) 0x00);
+        buffer.writeString(className);
         try {
             fillBuffer(buffer);
         } catch (NotImplementedException e) {
             e.printStackTrace();
             return null;
         }
-        buffer.flip();
-        buffer.rewind();
-        return buffer;
+        return buffer.getBuffer();
     }
 
 }

@@ -5,6 +5,7 @@ import dev.forbit.server.ServerInstance;
 import dev.forbit.server.ServerUtils;
 import dev.forbit.server.packets.ConnectionPacket;
 import dev.forbit.server.packets.Packet;
+import dev.forbit.server.utility.GMLInputBuffer;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
@@ -112,12 +113,13 @@ import java.util.Set;
                 try {
                     sc.read(bb);
                     bb.rewind();
+                    GMLInputBuffer buffer = new GMLInputBuffer(bb);
                     getInstance().getLogger().finest("Incoming TCP packet {\n\t\"client\": \"" + client + "\"\n\t\"data\": [" + ServerUtils.getBuffer(bb) + "]\n}");
 
-                    String header = ServerUtils.getNextString(bb);
+                    String header = buffer.readString();
                     Packet packet = ServerUtils.getPacket(header);
                     packet.setDataServer(this);
-                    packet.load(bb);
+                    packet.load(buffer);
                     getInstance().receivePacket(client, packet);
 
                 } catch (Exception e) {

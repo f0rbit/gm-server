@@ -2,6 +2,8 @@ package dev.forbit.server.packets;
 
 import dev.forbit.server.Client;
 import dev.forbit.server.logging.NotImplementedException;
+import dev.forbit.server.utility.GMLInputBuffer;
+import dev.forbit.server.utility.GMLOutputBuffer;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,11 +15,13 @@ import java.nio.ByteBuffer;
 public class ConnectionPacket extends Packet {
     @Getter @Setter Client client;
 
-    @Override public void fillBuffer(ByteBuffer buffer) {
-        buffer.put(client.getId().toString().getBytes());
+
+    @Override public void fillBuffer(GMLOutputBuffer buffer) throws NotImplementedException {
+        buffer.writeString(client.getId().toString());
+
     }
 
-    @Override public void load(ByteBuffer buffer) throws NotImplementedException {
+    @Override public void load(GMLInputBuffer buffer) throws NotImplementedException {
         throw new NotImplementedException();
     }
 
