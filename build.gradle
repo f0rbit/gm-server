@@ -1,23 +1,17 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation
-
 plugins {
-    id 'java'
-    id "com.github.johnrengelman.shadow" version "7.0.0"
+    id 'java-library'
     id 'maven-publish'
 }
 
 group 'dev.forbit'
 version '1.0.1-SNAPSHOT'
 
-
 repositories {
-    mavenCentral {
-        allowInsecureProtocol true
-    }
+    mavenCentral()
 }
 
 dependencies {
-    implementation('com.intellij:annotations:+@jar')
+    annotationProcessor ('com.intellij:annotations:12.0')
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
@@ -30,40 +24,10 @@ dependencies {
 
     testCompileOnly 'org.projectlombok:lombok:1.18.20'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
-
-
 }
 
 test {
     useJUnitPlatform()
 }
-
-
-jar {
-    manifest {
-        attributes 'Main-Class': 'dev.forbit.server.Test'
-    }
-}
-
-wrapper {
-    gradleVersion = "7.0.1"
-    distributionType = Wrapper.DistributionType.ALL
-
-}
-
-shadowJar {
-    archiveClassifier.set("shaded")
-}
-
-task relocateShadowJar(type: ConfigureShadowRelocation) {
-    target = tasks.shadowJar
-}
-
-task shade {
-    dependsOn build
-    dependsOn shadowJar
-}
-
-tasks.shadowJar.dependsOn tasks.relocateShadowJar
 
 
