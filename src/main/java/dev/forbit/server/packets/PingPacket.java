@@ -2,6 +2,7 @@ package dev.forbit.server.packets;
 
 import dev.forbit.server.Client;
 import dev.forbit.server.logging.NotImplementedException;
+import dev.forbit.server.networks.DataServer;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,22 +11,24 @@ import java.nio.ByteBuffer;
 public class PingPacket extends Packet {
 
     @Getter @Setter Client client;
-    @Getter @Setter long lastPing;
+    @Getter @Setter int time;
+    @Getter @Setter int lastPing;
 
 
     @Override public void fillBuffer(ByteBuffer buffer) throws NotImplementedException {
-        buffer.putLong(lastPing);
+        buffer.putInt(getTime());
     }
 
     @Override public void load(ByteBuffer buffer) throws NotImplementedException {
-        setLastPing(buffer.getLong());
+        setTime(buffer.getInt());
+        setLastPing(buffer.getInt());
     }
 
     @Override public void receive(Client client) {
         setClient(client);
         client.setPing(getLastPing());
         PingPacket packet = new PingPacket();
-        packet.setLastPing(getLastPing());
+        packet.setTime(getTime());
         getDataServer().send(client, packet);
     }
 }

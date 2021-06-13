@@ -21,7 +21,8 @@ import java.util.UUID;
 
 @EqualsAndHashCode(callSuper = true) public @Data class UDPServer extends Thread  implements DataServer {
 
-    public static boolean running;
+
+    public boolean running;
     String address;
     int port;
     private DatagramChannel server = null;
@@ -88,4 +89,10 @@ import java.util.UUID;
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void shutdown() {
+        setRunning(false);
+    }
+
 }

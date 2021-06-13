@@ -10,10 +10,6 @@ import java.nio.ByteBuffer;
 public class ConnectionPacket extends Packet {
     @Getter @Setter Client client;
 
-    public ConnectionPacket(Client client) {
-        setClient(client);
-    }
-
     @Override public void fillBuffer(ByteBuffer buffer) {
         buffer.put(client.getId().toString().getBytes());
     }

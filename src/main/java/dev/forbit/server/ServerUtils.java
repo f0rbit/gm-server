@@ -25,9 +25,9 @@ public class ServerUtils {
         throw new IOException("buffer ran out before 0x00 was detected.");
     }
 
-    public static String getBuffer(ByteBuffer bb) {
+    public static String getBuffer(ByteBuffer buffer) {
         StringBuilder builder = new StringBuilder();
-        for (byte b : bb.array()) {
+        for (byte b : buffer.array()) {
             builder.append(b != 0 ? b : " ");
         }
         return builder.toString().trim();

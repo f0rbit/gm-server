@@ -1,5 +1,5 @@
-#macro TCP_PORT 71 // port that the TCP server is ran on
-#macro UDP_PORT 70 // port that the UDP server is ran on
+#macro TCP_PORT 70 // port that the TCP server is ran on
+#macro UDP_PORT 71 // port that the UDP server is ran on
 #macro ADDRESS "localhost" // address of both servers.
 #macro DRAW_OUTPUT true // whether log_output should draw or not
 #macro ENABLE_LOG false // whether to print headers of packets to the console.
@@ -14,6 +14,7 @@ function handle_packet(header, buffer) {
 		case "dev.forbit.server.packets.PingPacket": {
 			// simple ping implementation
 			var sent_time = buffer_read(buffer, buffer_s32);
+			show_debug_message("sent_time: "+string(sent_time));
 			if (sent_time > 0) {
 				global.ping = global.sent_time-sent_time;
 			}

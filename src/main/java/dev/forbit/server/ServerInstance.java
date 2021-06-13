@@ -14,6 +14,7 @@ import javax.annotation.Nullable;
 import java.net.SocketAddress;
 import java.nio.channels.SocketChannel;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.UUID;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Formatter;
@@ -21,33 +22,54 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ServerInstance {
-    @Getter private final Logger logger;
+    @Getter private Logger logger;
     @Getter private final HashSet<Client> clients = new HashSet<>();
     @Getter @Setter private QueryServer queryServer;
     @Getter @Setter private TCPServer TCPServer;
     @Getter @Setter private UDPServer UDPServer;
+    @Getter @Setter private ServerProperties properties;
 
     public ServerInstance(Level logLevel) {
-        logger = Logger.getLogger(ServerInstance.class.getName());
+        init(logLevel, System.getenv());
+        start();
+
+    }
+
+    public ServerInstance(Level level, Map<String, String> environmentVariables) {
+        init(level, environmentVariables);
+        start();
+    }
+
+    private void init(Level level, Map<String, String> variables) {
+        this.logger = Logger.getLogger(ServerInstance.class.getName());
         getLogger().setUseParentHandlers(false);
-        getLogger().setLevel(logLevel);
+        getLogger().setLevel(level);
         getLogger().addHandler(new ConsoleHandler() {
             @Override public synchronized void setFormatter(Formatter newFormatter) throws SecurityException {
                 this.setLevel(Level.ALL);
                 super.setFormatter(new LogFormatter());
             }
         });
-        ServerProperties properties = new ServerProperties(System.getenv());
-        getLogger().info("properties: " + properties);
+        setProperties(new ServerProperties(variables));
+    }
 
-        this.queryServer = new QueryServer(this, properties.getAddress(), properties.getPort(ServerType.QUERY));
-        this.UDPServer = new UDPServer(this, properties.getAddress(), properties.getPort(ServerType.UDP));
-        this.TCPServer = new TCPServer(this, properties.getAddress(), properties.getPort(ServerType.TCP));
+    private void start() {
+        this.queryServer = new QueryServer(this, getProperties().getAddress(), getProperties().getPort(ServerType.QUERY));
+        this.UDPServer = new UDPServer(this, getProperties().getAddress(), getProperties().getPort(ServerType.UDP));
+        this.TCPServer = new TCPServer(this, getProperties().getAddress(), getProperties().getPort(ServerType.TCP));
 
         getTCPServer().start();
         getUDPServer().start();
 
-        getQueryServer().start();
+        //getQueryServer().start();
+
+        getLogger().info("Started Server on "+getProperties().getAddress());
+
+    }
+
+    public void shutdown() {
+        getUDPServer().shutdown();
+        getTCPServer().shutdown();
     }
 
 
@@ -81,14 +103,15 @@ public class ServerInstance {
 
 
     public void removeClient(Client c) {
-        assert (getClients().contains(c));
+        //assert (getClients().contains(c));
         clients.remove(c);
         getLogger().fine("Remove client: " + c);
     }
 
     public void startPinging(Client client) {
         PingPacket packet = new PingPacket();
-        packet.setLastPing(System.currentTimeMillis());
+        packet.setLastPing(0);
+        packet.setTime(0);
         getUDPServer().send(client, packet);
 
     }

@@ -15,7 +15,6 @@ public abstract class Packet {
 
     @Getter @Setter private DataServer dataServer;
 
-
     /**
      * Fill the buffer with data
      *

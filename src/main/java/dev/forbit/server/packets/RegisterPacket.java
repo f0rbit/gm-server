@@ -14,8 +14,8 @@ public class RegisterPacket extends Packet {
 
     @Getter @Setter UUID id;
 
-
-    @Override public void fillBuffer(ByteBuffer buffer) throws NotImplementedException {
+    @Override
+    public void fillBuffer(ByteBuffer buffer) throws NotImplementedException {
         throw new NotImplementedException();
     }
 

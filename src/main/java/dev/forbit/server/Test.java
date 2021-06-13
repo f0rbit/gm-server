@@ -1,4 +1,4 @@
-package test.forbit;
+package dev.forbit.server;
 
 
 import dev.forbit.server.ServerInstance;
@@ -9,7 +9,6 @@ public class Test {
 
     public static void main(String[] args) {
         ServerInstance instance = new ServerInstance(Level.ALL);
-
     }
 
 }

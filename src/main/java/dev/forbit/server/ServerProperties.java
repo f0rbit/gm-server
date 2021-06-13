@@ -20,7 +20,6 @@ public class ServerProperties {
     public ServerProperties(File file) {
         // TODO load from file
 
-
         getPorts().put(ServerType.QUERY, 1);
         getPorts().put(ServerType.UDP, 2);
         getPorts().put(ServerType.TCP, 3);
@@ -68,8 +67,5 @@ public class ServerProperties {
         return getPorts().getOrDefault(type, -1);
     }
 
-    @Override public String toString() {
-        return "server_properties: \"ports\": [" + getPorts() + "], \"address\": \"" + getAddress() + "\".";
-    }
 
 }

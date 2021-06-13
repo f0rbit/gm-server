@@ -23,10 +23,9 @@ import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true) public @Data class TCPServer extends Thread implements DataServer {
 
-    public static boolean running;
+    public boolean running;
     String address;
     int port;
-    private InetAddress host;
     private ServerSocketChannel channel;
     private ServerInstance instance;
 
@@ -40,11 +39,10 @@ import java.util.Set;
     @Override public void run() {
         running = true;
         try {
-            this.host = InetAddress.getByName(getAddress());
             Selector selector = Selector.open();
             this.channel = ServerSocketChannel.open();
             getChannel().configureBlocking(false);
-            getChannel().bind(new InetSocketAddress(getHost(), getPort()));
+            getChannel().bind(new InetSocketAddress(getAddress(), getPort()));
             getChannel().register(selector, SelectionKey.OP_ACCEPT);
             while (running) {
                 if (selector.select() <= 0) { continue; }
@@ -72,8 +70,9 @@ import java.util.Set;
                     Client client = new Client();
                     client.setChannel(socketChannel);
                     getInstance().addClient(client);
-
-                    send(client, new ConnectionPacket(client));
+                    ConnectionPacket packet = new ConnectionPacket();
+                    packet.setClient(client);
+                    send(client, packet);
                 }
             } catch (IOException exception) {
                 exception.printStackTrace();
@@ -114,5 +113,9 @@ import java.util.Set;
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override public void shutdown() {
+        setRunning(false);
     }
 }
