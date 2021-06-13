@@ -11,16 +11,13 @@ version '1.0.1-SNAPSHOT'
 
 
 repositories {
-    mavenCentral()
-    maven {
-        url = "https://jitpack.io"
+    mavenCentral {
+        allowInsecureProtocol true
     }
 }
 
 dependencies {
-
-    shadow localGroovy()
-    shadow gradleApi()
+    implementation('com.intellij:annotations:+@jar')
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.7.0'

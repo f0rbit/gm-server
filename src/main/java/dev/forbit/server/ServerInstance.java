@@ -9,8 +9,8 @@ import dev.forbit.server.packets.Packet;
 import dev.forbit.server.packets.PingPacket;
 import lombok.Getter;
 import lombok.Setter;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.net.SocketAddress;
 import java.nio.channels.SocketChannel;
 import java.util.HashSet;

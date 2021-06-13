@@ -1,7 +1,6 @@
 package dev.forbit.server.packets;
 
 import dev.forbit.server.Client;
-import dev.forbit.server.ServerUtils;
 import dev.forbit.server.logging.NotImplementedException;
 import dev.forbit.server.utility.GMLInputBuffer;
 import dev.forbit.server.utility.GMLOutputBuffer;
@@ -9,7 +8,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.util.UUID;
 
 
