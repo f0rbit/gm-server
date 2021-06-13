@@ -1,13 +1,13 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation
 
-
 plugins {
     id 'java'
     id "com.github.johnrengelman.shadow" version "7.0.0"
+    id 'maven-publish'
 }
 
 group 'dev.forbit'
-version '1.0-SNAPSHOT'
+version '1.0.1-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -44,6 +44,11 @@ jar {
     }
 }
 
+wrapper {
+    gradleVersion = "7.0.1"
+    distributionType = Wrapper.DistributionType.ALL
+}
+
 shadowJar {
     archiveClassifier.set("shaded")
 }
@@ -52,7 +57,7 @@ task relocateShadowJar(type: ConfigureShadowRelocation) {
     target = tasks.shadowJar
 }
 
-task install {
+task shade {
     dependsOn build
     dependsOn shadowJar
 }
