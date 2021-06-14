@@ -35,3 +35,7 @@ jobs:
           path: build/libs/
       - store_test_results:
           path: build/test-results
+          
+      - run:
+          name: Deploy docs
+          command: gh-pages --dist build/docs/javadoc
