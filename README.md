@@ -37,3 +37,9 @@ Add the following to your `pom.xml`
   </dependency>
 </dependencies>
 ```
+
+## Examples
+
+Inside the `examples` directory, is the `client-template`. This template is what you should base your GameMaker game off of. It includes basic implementation to connect to the TCP and UDP server, with only needed to change a couple macros.
+
+There is also an example of a basic platformer game [here](./example/platformer-basic) called `platformer-basic`.
