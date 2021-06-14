@@ -3,7 +3,7 @@
 This is an example of how to use the gm-server framework to implement a very basic online platformer.
 This example does not cover handling clients disconnecting or connecting, or moving rooms.
 
-# Demonstration
+## Demonstration
 
 In order to run this on your local machine follow these steps
 
@@ -15,3 +15,6 @@ In order to run this on your local machine follow these steps
 6. Unzip `client-application.zip`
 7. Navigate inside the unzipped folder and run `client.exe` twice, in order to see it working.
 8. Move around in both clients.
+
+## Walkthrough
+If you're looking for a more in-depth understanding of how this project works, check out this [wiki page](https://github.com/f0rbit/gm-server/wiki/Walkthrough-of-platformer-basic-example)
