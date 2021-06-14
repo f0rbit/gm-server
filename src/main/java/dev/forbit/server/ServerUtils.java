@@ -13,7 +13,7 @@ public class ServerUtils {
 
 
     /**
-     * Reads from a buffer to find the next string
+     * Reads from a buffer to find the next string written
      *
      * Strings in gamemaker buffers are ended with 0x00, if the functon can't find a 0x00 is will throw an IOException error
      * @param buffer buffer to read from.
