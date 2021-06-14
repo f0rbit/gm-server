@@ -111,8 +111,6 @@ public abstract class ServerInstance {
         getTCPServer().start();
         getUDPServer().start();
 
-        //getQueryServer().start();
-
         getLogger().info("Started Server on " + getProperties().getAddress());
 
     }
@@ -131,11 +129,11 @@ public abstract class ServerInstance {
      * <p>
      * This shouldn't be used outside of {@link ServerInstance} implementation.
      *
-     * @param c the client instance to add
+     * @param client the client instance to add
      */
-    public void addClient(Client c) {
-        getClients().add(c);
-        getLogger().fine("Client added: " + c);
+    public void addClient(Client client) {
+        getClients().add(client);
+        getLogger().fine("Client added: " + client);
     }
 
     /**
@@ -143,13 +141,13 @@ public abstract class ServerInstance {
      * <p>
      * This shouldn't be used outside of {@link ServerInstance} implementation.
      *
-     * @param sc the {@link SocketChannel} of the client
+     * @param socketChannel the {@link SocketChannel} of the client
      *
      * @return Client, or if none found, null.
      */
-    @Nullable public Client getClient(SocketChannel sc) {
+    @Nullable public Client getClient(SocketChannel socketChannel) {
         for (Client c : getClients()) {
-            if (c.getChannel().equals(sc)) {
+            if (c.getChannel().equals(socketChannel)) {
                 return c;
             }
         }
