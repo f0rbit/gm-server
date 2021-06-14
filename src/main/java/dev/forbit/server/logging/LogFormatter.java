@@ -1,14 +1,12 @@
 package dev.forbit.server.logging;
 
 
-import dev.forbit.server.ServerInstance;
-
 import java.util.Date;
 import java.util.logging.LogRecord;
 import java.util.logging.SimpleFormatter;
 
 /**
- * Default formatter for the {@link ServerInstance#getLogger()}
+ * Default formatter
  */
 public class LogFormatter extends SimpleFormatter {
 

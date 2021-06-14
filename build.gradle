@@ -32,4 +32,27 @@ test {
     useJUnitPlatform()
 }
 
+javadoc {
+    source = sourceSets.main.allJava
+}
 
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar) {
+    from javadoc
+    classifier = 'javadoc'
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'gm-server'
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+        }
+    }
+}
