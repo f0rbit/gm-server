@@ -28,6 +28,7 @@ jobs:
       # run tests!
       - run: gradle test
       - run: gradle build
+      - run: gradle javadoc
       - run:
           name: list
           command: |
