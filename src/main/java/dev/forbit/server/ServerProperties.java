@@ -7,6 +7,9 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Stores properties that the ServerInstance reads from
+ */
 public class ServerProperties {
 
     @Getter private final HashMap<ServerType, Integer> ports = new HashMap<>();
@@ -30,7 +33,7 @@ public class ServerProperties {
     /**
      * Instantiates server properties from environment variables
      *
-     * @param environment - get with #System.getenv()
+     * @param environment can either be your own map, or commonly loaded with {@link java.lang.System#getenv()}
      */
     public ServerProperties(Map<String, String> environment) {
 

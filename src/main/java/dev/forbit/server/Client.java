@@ -7,6 +7,9 @@ import java.net.SocketAddress;
 import java.nio.channels.SocketChannel;
 import java.util.UUID;
 
+/**
+ * A basic client implementation
+ */
 public class Client {
 
     /**

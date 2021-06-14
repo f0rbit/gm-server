@@ -21,20 +21,24 @@ import java.util.logging.Formatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class ServerInstance {
-    /**
-     * Logging instance
-     */
-    @Getter private Logger logger;
 
+/**
+ * Abstract class that all child servers should extend
+ * <p>
+ * For an example implementation, look at {@link TestServer}
+ */
+public abstract class ServerInstance {
     /**
      * List of connected clients
      */
     @Getter private final HashSet<Client> clients = new HashSet<>();
-
+    /**
+     * Logging instance
+     */
+    @Getter private Logger logger;
     /**
      * Query Server
-     *
+     * <p>
      * not implemented yet.
      */
     @Getter @Setter private QueryServer queryServer;
@@ -57,6 +61,7 @@ public abstract class ServerInstance {
 
     /**
      * Default constructor that automatically loads properties from {@link System#getenv()}
+     *
      * @param logLevel the minimum level for the logger to print.
      */
     public ServerInstance(Level logLevel) {
@@ -67,7 +72,8 @@ public abstract class ServerInstance {
 
     /**
      * Constructor that loads ServerProperties from a map of strings.
-     * @param level the minimum level for the logger to print.
+     *
+     * @param level                the minimum level for the logger to print.
      * @param environmentVariables map of variables, should contain TCP_PORT, UDP_PORT, QUERY_PORT, and ADDRESS
      */
     public ServerInstance(Level level, Map<String, String> environmentVariables) {
@@ -77,7 +83,8 @@ public abstract class ServerInstance {
 
     /**
      * Initiates the logger and loads server properties
-     * @param level the minimum level for the logger to print.
+     *
+     * @param level     the minimum level for the logger to print.
      * @param variables map of variables, should contain TCP_PORT, UDP_PORT, QUERY_PORT, and ADDRESS
      */
     private void init(Level level, Map<String, String> variables) {
@@ -95,7 +102,6 @@ public abstract class ServerInstance {
 
     /**
      * Starts the servers, it creates an instance of {@link QueryServer} but never starts the thread, because it's not implemented
-     *
      */
     private void start() {
         this.queryServer = new QueryServer(this, getProperties().getAddress(), getProperties().getPort(ServerType.QUERY));
@@ -107,7 +113,7 @@ public abstract class ServerInstance {
 
         //getQueryServer().start();
 
-        getLogger().info("Started Server on "+getProperties().getAddress());
+        getLogger().info("Started Server on " + getProperties().getAddress());
 
     }
 
@@ -122,8 +128,9 @@ public abstract class ServerInstance {
 
     /**
      * Adds a client to the list
-     *
+     * <p>
      * This shouldn't be used outside of {@link ServerInstance} implementation.
+     *
      * @param c the client instance to add
      */
     public void addClient(Client c) {
@@ -133,9 +140,11 @@ public abstract class ServerInstance {
 
     /**
      * Gets a client from a given socket channel
-     *
+     * <p>
      * This shouldn't be used outside of {@link ServerInstance} implementation.
+     *
      * @param sc the {@link SocketChannel} of the client
+     *
      * @return Client, or if none found, null.
      */
     @Nullable public Client getClient(SocketChannel sc) {
@@ -149,9 +158,11 @@ public abstract class ServerInstance {
 
     /**
      * Gets a client from a given UUID
-     *
+     * <p>
      * This shouldn't be used outside of {@link ServerInstance} implementation.
+     *
      * @param id the {@link UUID} of the client
+     *
      * @return the client instance, or if none found, null.
      */
     @Nullable public Client getClient(UUID id) {
@@ -166,9 +177,11 @@ public abstract class ServerInstance {
 
     /**
      * Gets a client from a given SocketAddress.
-     *
+     * <p>
      * This shouldn't be used outside of {@link ServerInstance} implementation.
+     *
      * @param address the {@link SocketAddress} of the client
+     *
      * @return the client instnace, or if none found, null.
      */
     @Nullable public Client getClient(SocketAddress address) {
@@ -178,8 +191,9 @@ public abstract class ServerInstance {
 
     /**
      * Removes a client from the list
-     *
+     * <p>
      * This shouldn't be used outside of {@link ServerInstance} implementation.
+     *
      * @param c the client to remove
      */
     public void removeClient(Client c) {
@@ -190,6 +204,7 @@ public abstract class ServerInstance {
 
     /**
      * Starts pinging the client
+     *
      * @param client client to ping
      */
     public void startPinging(Client client) {
@@ -201,8 +216,9 @@ public abstract class ServerInstance {
 
     /**
      * general method for recieving a packet
-     *
+     * <p>
      * This shouldn't be used outside of {@link ServerInstance} implementation.
+     *
      * @param client client that sent the packet
      * @param packet packet that was recieved
      */
@@ -216,14 +232,16 @@ public abstract class ServerInstance {
 
     /**
      * Event fired after a client connects to both TCP and UDP servers.
+     *
      * @param client connected client
      */
     public abstract void onConnect(Client client);
 
     /**
      * Event fired when client has disconnected, sockets haven't been closed but are inaccessible.
-     *
+     * <p>
      * After this method, the client is removed from {@link #clients}
+     *
      * @param client client to remove.
      */
     public abstract void onDisconnect(Client client);

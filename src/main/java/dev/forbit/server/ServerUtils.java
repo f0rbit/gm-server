@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
+/**
+ * Provides common utilities across objects
+ */
 public class ServerUtils {
 
 
