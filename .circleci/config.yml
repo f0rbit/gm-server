@@ -56,7 +56,9 @@ jobs:
             git config credential.helper 'cache --timeout=120'
             git config user.email "dev@forbit.dev"
             git config user.name "doc-bot"
-            git add ~/repo/build/docs/javadoc
+            cp -a ~/repo/build/docs/javadoc ~/clondir/gm-server/
+            ls -l
+            git add .
             git commit -m "Deployed docs via CircleCI"
             git push https://${DOCS_GITHUB_TOKEN}@github.com/f0rbit/gm-server.git javadocs
             echo "docs deployed"
