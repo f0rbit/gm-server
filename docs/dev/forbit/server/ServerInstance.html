@@ -122,7 +122,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#addClient(dev.forbit.server.Client)">addClient</a></span>&#8203;(<a href="Client.html" title="class in dev.forbit.server">Client</a>&nbsp;c)</code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#addClient(dev.forbit.server.Client)">addClient</a></span>&#8203;(<a href="Client.html" title="class in dev.forbit.server">Client</a>&nbsp;client)</code></div>
 <div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Adds a client to the list</div>
 </div>
@@ -132,7 +132,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Gets a client from a given SocketAddress.</div>
 </div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="Client.html" title="class in dev.forbit.server">Client</a></code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#getClient(java.nio.channels.SocketChannel)">getClient</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/nio/channels/SocketChannel.html" title="class or interface in java.nio.channels" class="external-link">SocketChannel</a>&nbsp;sc)</code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#getClient(java.nio.channels.SocketChannel)">getClient</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/nio/channels/SocketChannel.html" title="class or interface in java.nio.channels" class="external-link">SocketChannel</a>&nbsp;socketChannel)</code></div>
 <div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Gets a client from a given socket channel</div>
 </div>
@@ -231,13 +231,13 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="addClient(dev.forbit.server.Client)">
 <h3>addClient</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addClient</span>&#8203;<span class="parameters">(<a href="Client.html" title="class in dev.forbit.server">Client</a>&nbsp;c)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addClient</span>&#8203;<span class="parameters">(<a href="Client.html" title="class in dev.forbit.server">Client</a>&nbsp;client)</span></div>
 <div class="block">Adds a client to the list
  <p>
  This shouldn't be used outside of <a href="ServerInstance.html" title="class in dev.forbit.server"><code>ServerInstance</code></a> implementation.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>c</code> - the client instance to add</dd>
+<dd><code>client</code> - the client instance to add</dd>
 </dl>
 </section>
 </li>
@@ -245,13 +245,13 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getClient(java.nio.channels.SocketChannel)">
 <h3>getClient</h3>
 <div class="member-signature"><span class="annotations">@Nullable
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Client.html" title="class in dev.forbit.server">Client</a></span>&nbsp;<span class="element-name">getClient</span>&#8203;<span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/nio/channels/SocketChannel.html" title="class or interface in java.nio.channels" class="external-link">SocketChannel</a>&nbsp;sc)</span></div>
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Client.html" title="class in dev.forbit.server">Client</a></span>&nbsp;<span class="element-name">getClient</span>&#8203;<span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/nio/channels/SocketChannel.html" title="class or interface in java.nio.channels" class="external-link">SocketChannel</a>&nbsp;socketChannel)</span></div>
 <div class="block">Gets a client from a given socket channel
  <p>
  This shouldn't be used outside of <a href="ServerInstance.html" title="class in dev.forbit.server"><code>ServerInstance</code></a> implementation.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>sc</code> - the <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/nio/channels/SocketChannel.html" title="class or interface in java.nio.channels" class="external-link"><code>SocketChannel</code></a> of the client</dd>
+<dd><code>socketChannel</code> - the <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/nio/channels/SocketChannel.html" title="class or interface in java.nio.channels" class="external-link"><code>SocketChannel</code></a> of the client</dd>
 <dt>Returns:</dt>
 <dd>Client, or if none found, null.</dd>
 </dl>
