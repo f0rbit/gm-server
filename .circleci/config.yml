@@ -57,5 +57,5 @@ jobs:
             git config user.name "doc-bot"
             cp -a ~/repo/build/docs/javadoc/. ~/clonedir/gm-server/docs/
             git add .
-            git commit -m "Deployed docs via CircleCI"
-            git push https://${DOCS_GITHUB_TOKEN}@github.com/f0rbit/gm-server.git javadocs
+            git commit --allow-empty -m "Deployed docs via CircleCI"
+            git push -f https://${DOCS_GITHUB_TOKEN}@github.com/f0rbit/gm-server.git javadocs
