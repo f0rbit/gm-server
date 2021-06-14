@@ -95,15 +95,20 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#send(dev.forbit.server.Client,dev.forbit.server.packets.Packet)">send</a></span>&#8203;(<a href="../Client.html" title="class in dev.forbit.server">Client</a>&nbsp;client,
- <a href="../packets/Packet.html" title="class in dev.forbit.server.packets">Packet</a>&nbsp;packet)</code></div>
+<div class="col-first even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><a href="../ServerInstance.html" title="class in dev.forbit.server">ServerInstance</a></code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#getInstance()">getInstance</a></span>()</code></div>
 <div class="col-last even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
-<div class="block">Send a packet to a client from the server</div>
+<div class="block">Returns the ServerInstance that instantiated this Server.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#shutdown()">shutdown</a></span>()</code></div>
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#send(dev.forbit.server.Client,dev.forbit.server.packets.Packet)">send</a></span>&#8203;(<a href="../Client.html" title="class in dev.forbit.server">Client</a>&nbsp;client,
+ <a href="../packets/Packet.html" title="class in dev.forbit.server.packets">Packet</a>&nbsp;packet)</code></div>
 <div class="col-last odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
+<div class="block">Send a packet to a client from the server</div>
+</div>
+<div class="col-first even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#shutdown()">shutdown</a></span>()</code></div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
 <div class="block">Shuts down this server instance</div>
 </div>
 </div>
@@ -140,6 +145,17 @@ loadScripts(document, 'script');</script>
 <h3>shutdown</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">shutdown</span>()</div>
 <div class="block">Shuts down this server instance</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getInstance()">
+<h3>getInstance</h3>
+<div class="member-signature"><span class="return-type"><a href="../ServerInstance.html" title="class in dev.forbit.server">ServerInstance</a></span>&nbsp;<span class="element-name">getInstance</span>()</div>
+<div class="block">Returns the ServerInstance that instantiated this Server.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the server instance that made this object</dd>
+</dl>
 </section>
 </li>
 </ul>
