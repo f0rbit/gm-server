@@ -19,6 +19,8 @@ public class ServerProperties {
      * Load server properties from .json file
      *
      * @param file the file load from
+     *
+     * @deprecated not implemented yet.
      */
     public ServerProperties(File file) {
         // TODO load from file
