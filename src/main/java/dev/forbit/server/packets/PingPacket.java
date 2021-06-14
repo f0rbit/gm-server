@@ -12,8 +12,20 @@ import lombok.Setter;
  */
 public class PingPacket extends Packet {
 
+    /**
+     * The client relating to this packet
+     */
     @Getter @Setter Client client;
+
+    /**
+     * The time sent by the client, the time should be current_time, which is the milliseconds since the client's application was launched.
+     */
     @Getter @Setter int time;
+
+    /**
+     * The client also sends the ping that they calculated from last packet.
+     * This keeps track of the client's ping.
+     */
     @Getter @Setter int lastPing;
 
     @Override public void fillBuffer(GMLOutputBuffer buffer) throws NotImplementedException {

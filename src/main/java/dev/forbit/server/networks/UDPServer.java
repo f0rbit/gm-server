@@ -6,9 +6,10 @@ import dev.forbit.server.ServerUtils;
 import dev.forbit.server.packets.Packet;
 import dev.forbit.server.packets.RegisterPacket;
 import dev.forbit.server.utility.GMLInputBuffer;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -22,32 +23,32 @@ import java.nio.channels.DatagramChannel;
  * <p>
  * Only uses one thread to handle all connections thanks to NIO.
  */
-@EqualsAndHashCode(callSuper = true) public @Data class UDPServer extends Thread implements DataServer {
+public class UDPServer extends Thread implements DataServer {
 
     /**
      * Whether the server is running or not
      */
-    public boolean running;
+    @Getter @Setter public boolean running;
 
     /**
      * Gets the host address
      */
-    String address;
+    @Getter @Setter String address;
 
     /**
      * The port number to be hosting on
      */
-    int port;
+    @Getter @Setter int port;
 
     /**
      * The {@link DatagramChannel} the server is bound too
      */
-    private DatagramChannel server = null;
+    @Getter @Setter private DatagramChannel server = null;
 
     /**
      * The parent {@link ServerInstance} that made this instance.
      */
-    private ServerInstance instance;
+    @Getter @Setter private ServerInstance instance;
 
     /**
      * Constructor
@@ -111,7 +112,7 @@ import java.nio.channels.DatagramChannel;
     }
 
 
-    @Override public void send(@NonNull Client client, @NonNull Packet packet) {
+    @Override public void send(@NotNull Client client, @NotNull Packet packet) {
         assert (client.getAddress() != null);
         try {
             getServer().send(packet.getBuffer(), client.getAddress());

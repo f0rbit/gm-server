@@ -6,9 +6,10 @@ import dev.forbit.server.ServerUtils;
 import dev.forbit.server.packets.ConnectionPacket;
 import dev.forbit.server.packets.Packet;
 import dev.forbit.server.utility.GMLInputBuffer;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -21,32 +22,37 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
-@EqualsAndHashCode(callSuper = true) public @Data class TCPServer extends Thread implements DataServer {
+/**
+ * Implementaion of the TCP Server
+ * <p>
+ * Only uses one thread to handle all connections thanks to NIO.
+ */
+public class TCPServer extends Thread implements DataServer {
 
     /**
      * Whether the server is running or not
      */
-    public boolean running;
+    @Getter @Setter public boolean running;
 
     /**
      * Gets the host address
      */
-    String address;
+    @Getter @Setter String address;
 
     /**
      * The port number to be hosting on
      */
-    int port;
+    @Getter @Setter int port;
 
     /**
      * The {@link ServerSocketChannel} the server is bound too
      */
-    private ServerSocketChannel channel;
+    @Getter @Setter private ServerSocketChannel channel;
 
     /**
      * The parent {@link ServerInstance} that made this instance.
      */
-    private ServerInstance instance;
+    @Getter @Setter private ServerInstance instance;
 
     /**
      * Constructor
@@ -135,7 +141,7 @@ import java.util.Set;
         }
     }
 
-    @Override public void send(@NonNull Client client, @NonNull Packet packet) {
+    @Override public void send(@NotNull Client client, @NotNull Packet packet) {
         try {
             client.getChannel().write(packet.getBuffer());
         } catch (IOException e) {
