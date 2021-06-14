@@ -1,6 +1,7 @@
 package dev.forbit.server.networks;
 
 import dev.forbit.server.Client;
+import dev.forbit.server.ServerInstance;
 import dev.forbit.server.packets.Packet;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,5 +22,12 @@ public interface DataServer {
      * Shuts down this server instance
      */
     void shutdown();
+
+
+    /**
+     * Returns the ServerInstance that instantiated this Server.
+     * @return the server instance that made this object
+     */
+    ServerInstance getInstance();
 
 }
