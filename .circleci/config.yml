@@ -30,3 +30,8 @@ jobs:
       - run: gradle build
       - run: gradle assemble
       - run: gradle javadocJar
+      
+      - store_artifacts:
+        path: build/libs
+        destination: circleci-docs
+      - store_test_results
