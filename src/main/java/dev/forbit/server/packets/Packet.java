@@ -10,6 +10,13 @@ import lombok.Setter;
 
 import java.nio.ByteBuffer;
 
+/**
+ * Abstract class that all children Packets should extend.
+ *
+ * @see PingPacket
+ * @see RegisterPacket
+ * @see ConnectionPacket
+ */
 public abstract class Packet {
 
     /**
