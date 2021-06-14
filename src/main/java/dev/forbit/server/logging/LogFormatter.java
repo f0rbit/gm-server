@@ -11,7 +11,7 @@ import java.util.logging.SimpleFormatter;
 public class LogFormatter extends SimpleFormatter {
 
     /**
-     * Format string
+     * String used for formatting.
      */
     private static final String format = "[%1$tF %1$tT] [%2$-7s] %3$s %n";
 
