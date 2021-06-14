@@ -40,10 +40,14 @@ jobs:
           working_directory: ~/clonedir
           command: |
             git clone --depth 1 https://${DOCS_GITHUB_TOKEN}@github.com/f0rbit/gm-server.git -b javadocs
+            pwd
+            ls -a
       - deploy:
           name: Deploy docs
-          working_directory: ~/clonedir
+          working_directory: ~/clonedir/gm-server
           command: |
+            pwd
+            ls -a
             git config credential.helper 'cache --timeout=120'
             git config user.email "dev@forbit.dev"
             git config user.name "doc-bot"
