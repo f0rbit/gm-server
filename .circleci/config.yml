@@ -58,4 +58,4 @@ jobs:
             cp -a ~/repo/build/docs/javadoc/. ~/clonedir/gm-server/docs/
             git add .
             git commit -m "Deployed docs via CircleCI"
-            git -q push https://${DOCS_GITHUB_TOKEN}@github.com/f0rbit/gm-server.git javadocs --force
+            git push https://${DOCS_GITHUB_TOKEN}@github.com/f0rbit/gm-server.git javadocs
