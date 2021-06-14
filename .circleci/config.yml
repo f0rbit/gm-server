@@ -5,6 +5,10 @@
 version: 2
 jobs:
   build:
+    branches:
+      only:
+        - master
+
     docker:
       # specify the version you desire here
       - image: gradle:jdk16
@@ -27,37 +31,31 @@ jobs:
       - run: gradle dependencies
       # run tests!
       - run: gradle test
+      #build
       - run: gradle build
+      #generate javadocs
       - run: gradle javadoc
-      - run:
-          name: list
-          command: |
-            pwd
-            ls -l
 
+      #storing these, but I don't know how to retrieve them?
       - store_artifacts:
           path: build/libs/
       - store_test_results:
           path: build/test-results
+
+      # publish the javadocs
       - run:
           name: Clone docs
           working_directory: ~/clonedir
           command: |
             git clone --depth 1 https://${DOCS_GITHUB_TOKEN}@github.com/f0rbit/gm-server.git -b javadocs
-            pwd
-            ls -a
       - deploy:
           name: Deploy docs
           working_directory: ~/clonedir/gm-server
           command: |
-            pwd
-            ls -a
             git config credential.helper 'cache --timeout=120'
             git config user.email "dev@forbit.dev"
             git config user.name "doc-bot"
             cp -a ~/repo/build/docs/javadoc/. ~/clonedir/gm-server/docs/
-            ls -l
             git add .
             git commit -m "Deployed docs via CircleCI"
             git push https://${DOCS_GITHUB_TOKEN}@github.com/f0rbit/gm-server.git javadocs
-            echo "docs deployed"
