@@ -1,5 +1,6 @@
 package dev.forbit.server;
 
+import dev.forbit.server.packets.gson.GSONPacket;
 import dev.forbit.server.packets.Packet;
 
 import java.io.IOException;
@@ -64,7 +65,10 @@ public class ServerUtils {
      */
     public static Packet getPacket(String packetName) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         return (Packet) Class.forName(packetName).newInstance();
+    }
 
+    public static GSONPacket getGsonPacket(String packetName) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+        return (GSONPacket) Class.forName(packetName).newInstance();
     }
 
 }

@@ -1,12 +1,12 @@
-package dev.forbit.server.networks;
+package dev.forbit.server.networks.gson;
 
 import dev.forbit.server.Client;
-import dev.forbit.server.instances.ServerInstance;
 import dev.forbit.server.ServerUtils;
 import dev.forbit.server.instances.ServerInterface;
 import dev.forbit.server.packets.ConnectionPacket;
+import dev.forbit.server.packets.gson.GSONConnectionPacket;
+import dev.forbit.server.packets.gson.GSONPacket;
 import dev.forbit.server.packets.Packet;
-import dev.forbit.server.packets.PacketInterface;
 import dev.forbit.server.utility.GMLInputBuffer;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,12 +23,7 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
-/**
- * Implementaion of the TCP Server
- * <p>
- * Only uses one thread to handle all connections thanks to NIO.
- */
-public class TCPServer extends Thread implements DataServer {
+public class GsonTCPServer extends GSONServer {
 
     /**
      * Whether the server is running or not
@@ -62,7 +57,7 @@ public class TCPServer extends Thread implements DataServer {
      * @param address  address to host on
      * @param port     the port number
      */
-    public TCPServer(ServerInterface instance, String address, int port) {
+    public GsonTCPServer(ServerInterface instance, String address, int port) {
         setAddress(address);
         setPort(port);
         setInstance(instance);
@@ -103,7 +98,7 @@ public class TCPServer extends Thread implements DataServer {
                     Client client = new Client();
                     client.setChannel(socketChannel);
                     getInstance().addClient(client);
-                    ConnectionPacket packet = new ConnectionPacket();
+                    GSONConnectionPacket packet = new GSONConnectionPacket();
                     packet.setClient(client);
                     send(client, packet);
                 }
@@ -142,7 +137,7 @@ public class TCPServer extends Thread implements DataServer {
         }
     }
 
-    @Override public void send(@NotNull Client client, @NotNull PacketInterface packet) {
+    @Override public void send(@NotNull Client client, @NotNull GSONPacket packet) {
         try {
             client.getChannel().write(packet.getBuffer());
         } catch (IOException e) {
@@ -153,5 +148,4 @@ public class TCPServer extends Thread implements DataServer {
     @Override public void shutdown() {
         setRunning(false);
     }
-
 }

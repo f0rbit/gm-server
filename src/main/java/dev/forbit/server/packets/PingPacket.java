@@ -34,7 +34,7 @@ public class PingPacket extends Packet {
 
     @Override public void load(GMLInputBuffer buffer) throws NotImplementedException {
         setTime(buffer.readS32());
-        setTime(buffer.readS32());
+        setLastPing(buffer.readS32());
     }
 
     @Override public void receive(Client client) {

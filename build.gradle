@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'dev.forbit'
-version '1.0.3'
+version '1.0.4'
 
 repositories {
     mavenCentral {
@@ -26,6 +26,9 @@ dependencies {
 
     testImplementation 'org.projectlombok:lombok:1.18.20'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+    implementation 'com.google.code.gson:gson:2.8.7'
+
 }
 
 test {

@@ -1,5 +1,6 @@
 package dev.forbit.server;
 
+import com.google.gson.annotations.Expose;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +16,7 @@ public class Client {
     /**
      * The ID of this client
      */
-    @Getter @Setter private UUID id;
+    @Getter @Setter @Expose private UUID id;
 
     /**
      * The channel that is connected to the {@link dev.forbit.server.networks.TCPServer}
@@ -32,7 +33,7 @@ public class Client {
      * <p>
      * Note: This ping is not the total ping, but rather the time taken from the client to the server.
      */
-    @Getter @Setter private long ping;
+    @Getter @Setter @Expose private long ping;
 
 
     /**

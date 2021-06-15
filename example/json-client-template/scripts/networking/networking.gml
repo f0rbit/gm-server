@@ -6,14 +6,15 @@
 #macro DRAW_PING true
 
 
-function handle_packet(header, buffer) {
+// data is a struct containing all the variables of the packet.
+function handle_packet(header, data) {
 	switch(header) {
 		// handle each case
 		// each case should be the package & class name
 		// like so:
-		case "dev.forbit.server.packets.PingPacket": {
+		case "dev.forbit.server.packets.gson.GSONPingPacket": {
 			// simple ping implementation
-			var sent_time = buffer_read(buffer, buffer_s32);
+			var sent_time = real(variable_struct_get(data, "time"));
 			show_debug_message("sent_time: "+string(sent_time));
 			if (sent_time > 0) {
 				global.ping = global.sent_time-sent_time;
