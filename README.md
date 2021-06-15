@@ -9,7 +9,7 @@ A barebone server for talking with **GameMaker: Studio** games written in **Java
 ### Gradle
 Add the following to your `build.gradle`
 ```gradle
-  repositories {w
+  repositories {
       maven { url 'https://jitpack.io' }
   }
   
