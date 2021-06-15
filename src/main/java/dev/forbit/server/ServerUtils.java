@@ -1,6 +1,6 @@
 package dev.forbit.server;
 
-import dev.forbit.server.packets.GSONPacket;
+import dev.forbit.server.packets.gson.GSONPacket;
 import dev.forbit.server.packets.Packet;
 
 import java.io.IOException;

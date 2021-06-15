@@ -1,12 +1,13 @@
-package dev.forbit.server.networks;
+package dev.forbit.server.networks.gson;
 
 import dev.forbit.server.Client;
-import dev.forbit.server.instances.ServerInstance;
 import dev.forbit.server.ServerUtils;
+import dev.forbit.server.instances.ServerInstance;
 import dev.forbit.server.instances.ServerInterface;
+import dev.forbit.server.packets.gson.GSONPacket;
 import dev.forbit.server.packets.Packet;
-import dev.forbit.server.packets.PacketInterface;
 import dev.forbit.server.packets.RegisterPacket;
+import dev.forbit.server.packets.gson.GSONPingPacket;
 import dev.forbit.server.utility.GMLInputBuffer;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,12 +20,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.DatagramChannel;
 
-/**
- * Implementaion of the UDP Server
- * <p>
- * Only uses one thread to handle all connections thanks to NIO.
- */
-public class UDPServer extends Thread implements DataServer {
+public class GsonUDPServer extends GSONServer {
 
     /**
      * Whether the server is running or not
@@ -58,7 +54,7 @@ public class UDPServer extends Thread implements DataServer {
      * @param ip       address to host on
      * @param port     the port number
      */
-    public UDPServer(ServerInterface instance, String ip, int port) {
+    public GsonUDPServer(ServerInterface instance, String ip, int port) {
         this.instance = instance;
         setAddress(ip);
         setPort(port);
@@ -91,19 +87,24 @@ public class UDPServer extends Thread implements DataServer {
                     }
                     client.setAddress(remoteAddr);
                     getInstance().getLogger().info("Registered " + client + " to UDP Server");
-                    if (getInstance() instanceof ServerInstance) {
-                        ((ServerInstance) getInstance()).startPinging(client);
-                    }
+                    // start pinging user
+                    GSONPingPacket pingPacket = new GSONPingPacket();
+                    pingPacket.setTime(0);
+                    pingPacket.setLastPing(-1);
+                    pingPacket.setClient(client);
+                    send(client, pingPacket);
                     getInstance().onConnect(client);
                 }
                 else {
                     Client client = instance.getClient(remoteAddr);
                     getInstance().getLogger().finest("Incoming UDP packet {\n\t\"client\": \"" + client + "\"\n\t\"data\": [" + ServerUtils.getBuffer(bb) + "]\n}");
-                    Packet packet = ServerUtils.getPacket(header);
+                    GSONPacket packet = GSONPacket.load(header, buffer.readString());
+                    if (packet == null) {
+                        // throw error
+                        continue;
+                    }
                     packet.setDataServer(this);
-                    packet.load(buffer);
                     getInstance().receivePacket(client, packet);
-
                 }
 
                 bb.clear();
@@ -115,7 +116,7 @@ public class UDPServer extends Thread implements DataServer {
     }
 
 
-    @Override public void send(@NotNull Client client, @NotNull PacketInterface packet) {
+    @Override public void send(@NotNull Client client, @NotNull GSONPacket packet) {
         assert (client.getAddress() != null);
         try {
             getServer().send(packet.getBuffer(), client.getAddress());
@@ -127,5 +128,4 @@ public class UDPServer extends Thread implements DataServer {
     @Override public void shutdown() {
         setRunning(false);
     }
-
 }

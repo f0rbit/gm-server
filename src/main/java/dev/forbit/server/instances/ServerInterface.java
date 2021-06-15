@@ -6,6 +6,7 @@ import dev.forbit.server.logging.NotImplementedException;
 import dev.forbit.server.networks.DataServer;
 import dev.forbit.server.networks.QueryServer;
 import dev.forbit.server.packets.Packet;
+import dev.forbit.server.packets.PacketInterface;
 import org.jetbrains.annotations.Nullable;
 
 import java.net.SocketAddress;
@@ -104,7 +105,7 @@ public interface ServerInterface {
      * @param client client that sent the packet
      * @param packet packet that was recieved
      */
-    default void receivePacket(Client client, Packet packet) {
+    default void receivePacket(Client client, PacketInterface packet) {
         try {
             packet.receive(client);
         } catch (NotImplementedException e) {

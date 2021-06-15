@@ -26,7 +26,7 @@ public class TestServer extends ServerInstance {
 
 
     public static void main(String[] args) {
-        TestServer server = new TestServer(Level.ALL, Map.of("QUERY_PORT", "14449", "TCP_PORT", "14500", "UDP_PORT", "14501", "ADDRESS", "localhost"));
+        TestGsonServer server = new TestGsonServer(Level.ALL, 14449,14500,14501, "localhost");
         server.getLogger().info("Server Started");
     }
 }
