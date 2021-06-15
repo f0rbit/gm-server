@@ -45,3 +45,6 @@ Inside the `examples` directory, is the `client-template`. This template is what
 There is also an example of a basic platformer game [here](./example/platformer-basic) called `platformer-basic`.
 
 If you'd like a guided breakdown of how to implement this, or where to start, check out this [wiki article](https://github.com/f0rbit/gm-server/wiki/Walkthrough-of-platformer-basic-example)
+
+### License
+The source code is licensed under the [MIT License](./LICENSE.md)
