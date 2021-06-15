@@ -1,5 +1,8 @@
 dev.forbit.server
+dev.forbit.server.instances
 dev.forbit.server.logging
 dev.forbit.server.networks
+dev.forbit.server.networks.gson
 dev.forbit.server.packets
+dev.forbit.server.packets.gson
 dev.forbit.server.utility
