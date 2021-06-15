@@ -1,6 +1,6 @@
 package test.forbit.server;
 
-import dev.forbit.server.ServerInstance;
+import dev.forbit.server.instances.ServerInstance;
 import dev.forbit.server.ServerUtils;
 import dev.forbit.server.TestServer;
 import dev.forbit.server.packets.Packet;

@@ -1,6 +1,6 @@
 package dev.forbit.server.networks;
 
-import dev.forbit.server.ServerInstance;
+import dev.forbit.server.instances.ServerInstance;
 import lombok.Getter;
 import lombok.Setter;
 

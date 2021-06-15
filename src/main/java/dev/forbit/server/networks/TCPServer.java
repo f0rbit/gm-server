@@ -1,13 +1,14 @@
 package dev.forbit.server.networks;
 
 import dev.forbit.server.Client;
-import dev.forbit.server.ServerInstance;
+import dev.forbit.server.instances.ServerInstance;
 import dev.forbit.server.ServerUtils;
+import dev.forbit.server.instances.ServerInterface;
 import dev.forbit.server.packets.ConnectionPacket;
 import dev.forbit.server.packets.Packet;
+import dev.forbit.server.packets.PacketInterface;
 import dev.forbit.server.utility.GMLInputBuffer;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
@@ -50,9 +51,9 @@ public class TCPServer extends Thread implements DataServer {
     @Getter @Setter private ServerSocketChannel channel;
 
     /**
-     * The parent {@link ServerInstance} that made this instance.
+     * The parent {@link ServerInterface} that made this instance.
      */
-    @Getter @Setter private ServerInstance instance;
+    @Getter @Setter private ServerInterface instance;
 
     /**
      * Constructor
@@ -141,7 +142,7 @@ public class TCPServer extends Thread implements DataServer {
         }
     }
 
-    @Override public void send(@NotNull Client client, @NotNull Packet packet) {
+    @Override public void send(@NotNull Client client, @NotNull PacketInterface packet) {
         try {
             client.getChannel().write(packet.getBuffer());
         } catch (IOException e) {

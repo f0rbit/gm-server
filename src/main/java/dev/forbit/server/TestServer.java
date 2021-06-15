@@ -1,6 +1,8 @@
 package dev.forbit.server;
 
 
+import dev.forbit.server.instances.ServerInstance;
+
 import java.util.Map;
 import java.util.logging.Level;
 
@@ -20,5 +22,11 @@ public class TestServer extends ServerInstance {
 
     @Override public void onDisconnect(Client client) {
         getLogger().info("Client disconnected "+client);
+    }
+
+
+    public static void main(String[] args) {
+        TestServer server = new TestServer(Level.ALL, Map.of("QUERY_PORT", "14449", "TCP_PORT", "14500", "UDP_PORT", "14501", "ADDRESS", "localhost"));
+        server.getLogger().info("Server Started");
     }
 }

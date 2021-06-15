@@ -1,21 +1,20 @@
-package dev.forbit.server;
+package dev.forbit.server.instances;
 
+import dev.forbit.server.Client;
+import dev.forbit.server.ServerProperties;
+import dev.forbit.server.ServerType;
+import dev.forbit.server.TestServer;
 import dev.forbit.server.logging.LogFormatter;
-import dev.forbit.server.logging.NotImplementedException;
+import dev.forbit.server.networks.DataServer;
 import dev.forbit.server.networks.QueryServer;
 import dev.forbit.server.networks.TCPServer;
 import dev.forbit.server.networks.UDPServer;
-import dev.forbit.server.packets.Packet;
 import dev.forbit.server.packets.PingPacket;
 import lombok.Getter;
 import lombok.Setter;
-import org.jetbrains.annotations.Nullable;
 
-import java.net.SocketAddress;
-import java.nio.channels.SocketChannel;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.UUID;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Formatter;
 import java.util.logging.Level;
@@ -27,7 +26,7 @@ import java.util.logging.Logger;
  * <p>
  * For an example implementation, look at {@link TestServer}
  */
-public abstract class ServerInstance {
+public abstract class ServerInstance implements ServerInterface {
     /**
      * List of connected clients
      */
@@ -46,13 +45,13 @@ public abstract class ServerInstance {
     /**
      * This server instance's {@link TCPServer}, initiated when calling constructor.
      */
-    @Getter @Setter private TCPServer TCPServer;
+    @Getter @Setter private DataServer TCPServer;
 
 
     /**
      * This server instance's {@link UDPServer}, initiated when calling constructor.
      */
-    @Getter @Setter private UDPServer UDPServer;
+    @Getter @Setter private DataServer UDPServer;
 
     /**
      * The properties of this server, currently only loaded from {@link System#getenv()} or a {@link Map}(String,String)
@@ -78,6 +77,23 @@ public abstract class ServerInstance {
      */
     public ServerInstance(Level level, Map<String, String> environmentVariables) {
         init(level, environmentVariables);
+        start();
+    }
+
+    /**
+     * Constructor that loads the server off variables
+     * <p>
+     * Advised against using.
+     *
+     * @param level     the log level
+     * @param queryPort query port
+     * @param tcpPort   tcp port
+     * @param udpPort   udp port
+     * @param address   address to host all the servers on
+     */
+    public ServerInstance(Level level, int queryPort, int tcpPort, int udpPort, String address) {
+        init(level, null);
+        setProperties(new ServerProperties(queryPort, tcpPort, udpPort, address));
         start();
     }
 
@@ -115,90 +131,6 @@ public abstract class ServerInstance {
 
     }
 
-    /**
-     * Shutdowns UDP and TCP servers.
-     */
-    public void shutdown() {
-        getUDPServer().shutdown();
-        getTCPServer().shutdown();
-    }
-
-
-    /**
-     * Adds a client to the list
-     * <p>
-     * This shouldn't be used outside of {@link ServerInstance} implementation.
-     *
-     * @param client the client instance to add
-     */
-    public void addClient(Client client) {
-        getClients().add(client);
-        getLogger().fine("Client added: " + client);
-    }
-
-    /**
-     * Gets a client from a given socket channel
-     * <p>
-     * This shouldn't be used outside of {@link ServerInstance} implementation.
-     *
-     * @param socketChannel the {@link SocketChannel} of the client
-     *
-     * @return Client, or if none found, null.
-     */
-    @Nullable public Client getClient(SocketChannel socketChannel) {
-        for (Client c : getClients()) {
-            if (c.getChannel().equals(socketChannel)) {
-                return c;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Gets a client from a given UUID
-     * <p>
-     * This shouldn't be used outside of {@link ServerInstance} implementation.
-     *
-     * @param id the {@link UUID} of the client
-     *
-     * @return the client instance, or if none found, null.
-     */
-    @Nullable public Client getClient(UUID id) {
-        for (Client c : getClients()) {
-            if (c.getId().equals(id)) {
-                return c;
-            }
-        }
-        return null;
-    }
-
-
-    /**
-     * Gets a client from a given SocketAddress.
-     * <p>
-     * This shouldn't be used outside of {@link ServerInstance} implementation.
-     *
-     * @param address the {@link SocketAddress} of the client
-     *
-     * @return the client instnace, or if none found, null.
-     */
-    @Nullable public Client getClient(SocketAddress address) {
-        return getClients().stream().filter(client -> (client.getAddress() != null && client.getAddress().equals(address))).findFirst().orElse(null);
-    }
-
-
-    /**
-     * Removes a client from the list
-     * <p>
-     * This shouldn't be used outside of {@link ServerInstance} implementation.
-     *
-     * @param c the client to remove
-     */
-    public void removeClient(Client c) {
-        //assert (getClients().contains(c));
-        clients.remove(c);
-        getLogger().fine("Remove client: " + c);
-    }
 
     /**
      * Starts pinging the client
@@ -212,21 +144,6 @@ public abstract class ServerInstance {
         getUDPServer().send(client, packet);
     }
 
-    /**
-     * general method for recieving a packet
-     * <p>
-     * This shouldn't be used outside of {@link ServerInstance} implementation.
-     *
-     * @param client client that sent the packet
-     * @param packet packet that was recieved
-     */
-    public void receivePacket(Client client, Packet packet) {
-        try {
-            packet.receive(client);
-        } catch (NotImplementedException e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * Event fired after a client connects to both TCP and UDP servers.

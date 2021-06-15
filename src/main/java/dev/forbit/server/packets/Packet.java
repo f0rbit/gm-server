@@ -1,6 +1,7 @@
 package dev.forbit.server.packets;
 
 import dev.forbit.server.Client;
+import dev.forbit.server.ServerUtils;
 import dev.forbit.server.logging.NotImplementedException;
 import dev.forbit.server.networks.DataServer;
 import dev.forbit.server.utility.GMLInputBuffer;
@@ -17,16 +18,8 @@ import java.nio.ByteBuffer;
  * @see RegisterPacket
  * @see ConnectionPacket
  */
-public abstract class Packet {
+public abstract class Packet implements PacketInterface {
 
-    /**
-     * The packet size of all packets
-     */
-    public static final int PACKET_SIZE = 1024;
-
-    /**
-     * The server that the packet was recived on
-     */
     @Getter @Setter private DataServer dataServer;
 
     /**
@@ -63,7 +56,7 @@ public abstract class Packet {
      *
      * @return buffer to send to client
      */
-    public ByteBuffer getBuffer() {
+    @Override public ByteBuffer getBuffer() {
         GMLOutputBuffer buffer = new GMLOutputBuffer();
         String className = this.getClass().getName();
         buffer.writeString(className);

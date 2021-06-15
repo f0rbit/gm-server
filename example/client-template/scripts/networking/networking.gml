@@ -1,5 +1,5 @@
-#macro TCP_PORT 70 // port that the TCP server is ran on
-#macro UDP_PORT 71 // port that the UDP server is ran on
+#macro TCP_PORT 14500 // port that the TCP server is ran on
+#macro UDP_PORT 14501 // port that the UDP server is ran on
 #macro ADDRESS "localhost" // address of both servers.
 #macro DRAW_OUTPUT true // whether log_output should draw or not
 #macro ENABLE_LOG false // whether to print headers of packets to the console.
