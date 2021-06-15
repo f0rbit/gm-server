@@ -1,8 +1,7 @@
 package test.forbit.server;
 
-import dev.forbit.server.instances.ServerInstance;
 import dev.forbit.server.ServerUtils;
-import dev.forbit.server.TestServer;
+import dev.forbit.server.instances.ServerInstance;
 import dev.forbit.server.packets.Packet;
 import dev.forbit.server.packets.PingPacket;
 import dev.forbit.server.packets.RegisterPacket;
@@ -35,24 +34,23 @@ public class TestServerInstance {
         instance = new TestServer(Level.ALL, environment);
     }
 
+    @AfterAll static void shutdown() {
+        instance.shutdown();
+    }
 
-    @Test
-    void testUDPServer() {
+    @Test void testUDPServer() {
         Assertions.assertTrue(instance.getUDPServer().isRunning());
     }
 
-    @Test
-    void testTCPServer() {
+    @Test void testTCPServer() {
         Assertions.assertTrue(instance.getTCPServer().isRunning());
     }
 
-
-    @Nested
-    class TestClient {
+    @Nested class TestClient {
+        @Getter private final InetSocketAddress address = new InetSocketAddress("localhost", 71);
         @Getter @Setter UUID id;
         @Getter @Setter SocketChannel channel;
         @Getter @Setter DatagramChannel datagramChannel;
-        @Getter private final InetSocketAddress address = new InetSocketAddress("localhost", 71);
 
         public TestClient() {
             try {
@@ -63,6 +61,7 @@ public class TestServerInstance {
             }
 
         }
+
         void connectTCP() throws IOException {
             InetSocketAddress socketAddress = new InetSocketAddress("localhost", 70);
             setChannel(SocketChannel.open(socketAddress));
@@ -86,22 +85,17 @@ public class TestServerInstance {
             getDatagramChannel().write(buffer.getBuffer());
         }
 
-        @Test
-        void testConnections() {
-            Assertions.assertAll(
-                    () -> { Assertions.assertNotNull(getChannel());},
-                    () -> { Assertions.assertNotNull(getDatagramChannel());}
+        @Test void testConnections() {
+            Assertions.assertAll(() -> { Assertions.assertNotNull(getChannel());}, () -> { Assertions.assertNotNull(getDatagramChannel());}
 
             );
         }
 
-        @Test
-        void testUUID() {
+        @Test void testUUID() {
             Assertions.assertNotNull(getId());
         }
 
-        @Test
-        void testPingPacket() throws IOException {
+        @Test void testPingPacket() throws IOException {
             String header = PingPacket.class.getName();
             GMLOutputBuffer buffer = new GMLOutputBuffer();
             buffer.writeString(header);
@@ -121,12 +115,6 @@ public class TestServerInstance {
                 e.printStackTrace();
             }
         }
-    }
-
-
-    @AfterAll
-    static void shutdown() {
-        instance.shutdown();
     }
 
 }

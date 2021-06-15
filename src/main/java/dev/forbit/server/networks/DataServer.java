@@ -37,4 +37,11 @@ public interface DataServer {
      */
     ServerInterface getInstance();
 
+
+    /**
+     * Returns whether the thread is active or not
+     * @return true if thread is running
+     */
+    boolean isRunning();
+
 }

@@ -3,7 +3,6 @@ package dev.forbit.server.instances;
 import dev.forbit.server.Client;
 import dev.forbit.server.ServerProperties;
 import dev.forbit.server.ServerType;
-import dev.forbit.server.TestServer;
 import dev.forbit.server.logging.LogFormatter;
 import dev.forbit.server.networks.DataServer;
 import dev.forbit.server.networks.QueryServer;
@@ -23,8 +22,6 @@ import java.util.logging.Logger;
 
 /**
  * Abstract class that all child servers should extend
- * <p>
- * For an example implementation, look at {@link TestServer}
  */
 public abstract class ServerInstance implements ServerInterface {
     /**
@@ -160,4 +157,5 @@ public abstract class ServerInstance implements ServerInterface {
      * @param client client to remove.
      */
     public abstract void onDisconnect(Client client);
+
 }
