@@ -1,6 +1,6 @@
 # <img src="logo.png" width="60" /> GM Server
 
-[![CircleCI](https://img.shields.io/circleci/build/gh/f0rbit/gm-server/main)](https://jitpack.io/#f0rbit/gm-server/1.0.4) [![Javadocs](https://img.shields.io/badge/javadocs-live-blue)](https://f0rbit.github.io/gm-server/)
+[![CircleCI](https://img.shields.io/circleci/build/gh/f0rbit/gm-server/main)](https://jitpack.io/#dev.forbit/gm-server/1.0.4) [![Javadocs](https://img.shields.io/badge/javadocs-live-blue)](https://f0rbit.github.io/gm-server/)
 
 A barebone server for talking with **GameMaker: Studio** games written in **Java**
 
@@ -14,7 +14,7 @@ Add the following to your `build.gradle`
   }
   
   dependencies {
-      implementation 'com.github.f0rbit:gm-server:1.0.4'
+      implementation 'dev.forbit:gm-server:1.0.4'
   }
 
 ```
@@ -31,7 +31,7 @@ Add the following to your `pom.xml`
   
 <dependencies>
   <dependency>
-    <groupId>com.github.f0rbit</groupId>
+    <groupId>dev.forbit</groupId>
     <artifactId>gm-server</artifactId>
     <version>1.0.4</version>
   </dependency>
