@@ -136,15 +136,26 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
 <div class="block">Gets the query server of this instance</div>
 </div>
-<div class="col-first even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><a href="../networks/DataServer.html" title="interface in dev.forbit.server.networks">DataServer</a></code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#getTCPServer()">getTCPServer</a></span>()</code></div>
+<div class="col-first even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><a href="../scheduler/Scheduler.html" title="class in dev.forbit.server.scheduler">Scheduler</a></code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#getScheduler()">getScheduler</a></span>()</code></div>
 <div class="col-last even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
-<div class="block">Gets the TCP Server of this instance</div>
+<div class="block">Returns the scheduler of this server instance</div>
 </div>
 <div class="col-first odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><a href="../networks/DataServer.html" title="interface in dev.forbit.server.networks">DataServer</a></code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#getUDPServer()">getUDPServer</a></span>()</code></div>
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#getTCPServer()">getTCPServer</a></span>()</code></div>
 <div class="col-last odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
+<div class="block">Gets the TCP Server of this instance</div>
+</div>
+<div class="col-first even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><a href="../networks/DataServer.html" title="interface in dev.forbit.server.networks">DataServer</a></code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#getUDPServer()">getUDPServer</a></span>()</code></div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
 <div class="block">Gets the UDP Server of this instance</div>
+</div>
+<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code>default void</code></div>
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code><span class="member-name-link"><a href="#init(java.util.logging.Level,java.util.Map)">init</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.logging/java/util/logging/Level.html" title="class or interface in java.util.logging" class="external-link">Level</a>&nbsp;level,
+ <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,&#8203;<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;variables)</code></div>
+<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">
+<div class="block">Initiates the logger and loads server properties</div>
 </div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#onConnect(dev.forbit.server.Client)">onConnect</a></span>&#8203;(<a href="../Client.html" title="class in dev.forbit.server">Client</a>&nbsp;client)</code></div>
@@ -168,14 +179,24 @@ loadScripts(document, 'script');</script>
 <div class="block">Removes a client from the list</div>
 </div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#setProperties(dev.forbit.server.ServerProperties)">setProperties</a></span>&#8203;(<a href="../ServerProperties.html" title="class in dev.forbit.server">ServerProperties</a>&nbsp;properties)</code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#setLogger(java.util.logging.Logger)">setLogger</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.logging/java/util/logging/Logger.html" title="class or interface in java.util.logging" class="external-link">Logger</a>&nbsp;logger)</code></div>
 <div class="col-last even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
-<div class="block">Sets the server properties to load the server with</div>
+<div class="block">Sets the logger of this instance</div>
 </div>
 <div class="col-first odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#setQueryServer(dev.forbit.server.networks.QueryServer)">setQueryServer</a></span>&#8203;(<a href="../networks/QueryServer.html" title="class in dev.forbit.server.networks">QueryServer</a>&nbsp;queryServer)</code></div>
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#setProperties(dev.forbit.server.ServerProperties)">setProperties</a></span>&#8203;(<a href="../ServerProperties.html" title="class in dev.forbit.server">ServerProperties</a>&nbsp;properties)</code></div>
 <div class="col-last odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
+<div class="block">Sets the server properties to load the server with</div>
+</div>
+<div class="col-first even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#setQueryServer(dev.forbit.server.networks.QueryServer)">setQueryServer</a></span>&#8203;(<a href="../networks/QueryServer.html" title="class in dev.forbit.server.networks">QueryServer</a>&nbsp;queryServer)</code></div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
 <div class="block">Sets the query server of this instance</div>
+</div>
+<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#setScheduler(dev.forbit.server.scheduler.Scheduler)">setScheduler</a></span>&#8203;(<a href="../scheduler/Scheduler.html" title="class in dev.forbit.server.scheduler">Scheduler</a>&nbsp;scheduler)</code></div>
+<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
+<div class="block">Sets the scheduler for this server instance/</div>
 </div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#setTCPServer(dev.forbit.server.networks.DataServer)">setTCPServer</a></span>&#8203;(<a href="../networks/DataServer.html" title="interface in dev.forbit.server.networks">DataServer</a>&nbsp;tcpServer)</code></div>
@@ -206,6 +227,19 @@ loadScripts(document, 'script');</script>
 <section class="method-details" id="method.detail">
 <h2>Method Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="init(java.util.logging.Level,java.util.Map)">
+<h3>init</h3>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">init</span>&#8203;<span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.logging/java/util/logging/Level.html" title="class or interface in java.util.logging" class="external-link">Level</a>&nbsp;level,
+ <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,&#8203;<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;variables)</span></div>
+<div class="block">Initiates the logger and loads server properties</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>level</code> - the minimum level for the logger to print.</dd>
+<dd><code>variables</code> - map of variables, should contain TCP_PORT, UDP_PORT, QUERY_PORT, and ADDRESS</dd>
+</dl>
+</section>
+</li>
 <li>
 <section class="detail" id="getClient(java.nio.channels.SocketChannel)">
 <h3>getClient</h3>
@@ -266,6 +300,28 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="setScheduler(dev.forbit.server.scheduler.Scheduler)">
+<h3>setScheduler</h3>
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">setScheduler</span>&#8203;<span class="parameters">(<a href="../scheduler/Scheduler.html" title="class in dev.forbit.server.scheduler">Scheduler</a>&nbsp;scheduler)</span></div>
+<div class="block">Sets the scheduler for this server instance/</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>scheduler</code> - Scheduler object</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getScheduler()">
+<h3>getScheduler</h3>
+<div class="member-signature"><span class="return-type"><a href="../scheduler/Scheduler.html" title="class in dev.forbit.server.scheduler">Scheduler</a></span>&nbsp;<span class="element-name">getScheduler</span>()</div>
+<div class="block">Returns the scheduler of this server instance</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>Scheduler object</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="getLogger()">
 <h3>getLogger</h3>
 <div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.logging/java/util/logging/Logger.html" title="class or interface in java.util.logging" class="external-link">Logger</a></span>&nbsp;<span class="element-name">getLogger</span>()</div>
@@ -273,6 +329,17 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>Logger object</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setLogger(java.util.logging.Logger)">
+<h3>setLogger</h3>
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">setLogger</span>&#8203;<span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.logging/java/util/logging/Logger.html" title="class or interface in java.util.logging" class="external-link">Logger</a>&nbsp;logger)</span></div>
+<div class="block">Sets the logger of this instance</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>logger</code> - The Logger object</dd>
 </dl>
 </section>
 </li>
