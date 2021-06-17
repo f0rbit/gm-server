@@ -3,19 +3,17 @@ package dev.forbit.server.instances;
 import dev.forbit.server.Client;
 import dev.forbit.server.ServerProperties;
 import dev.forbit.server.ServerType;
-import dev.forbit.server.logging.LogFormatter;
 import dev.forbit.server.networks.DataServer;
 import dev.forbit.server.networks.QueryServer;
 import dev.forbit.server.networks.TCPServer;
 import dev.forbit.server.networks.UDPServer;
 import dev.forbit.server.packets.PingPacket;
+import dev.forbit.server.scheduler.Scheduler;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Map;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Formatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,7 +29,7 @@ public abstract class ServerInstance implements ServerInterface {
     /**
      * Logging instance
      */
-    @Getter private Logger logger;
+    @Getter @Setter private Logger logger;
     /**
      * Query Server
      * <p>
@@ -55,6 +53,10 @@ public abstract class ServerInstance implements ServerInterface {
      */
     @Getter @Setter private ServerProperties properties;
 
+    /**
+     * The scheduler object, loaded in the {@link #init} function
+     */
+    @Getter @Setter private Scheduler scheduler;
     /**
      * Default constructor that automatically loads properties from {@link System#getenv()}
      *
@@ -94,24 +96,6 @@ public abstract class ServerInstance implements ServerInterface {
         start();
     }
 
-    /**
-     * Initiates the logger and loads server properties
-     *
-     * @param level     the minimum level for the logger to print.
-     * @param variables map of variables, should contain TCP_PORT, UDP_PORT, QUERY_PORT, and ADDRESS
-     */
-    private void init(Level level, Map<String, String> variables) {
-        this.logger = Logger.getLogger(ServerInstance.class.getName());
-        getLogger().setUseParentHandlers(false);
-        getLogger().setLevel(level);
-        getLogger().addHandler(new ConsoleHandler() {
-            @Override public synchronized void setFormatter(Formatter newFormatter) throws SecurityException {
-                this.setLevel(Level.ALL);
-                super.setFormatter(new LogFormatter());
-            }
-        });
-        setProperties(new ServerProperties(variables));
-    }
 
     /**
      * Starts the servers, it creates an instance of {@link QueryServer} but never starts the thread, because it's not implemented

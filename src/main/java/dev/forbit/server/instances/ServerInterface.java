@@ -2,16 +2,22 @@ package dev.forbit.server.instances;
 
 import dev.forbit.server.Client;
 import dev.forbit.server.ServerProperties;
+import dev.forbit.server.logging.LogFormatter;
 import dev.forbit.server.logging.NotImplementedException;
 import dev.forbit.server.networks.DataServer;
 import dev.forbit.server.networks.QueryServer;
 import dev.forbit.server.packets.PacketInterface;
+import dev.forbit.server.scheduler.Scheduler;
 import org.jetbrains.annotations.Nullable;
 
 import java.net.SocketAddress;
 import java.nio.channels.SocketChannel;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.UUID;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Formatter;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
@@ -19,6 +25,31 @@ import java.util.logging.Logger;
  * Shared methods across Raw Server and GSON Server
  */
 public interface ServerInterface {
+
+
+    /**
+     * Initiates the logger and loads server properties
+     *
+     * @param level     the minimum level for the logger to print.
+     * @param variables map of variables, should contain TCP_PORT, UDP_PORT, QUERY_PORT, and ADDRESS
+     */
+    default void init(Level level, Map<String, String> variables) {
+        setLogger(Logger.getLogger(ServerInstance.class.getName()));
+        getLogger().setUseParentHandlers(false);
+        getLogger().setLevel(level);
+        getLogger().addHandler(new ConsoleHandler() {
+            @Override public synchronized void setFormatter(Formatter newFormatter) throws SecurityException {
+                this.setLevel(Level.ALL);
+                super.setFormatter(new LogFormatter());
+            }
+        });
+        setProperties(new ServerProperties(variables));
+        setScheduler(new Scheduler(this));
+        getScheduler().start();
+
+
+    }
+
     /**
      * Gets a client from a given socket channel
      * <p>
@@ -76,12 +107,32 @@ public interface ServerInterface {
      */
     HashSet<Client> getClients();
 
+
+    /**
+     * Sets the scheduler for this server instance/
+     * @param scheduler Scheduler object
+     */
+    void setScheduler(Scheduler scheduler);
+
+    /**
+     * Returns the scheduler of this server instance
+     * @return Scheduler object
+     */
+    Scheduler getScheduler();
+
     /**
      * Gets the logger of this instance
      *
      * @return Logger object
      */
     Logger getLogger();
+
+    /**
+     * Sets the logger of this instance
+     *
+     * @param logger The Logger object
+     */
+    void setLogger(Logger logger);
 
     /**
      * Gets the query server of this instance

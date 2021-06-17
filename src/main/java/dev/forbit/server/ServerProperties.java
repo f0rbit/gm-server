@@ -22,7 +22,7 @@ public class ServerProperties {
      *
      * @deprecated not implemented yet.
      */
-    public ServerProperties(File file) {
+    @Deprecated public ServerProperties(File file) {
         // TODO load from file
 
         getPorts().put(ServerType.QUERY, 1);

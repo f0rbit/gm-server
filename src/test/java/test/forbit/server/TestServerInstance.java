@@ -20,8 +20,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Level;
 
-@Disabled
-public class TestServerInstance {
+@Disabled public class TestServerInstance {
 
     static ServerInstance instance;
 
