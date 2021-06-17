@@ -5,7 +5,6 @@ import dev.forbit.server.ServerProperties;
 import dev.forbit.server.logging.NotImplementedException;
 import dev.forbit.server.networks.DataServer;
 import dev.forbit.server.networks.QueryServer;
-import dev.forbit.server.packets.Packet;
 import dev.forbit.server.packets.PacketInterface;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,9 +14,11 @@ import java.util.HashSet;
 import java.util.UUID;
 import java.util.logging.Logger;
 
+
+/**
+ * Shared methods across Raw Server and GSON Server
+ */
 public interface ServerInterface {
-
-
     /**
      * Gets a client from a given socket channel
      * <p>
@@ -75,30 +76,85 @@ public interface ServerInterface {
      */
     HashSet<Client> getClients();
 
+    /**
+     * Gets the logger of this instance
+     *
+     * @return Logger object
+     */
     Logger getLogger();
 
+    /**
+     * Gets the query server of this instance
+     *
+     * @return Query Server (NOT IMPLEMENTED)
+     */
     QueryServer getQueryServer();
 
+    /**
+     * Sets the query server of this instance
+     *
+     * @param queryServer the Query Server object
+     */
     void setQueryServer(QueryServer queryServer);
 
+    /**
+     * Gets the TCP Server of this instance
+     *
+     * @return the TCP Server object
+     */
     DataServer getTCPServer();
 
+    /**
+     * Sets the TCP Server of this instance
+     *
+     * @param tcpServer the TCP Server object
+     */
     void setTCPServer(DataServer tcpServer);
 
+    /**
+     * Gets the UDP Server of this instance
+     *
+     * @return the UDP Server object
+     */
     DataServer getUDPServer();
 
+    /**
+     * Sets the UDP Server of this instance
+     *
+     * @param udpServer the UDP Server object
+     */
     void setUDPServer(DataServer udpServer);
 
+    /**
+     * Gets the properties that this server was initialized with.
+     *
+     * @return the ServerProperties of this instance
+     */
     ServerProperties getProperties();
 
+    /**
+     * Sets the server properties to load the server with
+     *
+     * @param properties the Server Properties object to load off of.
+     */
     void setProperties(ServerProperties properties);
 
+    /**
+     * An event fired when a client is connected to both TCP and UDP servers.
+     *
+     * @param client the Client that is connected
+     */
     void onConnect(Client client);
 
+    /**
+     * An event fired when a client disconnects from the server
+     *
+     * @param client The disconnecting Client
+     */
     void onDisconnect(Client client);
 
     /**
-     * general method for recieving a packet
+     * General method for recieving a packet
      * <p>
      * This shouldn't be used outside of {@link ServerInstance} implementation.
      *

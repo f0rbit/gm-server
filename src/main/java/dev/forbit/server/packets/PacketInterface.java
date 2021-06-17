@@ -7,6 +7,9 @@ import dev.forbit.server.utility.GMLOutputBuffer;
 
 import java.nio.ByteBuffer;
 
+/**
+ * Common methods shared between {@link Packet} and {@link dev.forbit.server.packets.gson.GSONPacket}
+ */
 public interface PacketInterface {
 
     /**

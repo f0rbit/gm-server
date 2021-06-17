@@ -6,6 +6,8 @@ import dev.forbit.server.ServerType;
 import dev.forbit.server.logging.LogFormatter;
 import dev.forbit.server.networks.DataServer;
 import dev.forbit.server.networks.QueryServer;
+import dev.forbit.server.networks.TCPServer;
+import dev.forbit.server.networks.UDPServer;
 import dev.forbit.server.networks.gson.GsonTCPServer;
 import dev.forbit.server.networks.gson.GsonUDPServer;
 import dev.forbit.server.packets.PingPacket;
@@ -19,6 +21,10 @@ import java.util.logging.Formatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+/**
+ * Extend this to create a GSON-based server
+ */
 public abstract class GSONServerInstance implements ServerInterface {
     /**
      * List of connected clients
@@ -36,13 +42,13 @@ public abstract class GSONServerInstance implements ServerInterface {
     @Getter @Setter private QueryServer queryServer;
 
     /**
-     * This server instance's {@link TCPServer}, initiated when calling constructor.
+     * This server instance's {@link dev.forbit.server.networks.TCPServer}, initiated when calling constructor.
      */
     @Getter @Setter private DataServer TCPServer;
 
 
     /**
-     * This server instance's {@link UDPServer}, initiated when calling constructor.
+     * This server instance's {@link dev.forbit.server.networks.UDPServer}, initiated when calling constructor.
      */
     @Getter @Setter private DataServer UDPServer;
 

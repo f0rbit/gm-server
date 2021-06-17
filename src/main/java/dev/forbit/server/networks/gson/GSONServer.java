@@ -6,6 +6,10 @@ import dev.forbit.server.packets.gson.GSONPacket;
 import dev.forbit.server.packets.PacketInterface;
 import org.jetbrains.annotations.NotNull;
 
+
+/**
+ * Methods that are shared across {@link GsonTCPServer} and {@link GsonUDPServer}
+ */
 public abstract class GSONServer extends Thread implements DataServer {
 
     /**

@@ -14,6 +14,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.nio.ByteBuffer;
 
+/**
+ * Abstract class that all GSON-based Packets should extend.
+ *
+ * @see GSONConnectionPacket
+ * @see GSONPingPacket
+ */
 public abstract class GSONPacket implements PacketInterface {
 
     @Getter @Setter transient DataServer dataServer;
@@ -45,13 +51,11 @@ public abstract class GSONPacket implements PacketInterface {
      */
     abstract public void receive(Client client) throws NotImplementedException;
 
+    /**
+     * Returns the byte buffer of all the data inside the packet
+     * @return ByteBuffer with data inside.
+     */
     @Override public ByteBuffer getBuffer() {
-        // TODO get buffer
-        // buffer structure
-        /*
-        header - packet name
-        data - json of all variables
-         */
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         String data = gson.toJson(this);
         String header = this.getClass().getName();

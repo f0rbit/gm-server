@@ -2,11 +2,10 @@ package dev.forbit.server.networks.gson;
 
 import dev.forbit.server.Client;
 import dev.forbit.server.ServerUtils;
-import dev.forbit.server.instances.ServerInstance;
 import dev.forbit.server.instances.ServerInterface;
-import dev.forbit.server.packets.gson.GSONPacket;
 import dev.forbit.server.packets.Packet;
 import dev.forbit.server.packets.RegisterPacket;
+import dev.forbit.server.packets.gson.GSONPacket;
 import dev.forbit.server.packets.gson.GSONPingPacket;
 import dev.forbit.server.utility.GMLInputBuffer;
 import lombok.Getter;
@@ -20,6 +19,9 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.DatagramChannel;
 
+/**
+ * An implements of a UDP server where all the packets data is in on JSON string.
+ */
 public class GsonUDPServer extends GSONServer {
 
     /**

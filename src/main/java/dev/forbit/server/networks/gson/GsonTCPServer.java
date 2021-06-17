@@ -23,6 +23,10 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
+
+/**
+ * An implemention of a TCP Server where the packet's data is all in one JSON string.
+ */
 public class GsonTCPServer extends GSONServer {
 
     /**
