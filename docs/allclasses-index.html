@@ -84,19 +84,33 @@ loadScripts(document, 'script');</script>
 <div class="block">A tool to make writing to buffers for GML easier.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table-tab2 all-classes-table"><a href="dev/forbit/server/packets/gson/GSONConnectionPacket.html" title="class in dev.forbit.server.packets.gson">GSONConnectionPacket</a></div>
-<div class="col-last odd-row-color all-classes-table-tab2 all-classes-table">&nbsp;</div>
+<div class="col-last odd-row-color all-classes-table-tab2 all-classes-table">
+<div class="block">An implementation of the Connection Packet, except with GSON.</div>
+</div>
 <div class="col-first even-row-color all-classes-table-tab2 all-classes-table"><a href="dev/forbit/server/packets/gson/GSONPacket.html" title="class in dev.forbit.server.packets.gson">GSONPacket</a></div>
-<div class="col-last even-row-color all-classes-table-tab2 all-classes-table">&nbsp;</div>
+<div class="col-last even-row-color all-classes-table-tab2 all-classes-table">
+<div class="block">Abstract class that all GSON-based Packets should extend.</div>
+</div>
 <div class="col-first odd-row-color all-classes-table-tab2 all-classes-table"><a href="dev/forbit/server/packets/gson/GSONPingPacket.html" title="class in dev.forbit.server.packets.gson">GSONPingPacket</a></div>
-<div class="col-last odd-row-color all-classes-table-tab2 all-classes-table">&nbsp;</div>
+<div class="col-last odd-row-color all-classes-table-tab2 all-classes-table">
+<div class="block">A GSON-based implementation of a PingPacket</div>
+</div>
 <div class="col-first even-row-color all-classes-table-tab2 all-classes-table"><a href="dev/forbit/server/networks/gson/GSONServer.html" title="class in dev.forbit.server.networks.gson">GSONServer</a></div>
-<div class="col-last even-row-color all-classes-table-tab2 all-classes-table">&nbsp;</div>
+<div class="col-last even-row-color all-classes-table-tab2 all-classes-table">
+<div class="block">Methods that are shared across <a href="dev/forbit/server/networks/gson/GsonTCPServer.html" title="class in dev.forbit.server.networks.gson"><code>GsonTCPServer</code></a> and <a href="dev/forbit/server/networks/gson/GsonUDPServer.html" title="class in dev.forbit.server.networks.gson"><code>GsonUDPServer</code></a></div>
+</div>
 <div class="col-first odd-row-color all-classes-table-tab2 all-classes-table"><a href="dev/forbit/server/instances/GSONServerInstance.html" title="class in dev.forbit.server.instances">GSONServerInstance</a></div>
-<div class="col-last odd-row-color all-classes-table-tab2 all-classes-table">&nbsp;</div>
+<div class="col-last odd-row-color all-classes-table-tab2 all-classes-table">
+<div class="block">Extend this to create a GSON-based server</div>
+</div>
 <div class="col-first even-row-color all-classes-table-tab2 all-classes-table"><a href="dev/forbit/server/networks/gson/GsonTCPServer.html" title="class in dev.forbit.server.networks.gson">GsonTCPServer</a></div>
-<div class="col-last even-row-color all-classes-table-tab2 all-classes-table">&nbsp;</div>
+<div class="col-last even-row-color all-classes-table-tab2 all-classes-table">
+<div class="block">An implemention of a TCP Server where the packet's data is all in one JSON string.</div>
+</div>
 <div class="col-first odd-row-color all-classes-table-tab2 all-classes-table"><a href="dev/forbit/server/networks/gson/GsonUDPServer.html" title="class in dev.forbit.server.networks.gson">GsonUDPServer</a></div>
-<div class="col-last odd-row-color all-classes-table-tab2 all-classes-table">&nbsp;</div>
+<div class="col-last odd-row-color all-classes-table-tab2 all-classes-table">
+<div class="block">An implements of a UDP server where all the packets data is in on JSON string.</div>
+</div>
 <div class="col-first even-row-color all-classes-table-tab2 all-classes-table"><a href="dev/forbit/server/logging/LogFormatter.html" title="class in dev.forbit.server.logging">LogFormatter</a></div>
 <div class="col-last even-row-color all-classes-table-tab2 all-classes-table">
 <div class="block">Default formatter</div>
@@ -111,7 +125,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Abstract class that all children Packets should extend.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table-tab1 all-classes-table"><a href="dev/forbit/server/packets/PacketInterface.html" title="interface in dev.forbit.server.packets">PacketInterface</a></div>
-<div class="col-last odd-row-color all-classes-table-tab1 all-classes-table">&nbsp;</div>
+<div class="col-last odd-row-color all-classes-table-tab1 all-classes-table">
+<div class="block">Common methods shared between <a href="dev/forbit/server/packets/Packet.html" title="class in dev.forbit.server.packets"><code>Packet</code></a> and <a href="dev/forbit/server/packets/gson/GSONPacket.html" title="class in dev.forbit.server.packets.gson"><code>GSONPacket</code></a></div>
+</div>
 <div class="col-first even-row-color all-classes-table-tab2 all-classes-table"><a href="dev/forbit/server/packets/PingPacket.html" title="class in dev.forbit.server.packets">PingPacket</a></div>
 <div class="col-last even-row-color all-classes-table-tab2 all-classes-table">
 <div class="block">A basic implementation of a ping system.</div>
@@ -130,7 +146,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Abstract class that all child servers should extend</div>
 </div>
 <div class="col-first even-row-color all-classes-table-tab1 all-classes-table"><a href="dev/forbit/server/instances/ServerInterface.html" title="interface in dev.forbit.server.instances">ServerInterface</a></div>
-<div class="col-last even-row-color all-classes-table-tab1 all-classes-table">&nbsp;</div>
+<div class="col-last even-row-color all-classes-table-tab1 all-classes-table">
+<div class="block">Shared methods across Raw Server and GSON Server</div>
+</div>
 <div class="col-first odd-row-color all-classes-table-tab2 all-classes-table"><a href="dev/forbit/server/ServerProperties.html" title="class in dev.forbit.server">ServerProperties</a></div>
 <div class="col-last odd-row-color all-classes-table-tab2 all-classes-table">
 <div class="block">Stores properties that the ServerInstance reads from</div>
@@ -147,10 +165,8 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color all-classes-table-tab2 all-classes-table">
 <div class="block">Implementaion of the TCP Server</div>
 </div>
-<div class="col-first odd-row-color all-classes-table-tab2 all-classes-table"><a href="dev/forbit/server/TestGsonServer.html" title="class in dev.forbit.server">TestGsonServer</a></div>
-<div class="col-last odd-row-color all-classes-table-tab2 all-classes-table">&nbsp;</div>
-<div class="col-first even-row-color all-classes-table-tab2 all-classes-table"><a href="dev/forbit/server/networks/UDPServer.html" title="class in dev.forbit.server.networks">UDPServer</a></div>
-<div class="col-last even-row-color all-classes-table-tab2 all-classes-table">
+<div class="col-first odd-row-color all-classes-table-tab2 all-classes-table"><a href="dev/forbit/server/networks/UDPServer.html" title="class in dev.forbit.server.networks">UDPServer</a></div>
+<div class="col-last odd-row-color all-classes-table-tab2 all-classes-table">
 <div class="block">Implementaion of the UDP Server</div>
 </div>
 </div>

@@ -90,6 +90,12 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">GSONPacket</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="../PacketInterface.html" title="interface in dev.forbit.server.packets">PacketInterface</a></span></div>
+<div class="block">Abstract class that all GSON-based Packets should extend.</div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd><a href="GSONConnectionPacket.html" title="class in dev.forbit.server.packets.gson"><code>GSONConnectionPacket</code></a>, 
+<a href="GSONPingPacket.html" title="class in dev.forbit.server.packets.gson"><code>GSONPingPacket</code></a></dd>
+</dl>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -129,7 +135,7 @@ implements <a href="../PacketInterface.html" title="interface in dev.forbit.serv
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/nio/ByteBuffer.html" title="class or interface in java.nio" class="external-link">ByteBuffer</a></code></div>
 <div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#getBuffer()">getBuffer</a></span>()</code></div>
 <div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
-<div class="block">Returns a sendable buffer with all the information, including header</div>
+<div class="block">Returns the byte buffer of all the data inside the packet</div>
 </div>
 <div class="col-first odd-row-color method-summary-table-tab1 method-summary-table-tab4 method-summary-table"><code>static <a href="GSONPacket.html" title="class in dev.forbit.server.packets.gson">GSONPacket</a></code></div>
 <div class="col-second odd-row-color method-summary-table-tab1 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#load(java.lang.String,java.lang.String)">load</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;header,
@@ -212,13 +218,12 @@ implements <a href="../PacketInterface.html" title="interface in dev.forbit.serv
 <section class="detail" id="getBuffer()">
 <h3>getBuffer</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/nio/ByteBuffer.html" title="class or interface in java.nio" class="external-link">ByteBuffer</a></span>&nbsp;<span class="element-name">getBuffer</span>()</div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../PacketInterface.html#getBuffer()">PacketInterface</a></code></span></div>
-<div class="block">Returns a sendable buffer with all the information, including header</div>
+<div class="block">Returns the byte buffer of all the data inside the packet</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../PacketInterface.html#getBuffer()">getBuffer</a></code>&nbsp;in interface&nbsp;<code><a href="../PacketInterface.html" title="interface in dev.forbit.server.packets">PacketInterface</a></code></dd>
 <dt>Returns:</dt>
-<dd>buffer to send to client</dd>
+<dd>ByteBuffer with data inside.</dd>
 </dl>
 </section>
 </li>
