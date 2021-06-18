@@ -146,73 +146,81 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
 <div class="block">Gets the TCP Server of this instance</div>
 </div>
-<div class="col-first even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><a href="../networks/DataServer.html" title="interface in dev.forbit.server.networks">DataServer</a></code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#getUDPServer()">getUDPServer</a></span>()</code></div>
-<div class="col-last even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code>default int</code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code><span class="member-name-link"><a href="#getTimeout()">getTimeout</a></span>()</code></div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">
+<div class="block">Override this to set the amount of time to wait for clients to reconnect.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><a href="../networks/DataServer.html" title="interface in dev.forbit.server.networks">DataServer</a></code></div>
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#getUDPServer()">getUDPServer</a></span>()</code></div>
+<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
 <div class="block">Gets the UDP Server of this instance</div>
 </div>
-<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code>default void</code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code><span class="member-name-link"><a href="#init(java.util.logging.Level,java.util.Map)">init</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.logging/java/util/logging/Level.html" title="class or interface in java.util.logging" class="external-link">Level</a>&nbsp;level,
+<div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code>default void</code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code><span class="member-name-link"><a href="#init(java.util.logging.Level,java.util.Map)">init</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.logging/java/util/logging/Level.html" title="class or interface in java.util.logging" class="external-link">Level</a>&nbsp;level,
  <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,&#8203;<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;variables)</code></div>
-<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">
 <div class="block">Initiates the logger and loads server properties</div>
 </div>
-<div class="col-first even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#onConnect(dev.forbit.server.Client)">onConnect</a></span>&#8203;(<a href="../Client.html" title="class in dev.forbit.server">Client</a>&nbsp;client)</code></div>
-<div class="col-last even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#onConnect(dev.forbit.server.Client)">onConnect</a></span>&#8203;(<a href="../Client.html" title="class in dev.forbit.server">Client</a>&nbsp;client)</code></div>
+<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
 <div class="block">An event fired when a client is connected to both TCP and UDP servers.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#onDisconnect(dev.forbit.server.Client)">onDisconnect</a></span>&#8203;(<a href="../Client.html" title="class in dev.forbit.server">Client</a>&nbsp;client)</code></div>
-<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#onDisconnect(dev.forbit.server.Client)">onDisconnect</a></span>&#8203;(<a href="../Client.html" title="class in dev.forbit.server">Client</a>&nbsp;client)</code></div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
 <div class="block">An event fired when a client disconnects from the server</div>
 </div>
-<div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code>default void</code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code><span class="member-name-link"><a href="#receivePacket(dev.forbit.server.Client,dev.forbit.server.packets.PacketInterface)">receivePacket</a></span>&#8203;(<a href="../Client.html" title="class in dev.forbit.server">Client</a>&nbsp;client,
+<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code>default void</code></div>
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code><span class="member-name-link"><a href="#receivePacket(dev.forbit.server.Client,dev.forbit.server.packets.PacketInterface)">receivePacket</a></span>&#8203;(<a href="../Client.html" title="class in dev.forbit.server">Client</a>&nbsp;client,
  <a href="../packets/PacketInterface.html" title="interface in dev.forbit.server.packets">PacketInterface</a>&nbsp;packet)</code></div>
-<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">
+<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">
 <div class="block">General method for recieving a packet</div>
 </div>
-<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code>default void</code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code><span class="member-name-link"><a href="#removeClient(dev.forbit.server.Client)">removeClient</a></span>&#8203;(<a href="../Client.html" title="class in dev.forbit.server">Client</a>&nbsp;c)</code></div>
-<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">
+<div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code>default void</code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code><span class="member-name-link"><a href="#removeClient(dev.forbit.server.Client)">removeClient</a></span>&#8203;(<a href="../Client.html" title="class in dev.forbit.server">Client</a>&nbsp;c)</code></div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">
 <div class="block">Removes a client from the list</div>
 </div>
-<div class="col-first even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#setLogger(java.util.logging.Logger)">setLogger</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.logging/java/util/logging/Logger.html" title="class or interface in java.util.logging" class="external-link">Logger</a>&nbsp;logger)</code></div>
-<div class="col-last even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#setLogger(java.util.logging.Logger)">setLogger</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.logging/java/util/logging/Logger.html" title="class or interface in java.util.logging" class="external-link">Logger</a>&nbsp;logger)</code></div>
+<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
 <div class="block">Sets the logger of this instance</div>
 </div>
-<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#setProperties(dev.forbit.server.ServerProperties)">setProperties</a></span>&#8203;(<a href="../ServerProperties.html" title="class in dev.forbit.server">ServerProperties</a>&nbsp;properties)</code></div>
-<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#setProperties(dev.forbit.server.ServerProperties)">setProperties</a></span>&#8203;(<a href="../ServerProperties.html" title="class in dev.forbit.server">ServerProperties</a>&nbsp;properties)</code></div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
 <div class="block">Sets the server properties to load the server with</div>
 </div>
-<div class="col-first even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#setQueryServer(dev.forbit.server.networks.QueryServer)">setQueryServer</a></span>&#8203;(<a href="../networks/QueryServer.html" title="class in dev.forbit.server.networks">QueryServer</a>&nbsp;queryServer)</code></div>
-<div class="col-last even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#setQueryServer(dev.forbit.server.networks.QueryServer)">setQueryServer</a></span>&#8203;(<a href="../networks/QueryServer.html" title="class in dev.forbit.server.networks">QueryServer</a>&nbsp;queryServer)</code></div>
+<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
 <div class="block">Sets the query server of this instance</div>
 </div>
-<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#setScheduler(dev.forbit.server.scheduler.Scheduler)">setScheduler</a></span>&#8203;(<a href="../scheduler/Scheduler.html" title="class in dev.forbit.server.scheduler">Scheduler</a>&nbsp;scheduler)</code></div>
-<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#setScheduler(dev.forbit.server.scheduler.Scheduler)">setScheduler</a></span>&#8203;(<a href="../scheduler/Scheduler.html" title="class in dev.forbit.server.scheduler">Scheduler</a>&nbsp;scheduler)</code></div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
 <div class="block">Sets the scheduler for this server instance/</div>
 </div>
-<div class="col-first even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#setTCPServer(dev.forbit.server.networks.DataServer)">setTCPServer</a></span>&#8203;(<a href="../networks/DataServer.html" title="interface in dev.forbit.server.networks">DataServer</a>&nbsp;tcpServer)</code></div>
-<div class="col-last even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#setTCPServer(dev.forbit.server.networks.DataServer)">setTCPServer</a></span>&#8203;(<a href="../networks/DataServer.html" title="interface in dev.forbit.server.networks">DataServer</a>&nbsp;tcpServer)</code></div>
+<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
 <div class="block">Sets the TCP Server of this instance</div>
 </div>
-<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#setUDPServer(dev.forbit.server.networks.DataServer)">setUDPServer</a></span>&#8203;(<a href="../networks/DataServer.html" title="interface in dev.forbit.server.networks">DataServer</a>&nbsp;udpServer)</code></div>
-<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#setUDPServer(dev.forbit.server.networks.DataServer)">setUDPServer</a></span>&#8203;(<a href="../networks/DataServer.html" title="interface in dev.forbit.server.networks">DataServer</a>&nbsp;udpServer)</code></div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
 <div class="block">Sets the UDP Server of this instance</div>
 </div>
-<div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code>default void</code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code><span class="member-name-link"><a href="#shutdown()">shutdown</a></span>()</code></div>
-<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">
+<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code>default void</code></div>
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code><span class="member-name-link"><a href="#shutdown()">shutdown</a></span>()</code></div>
+<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">
 <div class="block">Shutdowns UDP and TCP servers.</div>
 </div>
+<div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code>default void</code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code><span class="member-name-link"><a href="#updateClients()">updateClients</a></span>()</code></div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -499,6 +507,23 @@ loadScripts(document, 'script');</script>
 <dt>Parameters:</dt>
 <dd><code>c</code> - the client to remove</dd>
 </dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getTimeout()">
+<h3>getTimeout</h3>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getTimeout</span>()</div>
+<div class="block">Override this to set the amount of time to wait for clients to reconnect.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>timeout in milliseconds</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="updateClients()">
+<h3>updateClients</h3>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">updateClients</span>()</div>
 </section>
 </li>
 </ul>
