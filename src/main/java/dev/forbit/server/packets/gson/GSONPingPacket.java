@@ -19,6 +19,7 @@ public class GSONPingPacket extends GSONPacket {
     @Getter @Setter @Expose int lastPing;
 
     @Override public void receive(Client client) throws NotImplementedException {
+        client.setLastPing(System.currentTimeMillis());
         getDataServer().send(client, this);
     }
 

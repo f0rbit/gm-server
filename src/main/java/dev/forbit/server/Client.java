@@ -35,6 +35,11 @@ public class Client {
      */
     @Getter @Setter @Expose private long ping;
 
+    /**
+     * This is the timestamp of the last PingPacket recieved by the client.
+     */
+    @Getter @Setter private long lastPing;
+
 
     /**
      * Constructor of client

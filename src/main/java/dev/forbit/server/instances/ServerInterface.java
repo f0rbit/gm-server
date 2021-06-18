@@ -7,6 +7,7 @@ import dev.forbit.server.logging.NotImplementedException;
 import dev.forbit.server.networks.DataServer;
 import dev.forbit.server.networks.QueryServer;
 import dev.forbit.server.packets.PacketInterface;
+import dev.forbit.server.scheduler.RepeatingTask;
 import dev.forbit.server.scheduler.Scheduler;
 import org.jetbrains.annotations.Nullable;
 
@@ -46,8 +47,7 @@ public interface ServerInterface {
         setProperties(new ServerProperties(variables));
         setScheduler(new Scheduler(this));
         getScheduler().start();
-
-
+        getScheduler().addTask(new RepeatingTask(this::updateClients, 2, 20));
     }
 
     /**
@@ -252,4 +252,26 @@ public interface ServerInterface {
         getClients().remove(c);
         getLogger().fine("Client removed: " + c);
     }
+
+
+    /**
+     * Override this to set the amount of time to wait for clients to reconnect.
+     * @return timeout in milliseconds
+     */
+    default int getTimeout() {
+        return 1000;
+    }
+
+    default void updateClients() {
+        if (getClients().isEmpty()) return;
+        for (Client c : getClients()) {
+            if (System.currentTimeMillis()-c.getLastPing() > getTimeout()) {
+                getLogger().info("Client timeout: "+c);
+                // TODO send disconnect packet.
+                onDisconnect(c);
+                removeClient(c);
+            }
+        }
+    }
+
 }
