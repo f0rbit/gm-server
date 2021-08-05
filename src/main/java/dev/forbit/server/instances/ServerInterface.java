@@ -107,18 +107,19 @@ public interface ServerInterface {
      */
     HashSet<Client> getClients();
 
-
-    /**
-     * Sets the scheduler for this server instance/
-     * @param scheduler Scheduler object
-     */
-    void setScheduler(Scheduler scheduler);
-
     /**
      * Returns the scheduler of this server instance
+     *
      * @return Scheduler object
      */
     Scheduler getScheduler();
+
+    /**
+     * Sets the scheduler for this server instance/
+     *
+     * @param scheduler Scheduler object
+     */
+    void setScheduler(Scheduler scheduler);
 
     /**
      * Gets the logger of this instance
@@ -256,6 +257,7 @@ public interface ServerInterface {
 
     /**
      * Override this to set the amount of time to wait for clients to reconnect.
+     *
      * @return timeout in milliseconds
      */
     default int getTimeout() {
@@ -263,10 +265,10 @@ public interface ServerInterface {
     }
 
     default void updateClients() {
-        if (getClients().isEmpty()) return;
+        if (getClients().isEmpty()) { return; }
         for (Client c : getClients()) {
-            if (System.currentTimeMillis()-c.getLastPing() > getTimeout()) {
-                getLogger().info("Client timeout: "+c);
+            if (System.currentTimeMillis() - c.getLastPing() > getTimeout()) {
+                getLogger().info("Client timeout: " + c);
                 // TODO send disconnect packet.
                 onDisconnect(c);
                 removeClient(c);

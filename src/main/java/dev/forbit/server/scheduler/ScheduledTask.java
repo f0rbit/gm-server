@@ -13,14 +13,14 @@ public class ScheduledTask implements Task {
         setExecuteTime(delay);
     }
 
-    @Override
-    public boolean tick() {
+    @Override public boolean tick() {
         if (getExecuteTime() <= 0) {
             System.out.println("Executed task");
             getTask().run();
             return false;
-        } else {
-            setExecuteTime(getExecuteTime()-1);
+        }
+        else {
+            setExecuteTime(getExecuteTime() - 1);
             return true;
         }
     }

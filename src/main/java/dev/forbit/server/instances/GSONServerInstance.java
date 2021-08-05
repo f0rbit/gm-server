@@ -64,9 +64,7 @@ public abstract class GSONServerInstance implements ServerInterface {
      * @param logLevel the minimum level for the logger to print.
      */
     public GSONServerInstance(Level logLevel) {
-        init(logLevel, System.getenv());
-        start();
-
+        this(logLevel, System.getenv());
     }
 
     /**

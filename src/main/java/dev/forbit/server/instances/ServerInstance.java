@@ -57,15 +57,14 @@ public abstract class ServerInstance implements ServerInterface {
      * The scheduler object, loaded in the {@link #init} function
      */
     @Getter @Setter private Scheduler scheduler;
+
     /**
      * Default constructor that automatically loads properties from {@link System#getenv()}
      *
      * @param logLevel the minimum level for the logger to print.
      */
     public ServerInstance(Level logLevel) {
-        init(logLevel, System.getenv());
-        start();
-
+        this(logLevel, System.getenv());
     }
 
     /**

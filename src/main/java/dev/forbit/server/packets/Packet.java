@@ -1,7 +1,6 @@
 package dev.forbit.server.packets;
 
 import dev.forbit.server.Client;
-import dev.forbit.server.ServerUtils;
 import dev.forbit.server.logging.NotImplementedException;
 import dev.forbit.server.networks.DataServer;
 import dev.forbit.server.utility.GMLInputBuffer;

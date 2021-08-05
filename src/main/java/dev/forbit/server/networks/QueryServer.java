@@ -1,6 +1,5 @@
 package dev.forbit.server.networks;
 
-import dev.forbit.server.instances.ServerInstance;
 import dev.forbit.server.instances.ServerInterface;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,9 +20,8 @@ public class QueryServer extends Thread {
         setPort(port);
     }
 
-    @Override
-    public String toString() {
-        return "query_server: \"port\": "+getPort()+".";
+    @Override public String toString() {
+        return "query_server: \"port\": " + getPort() + ".";
     }
 
 }

@@ -3,7 +3,6 @@ package dev.forbit.server.packets;
 import dev.forbit.server.Client;
 import dev.forbit.server.logging.NotImplementedException;
 import dev.forbit.server.networks.DataServer;
-import dev.forbit.server.utility.GMLOutputBuffer;
 
 import java.nio.ByteBuffer;
 
@@ -34,19 +33,19 @@ public interface PacketInterface {
      */
     ByteBuffer getBuffer();
 
-
-    /**
-     * Sets the data server that this packet was received from.
-     * @param server server that received the packet
-     */
-    void setDataServer(DataServer server);
-
     /**
      * Returns the server that received this packet
+     *
      * @return the data server that received this packet
      */
     DataServer getDataServer();
 
+    /**
+     * Sets the data server that this packet was received from.
+     *
+     * @param server server that received the packet
+     */
+    void setDataServer(DataServer server);
 
 
 }

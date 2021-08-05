@@ -1,7 +1,7 @@
 package dev.forbit.server;
 
-import dev.forbit.server.packets.gson.GSONPacket;
 import dev.forbit.server.packets.Packet;
+import dev.forbit.server.packets.gson.GSONPacket;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -15,10 +15,13 @@ public class ServerUtils {
 
     /**
      * Reads from a buffer to find the next string written
-     *
+     * <p>
      * Strings in gamemaker buffers are ended with 0x00, if the functon can't find a 0x00 is will throw an IOException error
+     *
      * @param buffer buffer to read from.
+     *
      * @return the concatenated string
+     *
      * @throws IOException when the function can't find end of string (usually caused by buffer size too small.)
      */
     public static String getNextString(ByteBuffer buffer) throws IOException {
@@ -31,7 +34,8 @@ public class ServerUtils {
                     array[i] = byteArrayList.get(i);
                 }
                 return new String(array);
-            } else {
+            }
+            else {
                 byteArrayList.add(b);
             }
         }
@@ -40,7 +44,9 @@ public class ServerUtils {
 
     /**
      * Returns the raw bytes of a buffer
+     *
      * @param buffer the buffer to read from
+     *
      * @return a string of all the bytes in the buffer, trimmed.
      */
     public static String getBuffer(ByteBuffer buffer) {
@@ -55,10 +61,13 @@ public class ServerUtils {
 
     /**
      * Gets a packet from a given class name.
-     *
+     * <p>
      * Uses reflection
+     *
      * @param packetName the packet name to load from, example "dev.forbit.packets.PingPacket"
+     *
      * @return the Packet loaded
+     *
      * @throws ClassNotFoundException
      * @throws InstantiationException
      * @throws IllegalAccessException

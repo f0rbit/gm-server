@@ -38,7 +38,7 @@ public class ServerProperties {
      * @param environment can either be your own map, or commonly loaded with {@link java.lang.System#getenv()}
      */
     public ServerProperties(Map<String, String> environment) {
-        if (environment == null) return;
+        if (environment == null) { return; }
         for (ServerType type : ServerType.values()) {
             if (environment.containsKey(type.name() + "_PORT")) {
                 try {
@@ -62,10 +62,11 @@ public class ServerProperties {
 
     /**
      * A constructor to build the server properties directly from variables
+     *
      * @param queryPort the port to run the query server on
-     * @param tcpPort the port to run the TCP server on
-     * @param udpPort the port to run the UDP server on
-     * @param address the address to host the servers.
+     * @param tcpPort   the port to run the TCP server on
+     * @param udpPort   the port to run the UDP server on
+     * @param address   the address to host the servers.
      */
     public ServerProperties(int queryPort, int tcpPort, int udpPort, String address) {
         this.ports.put(ServerType.QUERY, queryPort);

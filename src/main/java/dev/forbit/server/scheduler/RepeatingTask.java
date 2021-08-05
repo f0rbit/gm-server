@@ -15,13 +15,13 @@ public class RepeatingTask implements Task {
         setPeriod(period);
     }
 
-    @Override
-    public boolean tick() {
+    @Override public boolean tick() {
         if (getDelay() < 0) {
             getTask().run();
             setDelay(getPeriod());
-        } else {
-            setDelay(getDelay()-1);
+        }
+        else {
+            setDelay(getDelay() - 1);
         }
         return true;
     }

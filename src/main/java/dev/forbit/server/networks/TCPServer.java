@@ -1,7 +1,6 @@
 package dev.forbit.server.networks;
 
 import dev.forbit.server.Client;
-import dev.forbit.server.instances.ServerInstance;
 import dev.forbit.server.ServerUtils;
 import dev.forbit.server.instances.ServerInterface;
 import dev.forbit.server.packets.ConnectionPacket;

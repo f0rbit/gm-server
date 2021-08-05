@@ -1,6 +1,5 @@
 package dev.forbit.server.scheduler;
 
-import dev.forbit.server.instances.ServerInstance;
 import dev.forbit.server.instances.ServerInterface;
 import lombok.Getter;
 
@@ -17,14 +16,14 @@ public class Scheduler extends Thread {
         this.server = server;
         this.tasks = new HashSet<>();
     }
-    @Override
-    public void run() {
+
+    @Override public void run() {
         //System.out.println("[SCHEDULER] Started scheduler");
         server.getLogger().info("Started Scheduler.");
         running = true;
-        long lastTick = System.currentTimeMillis()-100;
+        long lastTick = System.currentTimeMillis() - 100;
         while (running) {
-            if (System.currentTimeMillis()-lastTick < 100) continue;
+            if (System.currentTimeMillis() - lastTick < 100) { continue; }
             List<Task> remove = new ArrayList<>();
             HashSet<Task> copy = (new HashSet<>());
             copy.addAll(getTasks());
@@ -39,7 +38,7 @@ public class Scheduler extends Thread {
     }
 
     public void stopRunning() {
-        running  = false;
+        running = false;
     }
 
     public void addTask(Task task) {
