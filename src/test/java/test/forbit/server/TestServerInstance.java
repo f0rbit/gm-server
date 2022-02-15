@@ -20,15 +20,17 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Level;
 
-@Disabled public class TestServerInstance {
-
+public class TestServerInstance {
+    static final int TCP_PORT = 7000;
+    static final int UDP_PORT = 7100;
+    static final int QUERY_PORT = 6900;
     static ServerInstance instance;
 
     @BeforeAll static void setup() {
         Map<String, String> environment = new HashMap<>();
-        environment.put("TCP_PORT", "70");
-        environment.put("UDP_PORT", "71");
-        environment.put("QUERY_PORT", "69");
+        environment.put("TCP_PORT", TCP_PORT+"");
+        environment.put("UDP_PORT", UDP_PORT+"");
+        environment.put("QUERY_PORT", QUERY_PORT+"");
         environment.put("ADDRESS", "localhost");
         instance = new TestServer(Level.ALL, environment);
     }
@@ -46,7 +48,7 @@ import java.util.logging.Level;
     }
 
     @Nested class TestClient {
-        @Getter private final InetSocketAddress address = new InetSocketAddress("localhost", 71);
+        @Getter private final InetSocketAddress address = new InetSocketAddress("localhost", UDP_PORT);
         @Getter @Setter UUID id;
         @Getter @Setter SocketChannel channel;
         @Getter @Setter DatagramChannel datagramChannel;
@@ -62,7 +64,7 @@ import java.util.logging.Level;
         }
 
         void connectTCP() throws IOException {
-            InetSocketAddress socketAddress = new InetSocketAddress("localhost", 70);
+            InetSocketAddress socketAddress = new InetSocketAddress("localhost", TCP_PORT);
             setChannel(SocketChannel.open(socketAddress));
             ByteBuffer buffer = ByteBuffer.allocate(Packet.PACKET_SIZE);
             getChannel().read(buffer);
