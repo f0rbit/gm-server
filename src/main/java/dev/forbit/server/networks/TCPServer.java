@@ -1,15 +1,17 @@
 package dev.forbit.server.networks;
 
 import dev.forbit.server.interfaces.Server;
-import old.code.Client;
-import old.code.logging.NotImplementedException;
-import old.code.networks.DataServer;
-import old.code.packets.Packet;
-import old.code.utility.GMLInputBuffer;
 import dev.forbit.server.packets.BaseConnectionPacket;
 import dev.forbit.server.utility.ServerUtils;
 import lombok.Getter;
 import lombok.Setter;
+import old.code.Client;
+import old.code.logging.NotImplementedException;
+import old.code.networks.DataServer;
+import old.code.packets.Packet;
+import old.code.packets.PacketInterface;
+import old.code.utility.GMLInputBuffer;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -173,4 +175,15 @@ public abstract class TCPServer extends Thread implements DataServer {
 
     protected abstract BaseConnectionPacket getConnectionPacket();
 
+    @Override public void send(@NotNull Client client, @NotNull PacketInterface packet) {
+        try {
+            client.getChannel().write(packet.getBuffer());
+        } catch (IOException ioException) {
+            getInstance().getLogger().warning("ERROR SENDING BUFFER" + ioException.getMessage());
+        }
+    }
+
+    @Override public void shutdown() {
+        setRunning(false);
+    }
 }
