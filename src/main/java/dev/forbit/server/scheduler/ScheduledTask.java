@@ -6,6 +6,7 @@ import lombok.Setter;
 public class ScheduledTask implements Task {
 
     @Getter @Setter int executeTime;
+
     @Getter @Setter Runnable task;
 
     public ScheduledTask(Runnable runnable, int delay) {
@@ -18,8 +19,7 @@ public class ScheduledTask implements Task {
             System.out.println("Executed task");
             getTask().run();
             return false;
-        }
-        else {
+        } else {
             setExecuteTime(getExecuteTime() - 1);
             return true;
         }

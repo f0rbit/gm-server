@@ -22,7 +22,6 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
-
 /**
  * An implemention of a TCP Server where the packet's data is all in one JSON string.
  */
@@ -66,7 +65,6 @@ public class GsonTCPServer extends GSONServer {
         setInstance(instance);
     }
 
-
     @Override public void run() {
         running = true;
         try {
@@ -108,8 +106,7 @@ public class GsonTCPServer extends GSONServer {
             } catch (IOException exception) {
                 exception.printStackTrace();
             }
-        }
-        else if (key.isReadable()) {
+        } else if (key.isReadable()) {
             SocketChannel sc = (SocketChannel) key.channel();
             ByteBuffer bb = ByteBuffer.allocate(Packet.PACKET_SIZE);
             bb.order(ByteOrder.LITTLE_ENDIAN);

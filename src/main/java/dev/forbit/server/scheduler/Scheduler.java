@@ -9,7 +9,9 @@ import java.util.List;
 
 public class Scheduler extends Thread {
     @Getter HashSet<Task> tasks;
+
     boolean running = false;
+
     ServerInterface server;
 
     public Scheduler(ServerInterface server) {

@@ -15,7 +15,9 @@ public class GSONPingPacket extends GSONPacket {
     // @expose annotation, very little is actually needed inside these packets.
 
     @Getter @Setter @Expose Client client;
+
     @Getter @Setter @Expose int time;
+
     @Getter @Setter @Expose int lastPing;
 
     @Override public void receive(Client client) throws NotImplementedException {

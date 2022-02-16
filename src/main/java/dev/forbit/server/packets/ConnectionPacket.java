@@ -13,7 +13,6 @@ import lombok.Setter;
 public class ConnectionPacket extends Packet {
     @Getter @Setter Client client;
 
-
     @Override public void fillBuffer(GMLOutputBuffer buffer) throws NotImplementedException {
         buffer.writeString(client.getId().toString());
 
@@ -26,6 +25,5 @@ public class ConnectionPacket extends Packet {
     @Override public void receive(Client client) throws NotImplementedException {
         throw new NotImplementedException();
     }
-
 
 }

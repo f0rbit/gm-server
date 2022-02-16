@@ -40,7 +40,6 @@ public class Client {
      */
     @Getter @Setter private long lastPing;
 
-
     /**
      * Constructor of client
      * <p>

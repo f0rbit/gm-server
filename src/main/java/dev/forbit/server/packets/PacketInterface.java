@@ -25,7 +25,6 @@ public interface PacketInterface {
      */
     void receive(Client client) throws NotImplementedException;
 
-
     /**
      * Returns a sendable buffer with all the information, including header
      *
@@ -46,6 +45,5 @@ public interface PacketInterface {
      * @param server server that received the packet
      */
     void setDataServer(DataServer server);
-
 
 }

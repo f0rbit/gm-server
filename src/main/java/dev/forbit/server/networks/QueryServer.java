@@ -11,7 +11,9 @@ import lombok.Setter;
 public class QueryServer extends Thread {
 
     @Getter @Setter int port;
+
     @Getter @Setter String address;
+
     @Getter ServerInterface instance;
 
     public QueryServer(ServerInterface serverInstance, String address, int port) {

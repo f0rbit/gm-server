@@ -17,7 +17,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  * Abstract class that all child servers should extend
  */
@@ -26,10 +25,12 @@ public abstract class ServerInstance implements ServerInterface {
      * List of connected clients
      */
     @Getter private final HashSet<Client> clients = new HashSet<>();
+
     /**
      * Logging instance
      */
     @Getter @Setter private Logger logger;
+
     /**
      * Query Server
      * <p>
@@ -41,7 +42,6 @@ public abstract class ServerInstance implements ServerInterface {
      * This server instance's {@link TCPServer}, initiated when calling constructor.
      */
     @Getter @Setter private DataServer TCPServer;
-
 
     /**
      * This server instance's {@link UDPServer}, initiated when calling constructor.
@@ -95,7 +95,6 @@ public abstract class ServerInstance implements ServerInterface {
         start();
     }
 
-
     /**
      * Starts the servers, it creates an instance of {@link QueryServer} but never starts the thread, because it's not implemented
      */
@@ -111,7 +110,6 @@ public abstract class ServerInstance implements ServerInterface {
 
     }
 
-
     /**
      * Starts pinging the client
      *
@@ -123,7 +121,6 @@ public abstract class ServerInstance implements ServerInterface {
         packet.setTime(0);
         getUDPServer().send(client, packet);
     }
-
 
     /**
      * Event fired after a client connects to both TCP and UDP servers.

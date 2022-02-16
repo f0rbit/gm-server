@@ -1,9 +1,7 @@
 package dev.forbit.server.networks;
 
 import dev.forbit.server.Client;
-import dev.forbit.server.instances.ServerInstance;
 import dev.forbit.server.instances.ServerInterface;
-import dev.forbit.server.packets.Packet;
 import dev.forbit.server.packets.PacketInterface;
 import org.jetbrains.annotations.NotNull;
 
@@ -30,16 +28,16 @@ public interface DataServer {
      */
     void shutdown();
 
-
     /**
      * Returns the ServerInstance that instantiated this Server.
+     *
      * @return the server instance that made this object
      */
     ServerInterface getInstance();
 
-
     /**
      * Returns whether the thread is active or not
+     *
      * @return true if thread is running
      */
     boolean isRunning();

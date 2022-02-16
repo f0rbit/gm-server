@@ -53,6 +53,7 @@ public abstract class GSONPacket implements PacketInterface {
 
     /**
      * Returns the byte buffer of all the data inside the packet
+     *
      * @return ByteBuffer with data inside.
      */
     @Override public ByteBuffer getBuffer() {

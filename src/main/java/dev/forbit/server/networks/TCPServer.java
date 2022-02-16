@@ -67,7 +67,6 @@ public class TCPServer extends Thread implements DataServer {
         setInstance(instance);
     }
 
-
     @Override public void run() {
         running = true;
         try {
@@ -109,8 +108,7 @@ public class TCPServer extends Thread implements DataServer {
             } catch (IOException exception) {
                 exception.printStackTrace();
             }
-        }
-        else if (key.isReadable()) {
+        } else if (key.isReadable()) {
             SocketChannel sc = (SocketChannel) key.channel();
             ByteBuffer bb = ByteBuffer.allocate(Packet.PACKET_SIZE);
             bb.order(ByteOrder.LITTLE_ENDIAN);

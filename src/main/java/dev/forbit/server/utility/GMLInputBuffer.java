@@ -45,5 +45,4 @@ public class GMLInputBuffer {
         return ServerUtils.getNextString(buffer);
     }
 
-
 }

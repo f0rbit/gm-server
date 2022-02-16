@@ -12,7 +12,6 @@ import java.util.ArrayList;
  */
 public class ServerUtils {
 
-
     /**
      * Reads from a buffer to find the next string written
      * <p>
@@ -34,8 +33,7 @@ public class ServerUtils {
                     array[i] = byteArrayList.get(i);
                 }
                 return new String(array);
-            }
-            else {
+            } else {
                 byteArrayList.add(b);
             }
         }
@@ -55,9 +53,7 @@ public class ServerUtils {
             builder.append(b != 0 ? b : " ");
         }
         return builder.toString().trim();
-
     }
-
 
     /**
      * Gets a packet from a given class name.

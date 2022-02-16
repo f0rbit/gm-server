@@ -39,7 +39,6 @@ public abstract class Packet implements PacketInterface {
      */
     abstract public void load(GMLInputBuffer buffer) throws NotImplementedException;
 
-
     /**
      * Event fired when the packet is recieved by a server.
      *
@@ -48,7 +47,6 @@ public abstract class Packet implements PacketInterface {
      * @throws NotImplementedException throw this if body is empty.
      */
     abstract public void receive(Client client) throws NotImplementedException;
-
 
     /**
      * Returns a sendable bufer with all the information, including header

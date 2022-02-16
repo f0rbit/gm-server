@@ -62,7 +62,6 @@ public class GsonUDPServer extends GSONServer {
         setPort(port);
     }
 
-
     @Override public void run() {
         running = true;
         try {
@@ -96,8 +95,7 @@ public class GsonUDPServer extends GSONServer {
                     pingPacket.setClient(client);
                     send(client, pingPacket);
                     getInstance().onConnect(client);
-                }
-                else {
+                } else {
                     Client client = instance.getClient(remoteAddr);
                     getInstance().getLogger().finest("Incoming UDP packet {\n\t\"client\": \"" + client + "\"\n\t\"data\": [" + ServerUtils.getBuffer(bb) + "]\n}");
                     GSONPacket packet = GSONPacket.load(header, buffer.readString());
@@ -116,7 +114,6 @@ public class GsonUDPServer extends GSONServer {
             e.printStackTrace();
         }
     }
-
 
     @Override public void send(@NotNull Client client, @NotNull GSONPacket packet) {
         assert (client.getAddress() != null);

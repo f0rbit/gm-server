@@ -64,7 +64,6 @@ public class UDPServer extends Thread implements DataServer {
         setPort(port);
     }
 
-
     @Override public void run() {
         running = true;
         try {
@@ -95,8 +94,7 @@ public class UDPServer extends Thread implements DataServer {
                         ((ServerInstance) getInstance()).startPinging(client);
                     }
                     getInstance().onConnect(client);
-                }
-                else {
+                } else {
                     Client client = instance.getClient(remoteAddr);
                     getInstance().getLogger().finest("Incoming UDP packet {\n\t\"client\": \"" + client + "\"\n\t\"data\": [" + ServerUtils.getBuffer(bb) + "]\n}");
                     Packet packet = ServerUtils.getPacket(header);
@@ -113,7 +111,6 @@ public class UDPServer extends Thread implements DataServer {
             e.printStackTrace();
         }
     }
-
 
     @Override public void send(@NotNull Client client, @NotNull PacketInterface packet) {
         assert (client.getAddress() != null);

@@ -21,12 +21,10 @@ import java.util.logging.Formatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  * Shared methods across Raw Server and GSON Server
  */
 public interface ServerInterface {
-
 
     /**
      * Initiates the logger and loads server properties
@@ -85,7 +83,6 @@ public interface ServerInterface {
         }
         return null;
     }
-
 
     /**
      * Gets a client from a given SocketAddress.
@@ -233,7 +230,6 @@ public interface ServerInterface {
         getLogger().fine("Client added: " + client);
     }
 
-
     /**
      * Shutdowns UDP and TCP servers.
      */
@@ -253,7 +249,6 @@ public interface ServerInterface {
         getClients().remove(c);
         getLogger().fine("Client removed: " + c);
     }
-
 
     /**
      * Override this to set the amount of time to wait for clients to reconnect.

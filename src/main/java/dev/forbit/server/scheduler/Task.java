@@ -13,5 +13,4 @@ public interface Task {
      */
     boolean tick();
 
-
 }

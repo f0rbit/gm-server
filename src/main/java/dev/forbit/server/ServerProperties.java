@@ -12,7 +12,14 @@ import java.util.Map;
  */
 public class ServerProperties {
 
+    /**
+     * The ports for each server type
+     */
     @Getter private final HashMap<ServerType, Integer> ports = new HashMap<>();
+
+    /**
+     * Address to connect to
+     */
     @Getter @Setter private String address = null;
 
     /**
@@ -24,7 +31,6 @@ public class ServerProperties {
      */
     @Deprecated public ServerProperties(File file) {
         // TODO load from file
-
         getPorts().put(ServerType.QUERY, 1);
         getPorts().put(ServerType.UDP, 2);
         getPorts().put(ServerType.TCP, 3);
@@ -46,16 +52,14 @@ public class ServerProperties {
                 } catch (NumberFormatException exception) {
                     // throw error
                 }
-            }
-            else {
+            } else {
                 // throw error
             }
         }
 
         if (environment.containsKey("ADDRESS")) {
             this.address = environment.get("ADDRESS");
-        }
-        else {
+        } else {
             // throw error
         }
     }
@@ -86,6 +90,5 @@ public class ServerProperties {
         assert (getPorts().containsKey(type));
         return getPorts().getOrDefault(type, -1);
     }
-
 
 }
