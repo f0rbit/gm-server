@@ -1,5 +1,39 @@
 package dev.forbit.server.abstracts;
 
+import dev.forbit.server.interfaces.ConnectionServer;
 import dev.forbit.server.interfaces.PacketInterface;
+import dev.forbit.server.utilities.GMLInputBuffer;
+import dev.forbit.server.utilities.GMLOutputBuffer;
+import lombok.Getter;
+import lombok.Setter;
 
-public abstract class Packet implements PacketInterface { }
+import java.nio.ByteBuffer;
+
+public abstract class Packet implements PacketInterface {
+    @Getter @Setter ConnectionServer server;
+
+    /**
+     * Fill the buffer with information you want to send to the client
+     *
+     * @param buffer the buffer with the header already included.
+     */
+    public abstract void fillBuffer(GMLOutputBuffer buffer);
+
+    /**
+     * Load information from the input buffer into the class to use
+     *
+     * @param buffer the input (header is already read.)
+     */
+    public abstract void loadBuffer(GMLInputBuffer buffer);
+
+    @Override public ByteBuffer getBuffer() {
+        GMLOutputBuffer output = new GMLOutputBuffer();
+        String className = this.getClass().getName();
+        output.writeString(className);
+
+        // fill buffer with information
+        fillBuffer(output);
+
+        return output.getBuffer();
+    }
+}

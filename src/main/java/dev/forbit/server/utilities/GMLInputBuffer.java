@@ -1,7 +1,7 @@
 package dev.forbit.server.utilities;
 
-import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.util.Optional;
 
 public class GMLInputBuffer {
 
@@ -35,7 +35,16 @@ public class GMLInputBuffer {
         return buffer.get() == 1;
     }
 
-    public String readString() throws IOException {
+    /**
+     * Attempts to read string from the buffer
+     * <p>
+     * This will loop through the buffer byte-by-byte until a character <code>0x00</code> is found.
+     * If the program cannot find a <code>0x00</code> character, then the entire buffer will be read through and this function
+     * will return <code>Optional.empty()</code>
+     *
+     * @return the string attempted to read, or empty
+     */
+    public Optional<String> readString() {
         return Utilities.getNextString(this.buffer);
     }
 }

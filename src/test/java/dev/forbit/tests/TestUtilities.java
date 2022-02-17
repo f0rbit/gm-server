@@ -1,4 +1,4 @@
-package dev.forbit;
+package dev.forbit.tests;
 
 import dev.forbit.server.utilities.GMLInputBuffer;
 import dev.forbit.server.utilities.GMLOutputBuffer;
@@ -7,9 +7,9 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -33,7 +33,10 @@ public class TestUtilities {
         return buffer;
     }
 
-    @Test @Order(1) @DisplayName("Test Creating New Buffer") public void testNewBuffer() {
+    @Test
+    @Order(1)
+    @DisplayName("Test Creating New Buffer")
+    public void testNewBuffer() {
         assertEquals(Utilities.newBuffer().limit(), Utilities.DEFAULT_PACKET_SIZE);
         assertEquals(createMockBuffer().limit(), Utilities.DEFAULT_PACKET_SIZE);
         assertEquals(Utilities.newBuffer().position(), 0);
@@ -41,24 +44,26 @@ public class TestUtilities {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"123123", "1231232131", "Hello World!", "🎈🎈🎈🎈 emoji👓🥼🎨🖼", "Testing 123 -123123 ... asdasd", "Escape characters go \n\n\n\r\t brrr"}) @Order(2)
-    @DisplayName("Test Getting String") public void testGettingString(String s) {
+    @ValueSource(strings = {"123123", "1231232131", "Hello World!", "🎈🎈🎈🎈 emoji👓🥼🎨🖼", "Testing 123 -123123 ... asdasd", "Escape characters " + "go " + "\n\n\n" + "\r\t brrr"})
+    @Order(2)
+    @DisplayName("Test Getting String")
+    public void testGettingString(String s) {
         System.out.println("value: " + s);
         ByteBuffer buffer = Utilities.newBuffer();
         buffer.put(s.getBytes());
         buffer.put((byte) 0x00);
         System.out.println("bytes: " + Arrays.toString(s.getBytes()));
         buffer.rewind();
-        try {
-            String string = Utilities.getNextString(buffer);
-            System.out.println("obtained string: " + string);
-            assertEquals(s, string);
-        } catch (IOException exception) {
-            fail();
-        }
+        Optional<String> string = Utilities.getNextString(buffer);
+        assertTrue(string.isPresent());
+        System.out.println("obtained string: " + string.get());
+        assertEquals(s, string.get());
     }
 
-    @Test @Order(3) @DisplayName("Test Printing ByteBuffer") public void testPrintingByteBuffer() {
+    @Test
+    @Order(3)
+    @DisplayName("Test Printing ByteBuffer")
+    public void testPrintingByteBuffer() {
         ByteBuffer testBuffer = Utilities.newBuffer();
         testBuffer.put((byte) 32);
         testBuffer.put((byte) 16);
@@ -69,7 +74,10 @@ public class TestUtilities {
         assertEquals(string, "32,16,8,65,");
     }
 
-    @Test @Order(4) @DisplayName("Test GMLInputBuffer") public void testInputBuffer() {
+    @Test
+    @Order(4)
+    @DisplayName("Test GMLInputBuffer")
+    public void testInputBuffer() {
         // construct input buffer
         GMLInputBuffer input = new GMLInputBuffer(createMockBuffer());
 
@@ -78,7 +86,11 @@ public class TestUtilities {
                 () -> assertEquals(input.readF64(), 64.0d),
                 () -> assertEquals(input.readS8(), 8),
                 () -> assertEquals(input.readS32(), -200),
-                () -> assertEquals(input.readString(), "hello world"),
+                () -> {
+                    Optional<String> string = input.readString();
+                    assertTrue(string.isPresent());
+                    assertEquals(string.get(), "hello world");
+                },
                 () -> assertEquals(input.readS16(), 33),
                 () -> assertEquals(input.readF32(), 43.5f),
                 () -> assertTrue(input.readBool()),
@@ -86,7 +98,9 @@ public class TestUtilities {
 
     }
 
-    @Test @DisplayName("Test GMLOutputBuffer") public void testOutputBuffer() {
+    @Test
+    @DisplayName("Test GMLOutputBuffer")
+    public void testOutputBuffer() {
         GMLOutputBuffer output = new GMLOutputBuffer();
         output.writeF64(64.0d);
         output.writeS8((byte) 8);

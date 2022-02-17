@@ -1,9 +1,9 @@
 package dev.forbit.server.utilities;
 
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class Utilities {
 
@@ -17,10 +17,8 @@ public class Utilities {
      * @param buffer buffer to read from.
      *
      * @return the concatenated string
-     *
-     * @throws IOException when the function can't find end of string (usually caused by buffer size too small.)
      */
-    public static String getNextString(ByteBuffer buffer) throws IOException {
+    public static Optional<String> getNextString(ByteBuffer buffer) {
         ArrayList<Byte> byteArrayList = new ArrayList<>();
         while (buffer.hasRemaining()) {
             byte b = buffer.get();
@@ -29,12 +27,12 @@ public class Utilities {
                 for (int i = 0; i < byteArrayList.size(); i++) {
                     array[i] = byteArrayList.get(i);
                 }
-                return new String(array);
+                return Optional.of(new String(array));
             } else {
                 byteArrayList.add(b);
             }
         }
-        throw new IOException("buffer ran out before 0x00 was detected.");
+        return Optional.empty();
     }
 
     /**
@@ -49,7 +47,7 @@ public class Utilities {
         for (byte b : buffer.array()) {
             builder.append(b != 0 ? b + "," : " ");
         }
-        return builder.toString().trim();
+        return builder.toString().trim().replaceAll(" ", "0,");
     }
 
     /**
