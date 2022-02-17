@@ -1,1 +1,0 @@
-log_output.log("Initiated Room");

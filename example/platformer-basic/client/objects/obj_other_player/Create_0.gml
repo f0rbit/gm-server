@@ -1,1 +1,0 @@
-network_id = -1;
