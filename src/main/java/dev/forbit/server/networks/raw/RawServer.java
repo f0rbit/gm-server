@@ -5,6 +5,7 @@ import dev.forbit.server.networks.raw.servers.RawTCPServer;
 import dev.forbit.server.networks.raw.servers.RawUDPServer;
 import dev.forbit.server.utilities.Client;
 import dev.forbit.server.utilities.ServerProperties;
+import dev.forbit.server.utilities.Utilities;
 
 public class RawServer extends Server {
 
@@ -16,7 +17,7 @@ public class RawServer extends Server {
 
     @Override
     public void onConnect(Client client) {
-        System.out.println("Registered Client: " + client);
+        Utilities.getLogger().info("Registered client (" + client + ")");
     }
 
     @Override

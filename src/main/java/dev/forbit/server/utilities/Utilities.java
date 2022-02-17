@@ -1,16 +1,19 @@
 package dev.forbit.server.utilities;
 
 import dev.forbit.server.abstracts.Packet;
+import dev.forbit.server.logging.LogFormatter;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.logging.*;
 
 public class Utilities {
 
     public static final int DEFAULT_PACKET_SIZE = 1024;
     public static final String REGISTER_PACKET_IDENTIFIER = "dev.forbit.identifier.RegisterPacket";
+    private static Logger logger;
 
     /**
      * Reads from a buffer to find the next string written
@@ -36,6 +39,39 @@ public class Utilities {
             }
         }
         return Optional.empty();
+    }
+
+    /**
+     * Singleton logger
+     *
+     * @return logger instance
+     */
+    public static Logger getLogger() {
+        if (logger == null) {
+            // create new logger
+            logger = Logger.getLogger("server-logger");
+            logger.setUseParentHandlers(false);
+            logger.setLevel(Level.ALL);
+            logger.addHandler(new ConsoleHandler() {
+                @Override
+                public synchronized void setFormatter(Formatter formatter) throws SecurityException {
+                    this.setLevel(Level.ALL);
+                    super.setFormatter(new LogFormatter());
+                }
+            });
+        }
+        return logger;
+    }
+
+    public static void addLogOutputFile(Level level, String dest) {
+        try {
+            FileHandler fileHandler = new FileHandler(dest);
+            fileHandler.setFormatter(new LogFormatter());
+            fileHandler.setLevel(level);
+            getLogger().addHandler(fileHandler);
+        } catch (Exception e) {
+            getLogger().log(Level.WARNING, "Error adding output file", e);
+        }
     }
 
     /**

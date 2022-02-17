@@ -1,6 +1,7 @@
 package dev.forbit.server.interfaces;
 
 import dev.forbit.server.abstracts.Server;
+import dev.forbit.server.utilities.Utilities;
 
 public interface ConnectionServer {
 
@@ -26,7 +27,7 @@ public interface ConnectionServer {
 
     default void begin() {
         if (!(init())) {
-            System.out.println("ERROR IN INIT PHASE. CLASS: " + getClass().getName());
+            Utilities.getLogger().severe("Error in init phase. class" + getClass().getName());
             setRunning(false);
             return;
         }

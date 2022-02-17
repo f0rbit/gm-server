@@ -17,6 +17,7 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Optional;
+import java.util.logging.Level;
 
 public abstract class TCPServer extends Thread implements ConnectionServer {
     @Getter @Setter String address;
@@ -37,7 +38,7 @@ public abstract class TCPServer extends Thread implements ConnectionServer {
 
     @Override
     public boolean init() {
-        System.out.println("Starting TCP Server");
+        Utilities.getLogger().info("Starting TCP Server");
         try {
             // open channel and selector
             setSelector(Selector.open());
@@ -93,9 +94,9 @@ public abstract class TCPServer extends Thread implements ConnectionServer {
     }
 
     private void acceptConnection(SocketChannel channel) throws IOException {
+        Utilities.getLogger().fine("Accepting connection from " + channel);
         channel.configureBlocking(false);
         channel.register(getSelector(), SelectionKey.OP_READ);
-
         // create new client
         Client client = new Client();
         client.setChannel(channel);
@@ -107,11 +108,17 @@ public abstract class TCPServer extends Thread implements ConnectionServer {
     }
 
     private void readKey(SelectionKey key) {
+        // get the channel
         SocketChannel channel = (SocketChannel) key.channel();
+        // read the buffer
         ByteBuffer buffer = Utilities.newBuffer();
+        // find the client based on the channel address.
         Optional<Client> client = getServer().getClient(channel);
+        // receive the packet if the client exists
         client.ifPresentOrElse(c -> receivePacket(channel, buffer, c), () -> {
             // error message
+            Utilities.getLogger()
+                     .warning("Read key from channel without a client. key (" + key + ") channel (" + channel + ") buffer (" + buffer + ")");
         });
 
     }
@@ -137,16 +144,18 @@ public abstract class TCPServer extends Thread implements ConnectionServer {
             // reflective get packet
             Optional<Packet> optionalPacket = Utilities.getPacket(header);
             // load packet
-            //System.out.println(optionalPacket);
-            optionalPacket.ifPresent(packet -> loadPacket(input, packet, client));
+            optionalPacket.ifPresentOrElse(packet -> loadPacket(input, packet, client), () -> {
+                Utilities.getLogger().warning("Unhandled packet with header (" + header + ")");
+            });
         } catch (Exception e) {
             // error
             getServer().forceDisconnect(client);
             try {
+                // close the channel
                 channel.close();
             } catch (Exception exception) {
                 // REAL ERROR
-                exception.printStackTrace();
+                Utilities.getLogger().log(Level.WARNING, "Error closing client channel", exception);
             }
         }
 
@@ -158,6 +167,7 @@ public abstract class TCPServer extends Thread implements ConnectionServer {
         // fill buffer with information
         packet.loadBuffer(input);
         // execute receive packet event
+        Utilities.getLogger().finest("Received TCP packet (" + packet + ") from client (" + client + ")");
         packet.receive(client);
     }
 }

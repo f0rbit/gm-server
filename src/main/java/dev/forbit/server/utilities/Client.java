@@ -1,5 +1,6 @@
 package dev.forbit.server.utilities;
 
+import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 import dev.forbit.server.interfaces.ClientInterface;
 import lombok.Getter;
@@ -17,7 +18,7 @@ public class Client implements ClientInterface {
 
     @Getter @Setter private SocketChannel channel;
     @Getter @Setter private SocketAddress address;
-    @Getter @Setter private int lastSeen;
+    @Getter @Setter @Expose private int lastSeen;
 
     /**
      * Constructor of client
@@ -28,4 +29,9 @@ public class Client implements ClientInterface {
         setUUID(java.util.UUID.randomUUID());
     }
 
+    @Override
+    public String toString() {
+        var gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        return this.getClass().getName() + "" + gson.toJson(this);
+    }
 }

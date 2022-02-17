@@ -31,7 +31,7 @@ public abstract class UDPServer extends Thread implements ConnectionServer {
 
     @Override
     public boolean init() {
-        System.out.println("Starting UDP Server");
+        Utilities.getLogger().info("Starting UDP Server");
         try {
             // open server
             setChannel(DatagramChannel.open());
@@ -77,10 +77,13 @@ public abstract class UDPServer extends Thread implements ConnectionServer {
             Optional<Client> client = getServer().getClient(remoteAddress);
             if (client.isEmpty()) {
                 // throw error
+                Utilities.getLogger().warning("Received packet from client that is unregistered! address (" + address + ")");
                 return;
             }
             Optional<Packet> packet = Utilities.getPacket(header);
-            packet.ifPresent((p) -> loadPacket(input, p, client.get()));
+            packet.ifPresentOrElse((p) -> loadPacket(input, p, client.get()), () -> {
+                Utilities.getLogger().warning("Unhandled packet with header (" + header + ")");
+            });
         }
     }
 
@@ -90,6 +93,7 @@ public abstract class UDPServer extends Thread implements ConnectionServer {
         // fill buffer with information
         packet.loadBuffer(input);
         // execute receive packet event
+        Utilities.getLogger().finest("Received TCP packet (" + packet + ") from client (" + client + ")");
         packet.receive(client);
     }
 
@@ -97,14 +101,14 @@ public abstract class UDPServer extends Thread implements ConnectionServer {
         Optional<String> uuid = input.readString();
         if (uuid.isEmpty()) {
             // throw error
-            System.out.println("ERROR: UUID NOT RECEIVED");
+            Utilities.getLogger().warning("Client registration didn't specify UUID.");
             return;
         }
         UUID id = UUID.fromString(uuid.get());
         Optional<Client> client = getServer().getClient(id);
         if (client.isEmpty()) {
             // throw error
-            System.out.println("ERROR: CLIENT WITH UUID NOT IN SET");
+            Utilities.getLogger().warning("Client's UUID is not associated with a Client instance in the server.");
             return;
         }
         client.get().setAddress(remoteAddress);

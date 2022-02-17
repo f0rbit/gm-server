@@ -3,6 +3,7 @@ package dev.forbit.server.abstracts;
 import dev.forbit.server.interfaces.ServerInterface;
 import dev.forbit.server.utilities.Client;
 import dev.forbit.server.utilities.ServerProperties;
+import dev.forbit.server.utilities.Utilities;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -44,19 +45,19 @@ public abstract class Server extends Thread implements ServerInterface {
 
     @Override
     public boolean removeClient(Client client) {
-        if (!clients.contains(client)) { return false; }
-        clients.remove(client);
+        if (!getClients().contains(client)) { return false; }
+        getClients().remove(client);
         return true;
     }
 
     @Override
     public void addClient(Client client) {
-        clients.add(client);
+        getClients().add(client);
     }
 
     @Override
     public void run() {
-        System.out.println("starting servers");
+        Utilities.getLogger().info("Starting servers...");
         getTCPServer().start();
         getUDPServer().start();
     }
@@ -65,6 +66,7 @@ public abstract class Server extends Thread implements ServerInterface {
      * Override this for custom force disconnect behaviour
      */
     public void forceDisconnect(Client client) {
+        Utilities.getLogger().info("Force disconnecting client (" + client + ")");
         onDisconnect(client);
         removeClient(client);
     }
@@ -73,13 +75,14 @@ public abstract class Server extends Thread implements ServerInterface {
     public void shutdown() {
         getTCPServer().shutdown();
         getUDPServer().shutdown();
-        System.out.println("Shutdown servers");
+        Utilities.getLogger().info("Shutting down servers...");
     }
 
     @Override
     public void sendPacket(Client client, Packet packet) {
         try {
             client.getChannel().write(packet.getBuffer());
+            Utilities.getLogger().finer("Sending packet (" + packet + ") to client (" + client + ")");
         } catch (IOException exception) {
             // exception sending client a packet
         }

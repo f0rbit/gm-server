@@ -7,6 +7,7 @@ import dev.forbit.server.abstracts.Server;
 import dev.forbit.server.networks.raw.RawServer;
 import dev.forbit.server.utilities.GMLInputBuffer;
 import dev.forbit.server.utilities.ServerProperties;
+import dev.forbit.server.utilities.Utilities;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -95,6 +96,7 @@ public class TestServer {
     @Order(4)
     @ValueSource(ints = {5, 10, 15, 20, 40, 70})
     public void testMassConnections(int nclients) {
+        Utilities.getLogger().info("Beginning mass test. # of clients: " + nclients);
         int cooldown = 2;
         Set<MockClient> clients = new HashSet<>();
         for (int i = 0; i < nclients; i++) {
@@ -110,7 +112,6 @@ public class TestServer {
             });
             assertTrue(client.isConnected());
             clients.add(client);
-            Thread.sleep(cooldown);
         }
 
         for (MockClient client : clients) {

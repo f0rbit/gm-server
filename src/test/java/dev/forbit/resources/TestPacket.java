@@ -4,6 +4,7 @@ import dev.forbit.server.abstracts.Packet;
 import dev.forbit.server.utilities.Client;
 import dev.forbit.server.utilities.GMLInputBuffer;
 import dev.forbit.server.utilities.GMLOutputBuffer;
+import dev.forbit.server.utilities.Utilities;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -40,7 +41,7 @@ public class TestPacket extends Packet {
 
     @Override
     public void receive(Client client) {
-        System.out.println("received test packet!");
+        Utilities.getLogger().fine("Server received test packet");
         try {
             client.getChannel().write(this.getBuffer());
         } catch (IOException e) {

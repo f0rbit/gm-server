@@ -29,20 +29,16 @@ public class MockClient extends Thread {
 
     public MockClient(String address, int tcp_port, int udp_port) {
         // connect to TCP server
-        //System.out.println("new client!");
         setConnected(false);
         try {
             connectTCP(address, tcp_port);
             connectUDP(address, udp_port);
             getChannel().finishConnect();
-            System.out.println("connected");
-
+            Utilities.getLogger().info("Client connected to servers.");
         } catch (IOException e) {
             e.printStackTrace();
         }
         setConnected(true);
-        // configure non blocking
-        //System.out.println("connected!");
         try {
             getChannel().configureBlocking(false);
             getDatagramChannel().configureBlocking(false);
@@ -86,19 +82,15 @@ public class MockClient extends Thread {
         buffer.writeString(register);
         buffer.writeString(getUUID().toString());
         getDatagramChannel().write(buffer.getBuffer());
-        //System.out.println("write register");
     }
 
     private void connectTCP(String address, int port) throws IOException {
         // open up socket
         var iAddress = new InetSocketAddress(address, port);
         setChannel(SocketChannel.open(iAddress));
-        //System.out.println("opened socket");
         // wait for an read the connection packet
         ByteBuffer buffer = Utilities.newBuffer();
-        //System.out.println("waiting for response");
         getChannel().read(buffer);
-        //System.out.println("read buffer");
         buffer.rewind();
         Optional<String> header = Utilities.getNextString(buffer);
         assert header.isPresent();
@@ -109,7 +101,6 @@ public class MockClient extends Thread {
         assert idString.isPresent();
         setUUID(java.util.UUID.fromString(idString.get()));
         assert getUUID() != null;
-        //System.out.println("uuid: " + getUUID());
     }
 
     private void loadPacket(AbstractSelectableChannel channel, ByteBuffer rawBuffer) {
@@ -117,14 +108,13 @@ public class MockClient extends Thread {
 
         Optional<String> header = buffer.readString();
         if (header.isEmpty()) { return; }
-        //System.out.println("received packet: " + header);
         if (getActions().containsKey(header.get())) {
             var action = getActions().get(header.get());
             action.setClient(this);
             action.setBuffer(buffer);
             action.run();
         } else {
-            System.out.println("Unhandled Packet: " + header);
+            Utilities.getLogger().warning("Unhandled packet with header (" + header + ")");
         }
     }
 
@@ -134,7 +124,6 @@ public class MockClient extends Thread {
 
     public void sendTCP(Packet packet) {
         try {
-            //System.out.println("writing packet: " + packet);
             getChannel().write(packet.getBuffer());
         } catch (Exception e) {
             e.printStackTrace();
