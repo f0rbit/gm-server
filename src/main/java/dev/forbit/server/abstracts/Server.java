@@ -6,17 +6,15 @@ import dev.forbit.server.utilities.ServerProperties;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.IOException;
 import java.net.SocketAddress;
 import java.nio.channels.SocketChannel;
 import java.util.*;
 
 public abstract class Server extends Thread implements ServerInterface {
     @Getter final Set<Client> clients = new HashSet<>();
-
     @Getter @Setter TCPServer TCPServer;
-
     @Getter @Setter UDPServer UDPServer;
-
     @Getter @Setter ServerProperties serverProperties;
 
     @Override
@@ -75,5 +73,14 @@ public abstract class Server extends Thread implements ServerInterface {
     public void shutdown() {
         getTCPServer().shutdown();
         getUDPServer().shutdown();
+    }
+
+    @Override
+    public void sendPacket(Client client, Packet packet) {
+        try {
+            client.getChannel().write(packet.getBuffer());
+        } catch (IOException exception) {
+            // exception sending client a packet
+        }
     }
 }

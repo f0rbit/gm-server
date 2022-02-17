@@ -1,6 +1,7 @@
 package dev.forbit.server.abstracts;
 
 import dev.forbit.server.interfaces.ConnectionServer;
+import dev.forbit.server.interfaces.packets.ConnectionPacket;
 import dev.forbit.server.utilities.Client;
 import dev.forbit.server.utilities.GMLInputBuffer;
 import dev.forbit.server.utilities.Utilities;
@@ -19,15 +20,10 @@ import java.util.Set;
 
 public abstract class TCPServer extends Thread implements ConnectionServer {
     @Getter @Setter String address;
-
     @Getter @Setter int port;
-
     @Getter @Setter boolean running;
-
     @Getter @Setter Selector selector;
-
     @Getter @Setter ServerSocketChannel channel;
-
     @Getter @Setter Server server;
 
     @Override
@@ -36,6 +32,8 @@ public abstract class TCPServer extends Thread implements ConnectionServer {
         setPort(getServer().getServerProperties().getTcpPort());
         begin();
     }
+
+    public abstract ConnectionPacket getConnectionPacket();
 
     @Override
     public boolean init() {
@@ -90,13 +88,16 @@ public abstract class TCPServer extends Thread implements ConnectionServer {
 
     private void acceptConnection(SocketChannel channel) throws IOException {
         channel.configureBlocking(false);
-        channel.register(getSelector(), SelectionKey.OP_ACCEPT);
+        channel.register(getSelector(), SelectionKey.OP_READ);
 
         // create new client
         Client client = new Client();
         client.setChannel(channel);
         getServer().addClient(client);
-        // TODO send a connection verification packet to client
+        var packet = getConnectionPacket();
+        packet.setUUID(client.getUUID());
+        getServer().sendPacket(client, (Packet) packet);
+
     }
 
     private void readKey(SelectionKey key) {

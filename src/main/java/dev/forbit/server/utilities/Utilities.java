@@ -10,6 +10,7 @@ import java.util.Optional;
 public class Utilities {
 
     public static final int DEFAULT_PACKET_SIZE = 1024;
+    public static final String REGISTER_PACKET_IDENTIFIER = "dev.forbit.identifier.RegisterPacket";
 
     /**
      * Reads from a buffer to find the next string written

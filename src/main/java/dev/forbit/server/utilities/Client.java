@@ -10,16 +10,13 @@ import java.nio.channels.SocketChannel;
 import java.util.UUID;
 
 public class Client implements ClientInterface {
-
     /**
      * The ID of this client
      */
     @Getter @Setter @Expose private UUID UUID;
 
     @Getter @Setter private SocketChannel channel;
-
     @Getter @Setter private SocketAddress address;
-
     @Getter @Setter private int lastSeen;
 
     /**

@@ -5,9 +5,7 @@ import lombok.Data;
 @Data
 public class ServerProperties {
     String address;
-
     int tcpPort;
-
     int udpPort;
 
     public ServerProperties(String address, int tcp_port, int udp_port) {

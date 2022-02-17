@@ -26,7 +26,8 @@ public abstract class Packet implements PacketInterface {
      */
     public abstract void loadBuffer(GMLInputBuffer buffer);
 
-    @Override public ByteBuffer getBuffer() {
+    @Override
+    public ByteBuffer getBuffer() {
         GMLOutputBuffer output = new GMLOutputBuffer();
         String className = this.getClass().getName();
         output.writeString(className);

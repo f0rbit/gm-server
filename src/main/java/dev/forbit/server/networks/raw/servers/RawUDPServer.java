@@ -9,19 +9,4 @@ public class RawUDPServer extends UDPServer {
         setServer(server);
     }
 
-    @Override
-    public void run() {
-        begin();
-    }
-
-    @Override
-    public boolean init() {
-        System.out.println("Starting UDP Server");
-        return true;
-    }
-
-    @Override
-    public void loop() {
-
-    }
 }
