@@ -49,8 +49,6 @@ public interface ServerInterface {
 
     void onDisconnect(Client client);
 
-    void receivePacket(Client client, Packet packet);
-
     int getTimeout();
 
     void sendPacket(Client client, Packet packet);

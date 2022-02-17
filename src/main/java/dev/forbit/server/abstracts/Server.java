@@ -73,6 +73,7 @@ public abstract class Server extends Thread implements ServerInterface {
     public void shutdown() {
         getTCPServer().shutdown();
         getUDPServer().shutdown();
+        System.out.println("Shutdown servers");
     }
 
     @Override

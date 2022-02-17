@@ -1,13 +1,12 @@
 package dev.forbit.resources;
 
+import dev.forbit.server.utilities.GMLInputBuffer;
 import lombok.Data;
 
 @Data
-public class ClientAction {
+public abstract class ClientAction {
     MockClient client;
-    Runnable runnable;
+    GMLInputBuffer buffer;
 
-    public void run() {
-        getRunnable().run();
-    }
+    public abstract void run();
 }

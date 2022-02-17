@@ -1,6 +1,5 @@
 package dev.forbit.server.networks.raw;
 
-import dev.forbit.server.abstracts.Packet;
 import dev.forbit.server.abstracts.Server;
 import dev.forbit.server.networks.raw.servers.RawTCPServer;
 import dev.forbit.server.networks.raw.servers.RawUDPServer;
@@ -17,7 +16,7 @@ public class RawServer extends Server {
 
     @Override
     public void onConnect(Client client) {
-
+        System.out.println("Registered Client: " + client);
     }
 
     @Override
@@ -26,12 +25,7 @@ public class RawServer extends Server {
     }
 
     @Override
-    public void receivePacket(Client client, Packet packet) {
-
-    }
-
-    @Override
     public int getTimeout() {
-        return 0;
+        return 100;
     }
 }

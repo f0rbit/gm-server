@@ -15,8 +15,8 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.util.Iterator;
 import java.util.Optional;
-import java.util.Set;
 
 public abstract class TCPServer extends Thread implements ConnectionServer {
     @Getter @Setter String address;
@@ -56,8 +56,13 @@ public abstract class TCPServer extends Thread implements ConnectionServer {
     @Override
     public void loop() {
         if (select() <= 0) { return; }
-        Set<SelectionKey> keys = getSelector().selectedKeys();
-        keys.forEach(this::handleKey);
+        Iterator<SelectionKey> keys = getSelector().selectedKeys().iterator();
+        while (keys.hasNext()) {
+            var key = keys.next();
+            keys.remove();
+            if (!key.isValid()) { continue; }
+            handleKey(key);
+        }
     }
 
     private int select() {
@@ -72,16 +77,17 @@ public abstract class TCPServer extends Thread implements ConnectionServer {
     private void handleKey(SelectionKey key) {
         try {
             if (key.isAcceptable()) {
-                acceptKey(key);
+                acceptKey();
             } else if (key.isReadable()) {
                 readKey(key);
             }
         } catch (Exception e) {
+            key.cancel();
             e.printStackTrace();
         }
     }
 
-    private void acceptKey(SelectionKey key) throws IOException {
+    private void acceptKey() throws IOException {
         SocketChannel channel = getChannel().accept();
         if (channel != null) { acceptConnection(channel); }
     }
@@ -114,10 +120,13 @@ public abstract class TCPServer extends Thread implements ConnectionServer {
         // check channel status
         if (!channel.isConnected()) { return; }
         if (!channel.isOpen()) { return; }
-
         // read from buffer
         try {
-            channel.read(buffer);
+            int num = channel.read(buffer);
+            if (num <= -1) {
+                getServer().forceDisconnect(client);
+                channel.close();
+            }
             buffer.rewind();
             // handle buffer
             GMLInputBuffer input = new GMLInputBuffer(buffer);
@@ -128,6 +137,7 @@ public abstract class TCPServer extends Thread implements ConnectionServer {
             // reflective get packet
             Optional<Packet> optionalPacket = Utilities.getPacket(header);
             // load packet
+            //System.out.println(optionalPacket);
             optionalPacket.ifPresent(packet -> loadPacket(input, packet, client));
         } catch (Exception e) {
             // error
@@ -148,6 +158,6 @@ public abstract class TCPServer extends Thread implements ConnectionServer {
         // fill buffer with information
         packet.loadBuffer(input);
         // execute receive packet event
-        getServer().receivePacket(client, packet);
+        packet.receive(client);
     }
 }

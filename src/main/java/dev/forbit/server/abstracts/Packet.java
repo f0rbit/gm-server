@@ -12,6 +12,11 @@ import java.nio.ByteBuffer;
 public abstract class Packet implements PacketInterface {
     @Getter @Setter ConnectionServer server;
 
+    public Packet() {
+        // default constructor needed for reflection
+        int i = 0;
+    }
+
     /**
      * Fill the buffer with information you want to send to the client
      *

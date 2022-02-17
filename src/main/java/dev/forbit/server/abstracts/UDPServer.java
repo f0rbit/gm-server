@@ -51,11 +51,14 @@ public abstract class UDPServer extends Thread implements ConnectionServer {
         try {
             // receive buffer
             SocketAddress remoteAddress = getChannel().receive(getBuffer());
+            if (remoteAddress == null) { return; }
             getBuffer().rewind();
             // handle buffer
-            GMLInputBuffer input = new GMLInputBuffer(buffer);
+            GMLInputBuffer input = new GMLInputBuffer(getBuffer());
             Optional<String> optionalHeader = input.readString();
             optionalHeader.ifPresent((header) -> {
+                //if (header.isEmpty() || header.equals(" ")) { return; }
+                //System.out.println("UDP Packet received: " + header);
                 acceptInput(remoteAddress, header, input);
             });
             //            acceptInput(remoteAddress, input);
@@ -72,8 +75,22 @@ public abstract class UDPServer extends Thread implements ConnectionServer {
         } else {
             // get client from address
             Optional<Client> client = getServer().getClient(remoteAddress);
-            // TODO load packet and receive it.
+            if (client.isEmpty()) {
+                // throw error
+                return;
+            }
+            Optional<Packet> packet = Utilities.getPacket(header);
+            packet.ifPresent((p) -> loadPacket(input, p, client.get()));
         }
+    }
+
+    private void loadPacket(GMLInputBuffer input, Packet packet, Client client) {
+        // tell the packet which server the packet was received on
+        packet.setServer(this);
+        // fill buffer with information
+        packet.loadBuffer(input);
+        // execute receive packet event
+        packet.receive(client);
     }
 
     private void registerClient(SocketAddress remoteAddress, GMLInputBuffer input) {
@@ -91,8 +108,8 @@ public abstract class UDPServer extends Thread implements ConnectionServer {
             return;
         }
         client.get().setAddress(remoteAddress);
-
-        // TODO send ping packet
+        // TODO send ping packeti
+        getServer().onConnect(client.get());
     }
 
 }

@@ -27,4 +27,5 @@ public class Client implements ClientInterface {
     public Client() {
         setUUID(java.util.UUID.randomUUID());
     }
+
 }

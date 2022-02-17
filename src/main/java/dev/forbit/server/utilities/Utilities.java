@@ -73,9 +73,14 @@ public class Utilities {
      */
     public static Optional<Packet> getPacket(String header) {
         try {
+            //System.out.println("header: " + header);
             Class<?> clazz = Class.forName(header);
+            //System.out.println("clazz: " + clazz);
+            var packet = (Packet) clazz.getDeclaredConstructor().newInstance();
+            //System.out.println("packet: " + packet);
             return Optional.of((Packet) clazz.getDeclaredConstructor().newInstance());
         } catch (Exception exception) {
+            //exception.printStackTrace();
             return Optional.empty();
         }
     }
