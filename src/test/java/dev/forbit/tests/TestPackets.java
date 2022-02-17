@@ -9,6 +9,7 @@ import org.junit.jupiter.api.*;
 import java.nio.ByteBuffer;
 import java.util.Optional;
 import java.util.Random;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,12 +23,7 @@ public class TestPackets {
 
     MockPacket getRandomMockPacket() {
         Random random = new Random();
-        byte[] bytes = new byte[100];
-        random.nextBytes(bytes);
-        // prevent random NUL characters
-        for (int i = 0; i < bytes.length; i++) {
-            if (bytes[i] == 0x00) { bytes[i] = (byte) random.nextInt(Byte.MAX_VALUE); }
-        }
+
         return new MockPacket(
                 random.nextInt(),
                 random.nextDouble(),
@@ -35,7 +31,7 @@ public class TestPackets {
                 random.nextFloat(),
                 (byte) random.nextInt(Byte.MAX_VALUE),
                 random.nextBoolean(),
-                new String(bytes));
+                UUID.randomUUID().toString());
     }
 
     @Test
