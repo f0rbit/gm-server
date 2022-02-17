@@ -1,6 +1,7 @@
 package dev.forbit.server.utilities;
 
 import dev.forbit.server.abstracts.Packet;
+import dev.forbit.server.interfaces.ConnectionServer;
 import dev.forbit.server.logging.LogFormatter;
 
 import java.nio.ByteBuffer;
@@ -109,15 +110,28 @@ public class Utilities {
      */
     public static Optional<Packet> getPacket(String header) {
         try {
-            //System.out.println("header: " + header);
             Class<?> clazz = Class.forName(header);
-            //System.out.println("clazz: " + clazz);
             var packet = (Packet) clazz.getDeclaredConstructor().newInstance();
-            //System.out.println("packet: " + packet);
             return Optional.of((Packet) clazz.getDeclaredConstructor().newInstance());
         } catch (Exception exception) {
-            //exception.printStackTrace();
             return Optional.empty();
         }
+    }
+
+    public static void loadPacket(ConnectionServer server, GMLInputBuffer buffer, String header, Client client) {
+        Optional<Packet> pck = Utilities.getPacket(header);
+        if (pck.isEmpty()) {
+            Utilities.getLogger().warning("Unhandled packet with header (" + header + ")");
+            return;
+        }
+        // get the packet instance
+        Packet packet = pck.get();
+        // tell the packet which server it was received on
+        packet.setServer(server);
+        // fill the buffer with the information sent by the client
+        packet.loadBuffer(buffer);
+        Utilities.getLogger().finest("Server " + server.getString() + " received packet (" + packet + ") from client (" + client + ")");
+        // trigger the packet event
+        packet.receive(client);
     }
 }

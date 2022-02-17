@@ -13,6 +13,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.logging.Level;
 
 public abstract class UDPServer extends Thread implements ConnectionServer {
     @Getter @Setter String address;
@@ -55,15 +56,11 @@ public abstract class UDPServer extends Thread implements ConnectionServer {
             getBuffer().rewind();
             // handle buffer
             GMLInputBuffer input = new GMLInputBuffer(getBuffer());
-            Optional<String> optionalHeader = input.readString();
-            optionalHeader.ifPresent((header) -> {
-                //if (header.isEmpty() || header.equals(" ")) { return; }
-                //System.out.println("UDP Packet received: " + header);
+            input.readString().ifPresent((header) -> {
                 acceptInput(remoteAddress, header, input);
             });
-            //            acceptInput(remoteAddress, input);
         } catch (Exception e) {
-            // ignore error?
+            Utilities.getLogger().log(Level.WARNING, "Error occurred in UDP loop.", e);
         }
         getBuffer().clear();
     }
@@ -75,26 +72,11 @@ public abstract class UDPServer extends Thread implements ConnectionServer {
         } else {
             // get client from address
             Optional<Client> client = getServer().getClient(remoteAddress);
-            if (client.isEmpty()) {
+            client.ifPresentOrElse((c) -> Utilities.loadPacket(this, input, header, c), () -> {
                 // throw error
                 Utilities.getLogger().warning("Received packet from client that is unregistered! address (" + address + ")");
-                return;
-            }
-            Optional<Packet> packet = Utilities.getPacket(header);
-            packet.ifPresentOrElse((p) -> loadPacket(input, p, client.get()), () -> {
-                Utilities.getLogger().warning("Unhandled packet with header (" + header + ")");
             });
         }
-    }
-
-    private void loadPacket(GMLInputBuffer input, Packet packet, Client client) {
-        // tell the packet which server the packet was received on
-        packet.setServer(this);
-        // fill buffer with information
-        packet.loadBuffer(input);
-        // execute receive packet event
-        Utilities.getLogger().finest("Received TCP packet (" + packet + ") from client (" + client + ")");
-        packet.receive(client);
     }
 
     private void registerClient(SocketAddress remoteAddress, GMLInputBuffer input) {

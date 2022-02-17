@@ -11,11 +11,14 @@ import lombok.Setter;
 import java.nio.ByteBuffer;
 
 public abstract class Packet implements PacketInterface {
+    /**
+     * The server that received the packet.
+     */
     @Getter @Setter transient ConnectionServer server;
 
     public Packet() {
         // default constructor needed for reflection
-        int i = 0;
+        int i = 0; // useless setting so the GC doesnt remove the constructor?
     }
 
     /**
@@ -32,15 +35,18 @@ public abstract class Packet implements PacketInterface {
      */
     public abstract void loadBuffer(GMLInputBuffer buffer);
 
+    /**
+     * Gets the byte buffer of the packet with the header included at the beginning.
+     *
+     * @return ByteBuffer ready to be sent.
+     */
     @Override
     public ByteBuffer getBuffer() {
         GMLOutputBuffer output = new GMLOutputBuffer();
         String className = this.getClass().getName();
         output.writeString(className);
-
         // fill buffer with information
         fillBuffer(output);
-
         return output.getBuffer();
     }
 

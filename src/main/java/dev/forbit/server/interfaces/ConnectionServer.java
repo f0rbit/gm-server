@@ -1,5 +1,6 @@
 package dev.forbit.server.interfaces;
 
+import com.google.gson.GsonBuilder;
 import dev.forbit.server.abstracts.Server;
 import dev.forbit.server.utilities.Utilities;
 
@@ -38,5 +39,10 @@ public interface ConnectionServer {
         }
 
         shutdown();
+    }
+
+    default String getString() {
+        var gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        return this.getClass().getName() + "" + gson.toJson(this);
     }
 }

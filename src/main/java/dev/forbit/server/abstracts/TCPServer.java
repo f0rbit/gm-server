@@ -1,5 +1,6 @@
 package dev.forbit.server.abstracts;
 
+import com.google.gson.annotations.Expose;
 import dev.forbit.server.interfaces.ConnectionServer;
 import dev.forbit.server.interfaces.packets.ConnectionPacket;
 import dev.forbit.server.utilities.Client;
@@ -21,7 +22,7 @@ import java.util.logging.Level;
 
 public abstract class TCPServer extends Thread implements ConnectionServer {
     @Getter @Setter String address;
-    @Getter @Setter int port;
+    @Getter @Setter @Expose int port;
     @Getter @Setter boolean running;
     @Getter @Setter Selector selector;
     @Getter @Setter ServerSocketChannel channel;
@@ -138,15 +139,7 @@ public abstract class TCPServer extends Thread implements ConnectionServer {
             // handle buffer
             GMLInputBuffer input = new GMLInputBuffer(buffer);
             // get header
-            Optional<String> optionalHeader = input.readString();
-            if (optionalHeader.isEmpty()) { return; }
-            String header = optionalHeader.get();
-            // reflective get packet
-            Optional<Packet> optionalPacket = Utilities.getPacket(header);
-            // load packet
-            optionalPacket.ifPresentOrElse(packet -> loadPacket(input, packet, client), () -> {
-                Utilities.getLogger().warning("Unhandled packet with header (" + header + ")");
-            });
+            input.readString().ifPresent((header) -> Utilities.loadPacket(this, input, header, client));
         } catch (Exception e) {
             // error
             getServer().forceDisconnect(client);
@@ -161,13 +154,4 @@ public abstract class TCPServer extends Thread implements ConnectionServer {
 
     }
 
-    private void loadPacket(GMLInputBuffer input, Packet packet, Client client) {
-        // tell the packet which server the packet was received on
-        packet.setServer(this);
-        // fill buffer with information
-        packet.loadBuffer(input);
-        // execute receive packet event
-        Utilities.getLogger().finest("Received TCP packet (" + packet + ") from client (" + client + ")");
-        packet.receive(client);
-    }
 }

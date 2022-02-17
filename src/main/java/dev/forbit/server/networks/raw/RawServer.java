@@ -22,6 +22,7 @@ public class RawServer extends Server {
 
     @Override
     public void onDisconnect(Client client) {
+        Utilities.getLogger().info("Client disconnected (" + client + ")");
 
     }
 
