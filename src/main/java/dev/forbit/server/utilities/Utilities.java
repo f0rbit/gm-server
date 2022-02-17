@@ -1,5 +1,7 @@
 package dev.forbit.server.utilities;
 
+import dev.forbit.server.abstracts.Packet;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
@@ -59,5 +61,21 @@ public class Utilities {
         ByteBuffer buffer = ByteBuffer.allocate(DEFAULT_PACKET_SIZE);
         buffer.order(ByteOrder.LITTLE_ENDIAN);
         return buffer;
+    }
+
+    /**
+     * Reflectively loads a new packet instance from the given header.
+     *
+     * @param header the class name to load from.
+     *
+     * @return optional of packet, empty if error occurs.
+     */
+    public static Optional<Packet> getPacket(String header) {
+        try {
+            Class<?> clazz = Class.forName(header);
+            return Optional.of((Packet) clazz.getDeclaredConstructor().newInstance());
+        } catch (Exception exception) {
+            return Optional.empty();
+        }
     }
 }

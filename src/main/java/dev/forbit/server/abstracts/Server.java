@@ -58,6 +58,7 @@ public abstract class Server extends Thread implements ServerInterface {
 
     @Override
     public void run() {
+        System.out.println("starting servers");
         getTCPServer().start();
         getUDPServer().start();
     }

@@ -9,4 +9,10 @@ public class ServerProperties {
     int tcpPort;
 
     int udpPort;
+
+    public ServerProperties(String address, int tcp_port, int udp_port) {
+        setAddress(address);
+        setTcpPort(tcp_port);
+        setUdpPort(udp_port);
+    }
 }

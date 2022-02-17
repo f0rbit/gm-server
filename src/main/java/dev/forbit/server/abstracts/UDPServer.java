@@ -11,6 +11,8 @@ public abstract class UDPServer extends Thread implements ConnectionServer {
 
     @Getter @Setter boolean running;
 
+    @Getter @Setter Server server;
+
     @Override
     public void shutdown() {
         setRunning(false);
