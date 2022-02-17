@@ -1,3 +1,12 @@
 package dev.forbit.server.utilities;
 
-public class ServerProperties { }
+import lombok.Data;
+
+@Data
+public class ServerProperties {
+    String address;
+
+    int tcpPort;
+
+    int udpPort;
+}
