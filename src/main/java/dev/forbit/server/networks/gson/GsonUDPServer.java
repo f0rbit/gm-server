@@ -3,11 +3,7 @@ package dev.forbit.server.networks.gson;
 import dev.forbit.server.interfaces.Server;
 import dev.forbit.server.networks.UDPServer;
 import dev.forbit.server.packets.BasePingPacket;
-import dev.forbit.server.packets.GSONPacket;
-import lombok.Getter;
-import lombok.Setter;
-import old.code.Client;
-import old.code.logging.NotImplementedException;
+import dev.forbit.server.packets.gson.GSONPingPacket;
 
 public class GsonUDPServer extends UDPServer {
 
@@ -16,19 +12,7 @@ public class GsonUDPServer extends UDPServer {
     }
 
     @Override protected BasePingPacket getBasePingPacket() {
-        return null;
+        return new GSONPingPacket();
     }
 
-    static class GsonPingPacket extends GSONPacket implements BasePingPacket {
-        @Getter @Setter Client client;
-
-        @Getter @Setter int lastPing;
-
-        @Getter @Setter int time;
-
-        @Override public void receive(Client client) throws NotImplementedException {
-            client.setLastPing(System.currentTimeMillis());
-            getDataServer().send(client, this);
-        }
-    }
 }

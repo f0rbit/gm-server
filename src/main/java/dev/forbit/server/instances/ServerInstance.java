@@ -1,13 +1,10 @@
-package old.code.instances;
+package dev.forbit.server.instances;
 
 import dev.forbit.server.interfaces.Server;
-import dev.forbit.server.networks.raw.RawTCPServer;
-import dev.forbit.server.networks.raw.RawUDPServer;
 import lombok.Getter;
 import lombok.Setter;
 import old.code.Client;
 import old.code.ServerProperties;
-import old.code.ServerType;
 import old.code.networks.DataServer;
 import old.code.networks.QueryServer;
 import old.code.packets.PingPacket;
@@ -18,10 +15,8 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Abstract class that all child servers should extend
- */
 public abstract class ServerInstance implements Server {
+
     /**
      * List of connected clients
      */
@@ -97,21 +92,6 @@ public abstract class ServerInstance implements Server {
     }
 
     /**
-     * Starts the servers, it creates an instance of {@link QueryServer} but never starts the thread, because it's not implemented
-     */
-    private void start() {
-        this.queryServer = new QueryServer(this, getProperties().getAddress(), getProperties().getPort(ServerType.QUERY));
-        this.UDPServer = new RawUDPServer(this, getProperties().getAddress(), getProperties().getPort(ServerType.UDP));
-        this.TCPServer = new RawTCPServer(this, getProperties().getAddress(), getProperties().getPort(ServerType.TCP));
-
-        getTCPServer().start();
-        getUDPServer().start();
-
-        getLogger().info("Started Server on " + getProperties().getAddress());
-
-    }
-
-    /**
      * Starts pinging the client
      *
      * @param client client to ping
@@ -122,6 +102,8 @@ public abstract class ServerInstance implements Server {
         packet.setTime(0);
         getUDPServer().send(client, packet);
     }
+
+    public abstract void start();
 
     /**
      * Event fired after a client connects to both TCP and UDP servers.
@@ -138,5 +120,4 @@ public abstract class ServerInstance implements Server {
      * @param client client to remove.
      */
     public abstract void onDisconnect(Client client);
-
 }

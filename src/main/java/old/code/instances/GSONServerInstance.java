@@ -1,16 +1,17 @@
 package old.code.instances;
 
+import dev.forbit.server.interfaces.Server;
+import dev.forbit.server.networks.gson.GsonTCPServer;
+import dev.forbit.server.networks.gson.GsonUDPServer;
+import lombok.Getter;
+import lombok.Setter;
 import old.code.Client;
 import old.code.ServerProperties;
 import old.code.ServerType;
 import old.code.networks.DataServer;
 import old.code.networks.QueryServer;
-import old.code.networks.gson.GsonTCPServer;
-import old.code.networks.gson.GsonUDPServer;
-import old.code.scheduler.Scheduler;
 import old.code.packets.PingPacket;
-import lombok.Getter;
-import lombok.Setter;
+import old.code.scheduler.Scheduler;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -20,7 +21,7 @@ import java.util.logging.Logger;
 /**
  * Extend this to create a GSON-based server
  */
-public abstract class GSONServerInstance implements ServerInterface {
+public abstract class GSONServerInstance implements Server {
     /**
      * List of connected clients
      */

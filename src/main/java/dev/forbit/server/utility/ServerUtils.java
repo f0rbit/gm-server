@@ -1,6 +1,9 @@
 package dev.forbit.server.utility;
 
-import old.code.packets.Packet;
+import dev.forbit.server.packets.GSONPacket;
+import dev.forbit.server.packets.RawPacket;
+import old.code.packets.PacketInterface;
+import old.code.utility.GMLInputBuffer;
 
 import java.nio.ByteBuffer;
 import java.util.Optional;
@@ -33,13 +36,34 @@ public class ServerUtils {
      *
      * @return the Packet loaded
      */
-    public static Optional<Packet> getPacket(String packetName) {
+    public static Optional<PacketInterface> getPacket(String packetName) {
         try {
             var clazz = Class.forName(packetName);
-            return Optional.of((Packet) clazz.getDeclaredConstructor().newInstance());
+            return Optional.of((PacketInterface) clazz.getDeclaredConstructor().newInstance());
         } catch (Exception e) {
             return Optional.empty();
         }
+    }
+
+    public static Optional<PacketInterface> loadPacket(PacketInterface packet, String header, GMLInputBuffer input) {
+        try {
+            if (packet instanceof GSONPacket gsonPacket) {
+                var optionalLoad = GSONPacket.load(header, input.readString());
+                if (optionalLoad.isPresent()) {
+                    var loadedPacket = optionalLoad.get();
+                    return Optional.of(loadedPacket);
+                } else {
+                    return Optional.empty();
+                }
+
+            } else if (packet instanceof RawPacket rawPacket) {
+                rawPacket.load(input);
+                return Optional.of(rawPacket);
+            }
+        } catch (Exception e) {
+            //return Optional.empty();
+        }
+        return Optional.empty();
     }
 
 }

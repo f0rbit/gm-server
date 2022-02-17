@@ -1,37 +1,84 @@
 package dev.forbit.server.interfaces;
 
-import dev.forbit.server.old.Client;
-import dev.forbit.server.old.ServerProperties;
-import dev.forbit.server.old.networks.DataServer;
-import dev.forbit.server.old.networks.QueryServer;
-import dev.forbit.server.old.packets.Packet;
-import dev.forbit.server.old.scheduler.Scheduler;
-import org.apache.logging.log4j.core.net.SocketAddress;
+import old.code.Client;
+import old.code.ServerProperties;
+import old.code.logging.LogFormatter;
+import old.code.logging.NotImplementedException;
+import old.code.networks.DataServer;
+import old.code.networks.QueryServer;
+import old.code.packets.PacketInterface;
+import old.code.scheduler.RepeatingTask;
+import old.code.scheduler.Scheduler;
 
+import java.net.SocketAddress;
 import java.nio.channels.SocketChannel;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Formatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public interface Server {
 
-    void init(Level logLevel, Map<String, String> environment);
+    default void init(Level logLevel, Map<String, String> environment) {
+        setLogger(Logger.getLogger("serverLogger"));
+        getLogger().setUseParentHandlers(false);
+        getLogger().setLevel(logLevel);
+        getLogger().addHandler(new ConsoleHandler() {
+            @Override public synchronized void setFormatter(Formatter formatter) throws SecurityException {
+                this.setLevel(Level.ALL);
+                super.setFormatter(new LogFormatter());
+            }
+        });
+        setProperties(new ServerProperties(environment));
+        setScheduler(new Scheduler(this));
+        getScheduler().start();
+        getScheduler().addTask(new RepeatingTask(this::updateClients, 2, 20));
+    }
 
-    void shutdown();
+    default void shutdown() {
+        getUDPServer().shutdown();
+        getTCPServer().shutdown();
+    }
 
-    Optional<Client> getClient(SocketChannel channel);
+    default Optional<Client> getClient(SocketChannel channel) {
+        return getClients().stream().filter((client) -> client.getChannel().equals(channel)).findFirst();
+    }
 
-    Optional<Client> getClient(SocketAddress address);
+    default Optional<Client> getClient(SocketAddress address) {
+        return getClients().stream().filter((client) -> client.getAddress().equals(address)).findFirst();
+    }
 
-    Optional<Client> getClient(UUID id);
+    default Optional<Client> getClient(UUID id) {
+        return getClients().stream().filter(client -> client.getId().equals(id)).findFirst();
+    }
 
-    boolean removeClient(Client client);
+    default boolean removeClient(Client client) {
+        if (getClients().contains(client)) {
+            getClients().remove(client);
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-    void updateClients();
+    default void updateClients() {
+        if (getClients().isEmpty()) { return; }
+        getClients().stream().filter((client -> (System.currentTimeMillis() - client.getLastPing() > getTimeout()))).toList().forEach(client -> {
+            getLogger().info("Client timeout: " + client);
+            // TODO send disconnection packet.
+            onDisconnect(client);
+            removeClient(client);
+        });
+    }
 
-    void addClient(Client client);
+    default void addClient(Client client) {
+        getClients().add(client);
+        getLogger().fine("Client added: " + client);
+    }
 
     Scheduler getScheduler();
 
@@ -61,8 +108,15 @@ public interface Server {
 
     void onDisconnect(Client client);
 
-    void receivePacket(Client client, Packet packet);
+    default void receivePacket(Client client, PacketInterface packet) {
+        try {
+            packet.receive(client);
+        } catch (NotImplementedException e) {
+            e.printStackTrace();
+        }
+    }
 
-    int getTimeout();
+    default int getTimeout() { return 1000; }
 
+    Set<Client> getClients();
 }

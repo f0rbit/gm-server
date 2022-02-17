@@ -1,5 +1,7 @@
 package dev.forbit.server.packets;
 
+import lombok.Getter;
+import lombok.Setter;
 import old.code.Client;
 import old.code.logging.NotImplementedException;
 import old.code.networks.DataServer;
@@ -9,8 +11,6 @@ import old.code.packets.PingPacket;
 import old.code.packets.RegisterPacket;
 import old.code.utility.GMLInputBuffer;
 import old.code.utility.GMLOutputBuffer;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.nio.ByteBuffer;
 

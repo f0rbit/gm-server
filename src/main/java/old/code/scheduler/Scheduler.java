@@ -1,6 +1,6 @@
 package old.code.scheduler;
 
-import old.code.instances.ServerInterface;
+import dev.forbit.server.interfaces.Server;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -12,9 +12,9 @@ public class Scheduler extends Thread {
 
     boolean running = false;
 
-    ServerInterface server;
+    Server server;
 
-    public Scheduler(ServerInterface server) {
+    public Scheduler(Server server) {
         this.server = server;
         this.tasks = new HashSet<>();
     }

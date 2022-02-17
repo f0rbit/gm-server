@@ -1,11 +1,11 @@
 package old.code;
 
 import com.google.gson.annotations.Expose;
-import old.code.networks.TCPServer;
-import old.code.networks.UDPServer;
-import old.code.packets.PingPacket;
+import dev.forbit.server.networks.TCPServer;
+import dev.forbit.server.networks.UDPServer;
 import lombok.Getter;
 import lombok.Setter;
+import old.code.packets.PingPacket;
 
 import java.net.SocketAddress;
 import java.nio.channels.SocketChannel;

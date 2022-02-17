@@ -6,9 +6,7 @@ import dev.forbit.server.utility.ServerUtils;
 import lombok.Getter;
 import lombok.Setter;
 import old.code.Client;
-import old.code.logging.NotImplementedException;
 import old.code.networks.DataServer;
-import old.code.packets.Packet;
 import old.code.packets.PacketInterface;
 import old.code.utility.GMLInputBuffer;
 import org.jetbrains.annotations.NotNull;
@@ -27,15 +25,15 @@ import java.util.logging.Level;
 
 public abstract class TCPServer extends Thread implements DataServer {
 
-    @Getter @Setter private boolean running;
-
     @Getter private final String address;
 
     @Getter private final int port;
 
-    @Getter private ServerSocketChannel channel;
-
     @Getter private final Server instance;
+
+    @Getter @Setter private boolean running;
+
+    @Getter private ServerSocketChannel channel;
 
     private Selector selector;
 
@@ -109,7 +107,10 @@ public abstract class TCPServer extends Thread implements DataServer {
             String header = input.readString();
             ServerUtils.getPacket(header).ifPresentOrElse((packet) -> {
                 // load the packet
-                loadPacket(input, packet, client);
+                packet.setDataServer(this);
+                ServerUtils.loadPacket(packet, header, input).ifPresent((loadedPacket) -> {
+                    this.getInstance().receivePacket(client, loadedPacket);
+                });
             }, () -> {
                 // couldn't get the packet
                 getInstance().getLogger().info("COULDN'T REFLECT PACKET FOR NAME " + header);
@@ -118,22 +119,15 @@ public abstract class TCPServer extends Thread implements DataServer {
         } catch (IOException e) {
             // disconnect client
             getInstance().onDisconnect(client);
-            getInstance().removeClient(client);
+            if (!getInstance().removeClient(client)) {
+                // tried disconnecting a non-existing client
+                getInstance().getLogger().info("Attempted to disconnect an unregistered client. client=" + client);
+            }
             try {
                 channel.close();
             } catch (IOException ioException) {
                 getInstance().getLogger().warning(ioException.getMessage());
             }
-        }
-    }
-
-    private void loadPacket(GMLInputBuffer buffer, Packet packet, Client client) {
-        try {
-            packet.setDataServer(this);
-            packet.load(buffer);
-            this.getInstance().receivePacket(client, packet);
-        } catch (NotImplementedException exception) {
-            // exception is not yet implemented
         }
     }
 
@@ -173,7 +167,7 @@ public abstract class TCPServer extends Thread implements DataServer {
         }
     }
 
-    protected abstract BaseConnectionPacket getConnectionPacket();
+    public abstract BaseConnectionPacket getConnectionPacket();
 
     @Override public void send(@NotNull Client client, @NotNull PacketInterface packet) {
         try {

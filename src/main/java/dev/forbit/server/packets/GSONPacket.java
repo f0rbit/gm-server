@@ -2,15 +2,13 @@ package dev.forbit.server.packets;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import old.code.Client;
-import old.code.ServerUtils;
-import old.code.logging.NotImplementedException;
-import old.code.networks.DataServer;
-import old.code.packets.Packet;
-import old.code.packets.PacketInterface;
-import old.code.utility.GMLOutputBuffer;
 import lombok.Getter;
 import lombok.Setter;
+import old.code.Client;
+import old.code.logging.NotImplementedException;
+import old.code.networks.DataServer;
+import old.code.packets.PacketInterface;
+import old.code.utility.GMLOutputBuffer;
 
 import java.nio.ByteBuffer;
 import java.util.Optional;
@@ -25,16 +23,16 @@ public abstract class GSONPacket implements PacketInterface {
      * @param header the packet identifider
      * @param data   the JSON string with all the data and variables.
      *
-     * @return Packet instance of null if error occurs
+     * @return GSONPacket instance of null if error occurs
      */
-    public static Optional<Packet> load(String header, String data) {
+    public static Optional<GSONPacket> load(String header, String data) {
         try {
             Gson gson = (new GsonBuilder().excludeFieldsWithoutExposeAnnotation()).create();
-            return Optional.ofNullable(gson.fromJson(data, ServerUtils.getPacket(header).getClass()));
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            return Optional.ofNullable((GSONPacket) gson.fromJson(data, Class.forName(header)));
+            //return gson.fromJson(data, ServerUtils.getPacket(header).get().getClass());
+        } catch (ClassNotFoundException | ClassCastException e) {
             // throw error
             return Optional.empty();
-
         }
     }
 

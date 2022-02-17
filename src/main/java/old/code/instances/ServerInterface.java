@@ -6,9 +6,9 @@ import old.code.logging.LogFormatter;
 import old.code.logging.NotImplementedException;
 import old.code.networks.DataServer;
 import old.code.networks.QueryServer;
+import old.code.packets.PacketInterface;
 import old.code.scheduler.RepeatingTask;
 import old.code.scheduler.Scheduler;
-import old.code.packets.PacketInterface;
 import org.jetbrains.annotations.Nullable;
 
 import java.net.SocketAddress;
@@ -43,7 +43,7 @@ public interface ServerInterface {
             }
         });
         setProperties(new ServerProperties(variables));
-        setScheduler(new Scheduler(this));
+        //setScheduler(new Scheduler(this));
         getScheduler().start();
         getScheduler().addTask(new RepeatingTask(this::updateClients, 2, 20));
     }

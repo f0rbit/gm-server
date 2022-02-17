@@ -77,11 +77,16 @@ public abstract class UDPServer extends Thread implements DataServer {
 
     private void loadPacket(String header, SocketAddress remoteAddress, GMLInputBuffer input, ByteBuffer buffer) {
         getInstance().getClient(remoteAddress).ifPresent((client) -> {
-            getInstance().getLogger().finest("Incoming UDP packet {\n\t\"client\": \"" + client + "\"\n\t\"data\": [" + ServerUtils.getBuffer(buffer) + "]\n}");
+            // getInstance().getLogger().finest("Incoming UDP packet {\n\t\"client\": \"" + client + "\"\n\t\"data\": [" + ServerUtils.getBuffer(buffer) + "]\n}");
+            //getInstance().getLogger().finest(String.format("Incoming UDP packet %s{%s}", header, serialiser.toJson(input)));
             // load packet
             ServerUtils.getPacket(header).ifPresent((packet) -> {
                 packet.setDataServer(this);
-                getInstance().receivePacket(client, packet);
+                //getInstance().getLogger().finest("data: " + serialiser.toJson(packet));
+                ServerUtils.loadPacket(packet, header, input).ifPresent((loadedPacket) -> {
+                    getInstance().receivePacket(client, loadedPacket);
+                });
+
             });
         });
 

@@ -1,6 +1,6 @@
 package old.code.networks;
 
-import old.code.instances.ServerInterface;
+import dev.forbit.server.interfaces.Server;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,9 +14,9 @@ public class QueryServer extends Thread {
 
     @Getter @Setter String address;
 
-    @Getter ServerInterface instance;
+    @Getter Server instance;
 
-    public QueryServer(ServerInterface serverInstance, String address, int port) {
+    public QueryServer(Server serverInstance, String address, int port) {
         this.instance = serverInstance;
         setAddress(address);
         setPort(port);
