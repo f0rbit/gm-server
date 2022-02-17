@@ -11,8 +11,4 @@ public abstract class TCPServer extends Thread implements ConnectionServer {
 
     @Getter @Setter boolean running;
 
-    @Override
-    public void shutdown() {
-        setRunning(false);
-    }
 }

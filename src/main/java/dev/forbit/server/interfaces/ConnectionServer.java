@@ -8,7 +8,25 @@ public interface ConnectionServer {
 
     String getAddress();
 
-    void shutdown();
+    default void shutdown() {
+        setRunning(false);
+    }
 
     boolean isRunning();
+
+    void setRunning(boolean running);
+
+    void init();
+
+    void loop();
+
+    default void run() {
+        init();
+
+        while (isRunning()) {
+            loop();
+        }
+
+        shutdown();
+    }
 }
