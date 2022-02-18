@@ -150,6 +150,7 @@ public interface ServerInterface {
      * @param client client
      * @param packet packet.
      */
-    void sendPacket(Client client, Packet packet);
+    void sendPacketTCP(Client client, Packet packet);
 
+    void sendPacketUDP(Client client, Packet packet);
 }

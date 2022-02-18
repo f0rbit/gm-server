@@ -76,13 +76,24 @@ public abstract class Server extends Thread implements ServerInterface {
         getClients().add(client);
     }
 
+    // TODO Extract similar logic
     @Override
-    public void sendPacket(Client client, Packet packet) {
+    public void sendPacketTCP(Client client, Packet packet) {
         try {
             client.getChannel().write(packet.getBuffer());
-            Utilities.getLogger().finer("Sending packet (" + packet + ") to client (" + client + ")");
+            Utilities.getLogger().finer("Sending TCP packet (" + packet + ") to client (" + client + ")");
         } catch (IOException exception) {
             // exception sending client a packet
+        }
+    }
+
+    @Override
+    public void sendPacketUDP(Client client, Packet packet) {
+        try {
+            this.getUDPServer().getChannel().send(packet.getBuffer(), client.getAddress());
+            Utilities.getLogger().finer("Sending UDP packet (" + packet + ") to client (" + client + ")");
+        } catch (IOException exception) {
+            // exception sending client a packet;
         }
     }
 

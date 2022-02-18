@@ -104,7 +104,7 @@ public abstract class TCPServer extends Thread implements ConnectionServer {
         getServer().addClient(client);
         var packet = getConnectionPacket();
         packet.setUUID(client.getUUID());
-        getServer().sendPacket(client, (Packet) packet);
+        getServer().sendPacketTCP(client, (Packet) packet);
 
     }
 

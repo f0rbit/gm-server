@@ -28,6 +28,6 @@ public class RawServer extends Server {
 
     @Override
     public int getTimeout() {
-        return 100;
+        return 1000;
     }
 }
