@@ -151,6 +151,8 @@ public class Utilities {
         packet.setServer(server);
         // fill the buffer with the information sent by the client
         packet.loadBuffer(buffer);
+        // log the fact that we received a packet from the client recently.
+        client.setLastSeen(System.currentTimeMillis());
         Utilities.getLogger().finest("Server " + server.getString() + " received packet (" + packet + ") from client (" + client + ")");
         // trigger the packet event
         packet.receive(client);

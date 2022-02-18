@@ -18,7 +18,7 @@ public class Client implements ClientInterface {
 
     @Getter @Setter private SocketChannel channel;
     @Getter @Setter private SocketAddress address;
-    @Getter @Setter @Expose private int lastSeen;
+    @Getter @Setter @Expose private long lastSeen;
 
     /**
      * Constructor of client

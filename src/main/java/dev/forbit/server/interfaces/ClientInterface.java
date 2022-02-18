@@ -15,5 +15,5 @@ public interface ClientInterface {
     /**
      * The System.currentTimeMillis() we last heard from the client
      */
-    int getLastSeen();
+    long getLastSeen();
 }

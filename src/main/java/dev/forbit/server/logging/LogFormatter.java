@@ -6,7 +6,7 @@ import java.util.logging.SimpleFormatter;
 
 public class LogFormatter extends SimpleFormatter {
 
-    private static final String format = "[%1$tF %1$tT [%2$s] %3$s %n";
+    private static final String format = "[%1$tF %1$tT] [%2$s] %3$s %n";
 
     @Override
     public synchronized String format(LogRecord record) {
