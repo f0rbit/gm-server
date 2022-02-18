@@ -76,6 +76,24 @@ public class TestUtilities {
 
     @Test
     @Order(4)
+    @DisplayName("Test Printing ByteBuffer as hex value")
+    public void testPrintingHexBuffer() {
+        // first test
+        ByteBuffer testBuffer = Utilities.newBuffer();
+        testBuffer.put((byte) 32);
+        testBuffer.put((byte) 16);
+        testBuffer.put((byte) 8);
+        testBuffer.put((byte) 65);
+        testBuffer.rewind();
+        String first = Utilities.getHexBuffer(testBuffer);
+        assertEquals(first, "20, 10, 08, 41");
+        // second test
+        String second = Utilities.getHexBuffer(createMockBuffer());
+        assertEquals(second, "50, 40, 08, 38, FF, FF, FF, 68, 65, 6C, 6C, 6F, 20, 77, 6F, 72, 6C, 64, 21, 2E, 42, 01");
+    }
+
+    @Test
+    @Order(5)
     @DisplayName("Test GMLInputBuffer")
     public void testInputBuffer() {
         // construct input buffer
@@ -100,6 +118,7 @@ public class TestUtilities {
 
     @Test
     @DisplayName("Test GMLOutputBuffer")
+    @Order(6)
     public void testOutputBuffer() {
         GMLOutputBuffer output = new GMLOutputBuffer();
         output.writeF64(64.0d);

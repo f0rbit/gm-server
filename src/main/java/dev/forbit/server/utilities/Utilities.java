@@ -90,6 +90,27 @@ public class Utilities {
         return builder.toString().trim().replaceAll(" ", "0,");
     }
 
+    public static String getHexBuffer(ByteBuffer buffer) {
+        StringBuilder builder = new StringBuilder();
+        String wait = "";
+        for (byte b : buffer.array()) {
+            if (b != 0) {
+                if (!("".equals(wait))) {
+                    builder.append(wait);
+                    wait = "";
+                }
+                if (builder.length() > 0) {
+                    wait = String.format(", %02X", b);
+                } else {
+                    wait = String.format("%02X", b);
+                }
+            }
+            //builder.append(String.format("%02X ", b));
+        }
+        builder.append(wait);
+        return builder.toString();
+    }
+
     /**
      * Returns a LITTLE_ENDIAN ordered buffer with the default size
      *
