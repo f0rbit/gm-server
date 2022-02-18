@@ -1,9 +1,8 @@
-dev.forbit.server
-dev.forbit.server.instances
+dev.forbit.server.abstracts
+dev.forbit.server.interfaces
+dev.forbit.server.interfaces.packets
 dev.forbit.server.logging
-dev.forbit.server.networks
-dev.forbit.server.networks.gson
-dev.forbit.server.packets
-dev.forbit.server.packets.gson
-dev.forbit.server.scheduler
-dev.forbit.server.utility
+dev.forbit.server.networks.raw
+dev.forbit.server.networks.raw.packets
+dev.forbit.server.networks.raw.servers
+dev.forbit.server.utilities
