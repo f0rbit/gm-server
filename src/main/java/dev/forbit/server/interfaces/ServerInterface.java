@@ -15,7 +15,7 @@ public interface ServerInterface {
 
     /**
      * Method called when booting up the server.
-     * <p/>
+     * <p>
      * Use this to start the thread if your server is extending Thread
      */
     void init();
@@ -121,7 +121,7 @@ public interface ServerInterface {
 
     /**
      * Fired when a client is registered on the TCP and UDP server.
-     * <p/>
+     * <p>
      * Client should have a Channel and an Address.
      *
      * @param client
