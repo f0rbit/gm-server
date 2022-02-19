@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-public class MockClient extends Thread {
+public class RawMockClient extends Thread {
     @Getter @Setter boolean connected;
     @Getter @Setter SocketChannel channel;
     @Getter @Setter DatagramChannel datagramChannel;
@@ -27,7 +27,7 @@ public class MockClient extends Thread {
     @Getter @Setter Map<String, ClientAction> actions = new HashMap<>();
     @Getter @Setter boolean running;
 
-    public MockClient(String address, int tcp_port, int udp_port) {
+    public RawMockClient(String address, int tcp_port, int udp_port) {
         // connect to TCP server
         setConnected(false);
         try {

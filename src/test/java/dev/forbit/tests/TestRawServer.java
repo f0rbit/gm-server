@@ -1,7 +1,7 @@
 package dev.forbit.tests;
 
 import dev.forbit.resources.ClientAction;
-import dev.forbit.resources.MockClient;
+import dev.forbit.resources.RawMockClient;
 import dev.forbit.resources.TestPacket;
 import dev.forbit.server.abstracts.Server;
 import dev.forbit.server.networks.raw.RawServer;
@@ -19,9 +19,9 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("3 - Test Server")
+@DisplayName("3 - Test Raw Server")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class TestServer {
+public class TestRawServer {
 
     static Server server;
 
@@ -51,7 +51,7 @@ public class TestServer {
     @Test
     @Order(2)
     public void testClientConnection() {
-        var client = new MockClient("localhost", 19238, 18238);
+        var client = new RawMockClient("localhost", 19238, 18238);
         Thread.sleep(20L);
         assertNotNull(client.getUUID());
         assertEquals(server.getClients().stream().findFirst().get().getUUID(), client.getUUID());
@@ -65,7 +65,7 @@ public class TestServer {
     @Order(3)
     public void testPacketSendingReceiving() {
         Thread.sleep(20L);
-        MockClient client = new MockClient("localhost", 19238, 18238);
+        RawMockClient client = new RawMockClient("localhost", 19238, 18238);
         Thread.sleep(20L);
         // send a random packet
         //System.out.println("writing packet");
@@ -99,9 +99,9 @@ public class TestServer {
     public void testMassConnections(int nclients) {
         Utilities.getLogger().info("Beginning mass test. # of clients: " + nclients);
         int cooldown = 2;
-        Set<MockClient> clients = new HashSet<>();
+        Set<RawMockClient> clients = new HashSet<>();
         for (int i = 0; i < nclients; i++) {
-            MockClient client = new MockClient("localhost", 19238, 18238);
+            RawMockClient client = new RawMockClient("localhost", 19238, 18238);
             Thread.sleep(cooldown);
             // awake
             client.addAction("dev.forbit.resources.TestPacket", new ClientAction() {
@@ -115,7 +115,7 @@ public class TestServer {
             clients.add(client);
         }
 
-        for (MockClient client : clients) {
+        for (RawMockClient client : clients) {
             client.sendTCP(new TestPacket("this is a test packet", 12837, false));
         }
     }
@@ -128,7 +128,7 @@ public class TestServer {
         final int cooldown = 200;
         Utilities.getLogger().info("Beginning testing of pinging.");
         int pingSent = 0;
-        MockClient client = new MockClient("localhost", 19238, 18238);
+        RawMockClient client = new RawMockClient("localhost", 19238, 18238);
         final int[] pingsReceived = {0};
         client.addAction(PING_ID, new ClientAction() {
             @Override

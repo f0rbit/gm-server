@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public abstract class ClientAction {
-    MockClient client;
+    RawMockClient client;
     GMLInputBuffer buffer;
 
     public abstract void run();
