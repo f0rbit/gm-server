@@ -130,6 +130,15 @@ public class MockClient extends Thread {
         }
     }
 
+    public void sendPacket(GMLOutputBuffer buffer) {
+        try {
+            getChannel().write(buffer.getBuffer());
+        } catch (Exception e) {
+            e.printStackTrace();
+            ;
+        }
+    }
+
     public void disconnect() {
         try {
             getChannel().close();

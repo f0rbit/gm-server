@@ -14,6 +14,7 @@ public class RawPingPacket extends RawPacket {
     @Override
     public void fillBuffer(GMLOutputBuffer buffer) {
         buffer.writeS32(getReceivedTime());
+        buffer.writeS32(getCurrentPing());
     }
 
     @Override
@@ -27,6 +28,7 @@ public class RawPingPacket extends RawPacket {
         // send packet back
         var packet = new RawPingPacket();
         packet.setReceivedTime(getReceivedTime());
+        packet.setCurrentPing(getCurrentPing());
         getServer().getServer().sendPacketUDP(client, packet);
     }
 }

@@ -49,8 +49,8 @@ public abstract class TCPServer extends Thread implements ConnectionServer {
             getChannel().bind(new InetSocketAddress(getAddress(), getPort()));
             getChannel().register(getSelector(), SelectionKey.OP_ACCEPT);
             return true;
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            Utilities.getLogger().log(Level.WARNING, "General IOException occurred during initialising TCPServer.", e);
             return false;
         }
     }
@@ -67,10 +67,10 @@ public abstract class TCPServer extends Thread implements ConnectionServer {
         }
     }
 
-    private int select() {
+    public int select() {
         try {
             return this.getSelector().select();
-        } catch (IOException e) {
+        } catch (Exception e) {
             // error selection
             return -1;
         }

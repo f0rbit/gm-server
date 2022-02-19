@@ -2,7 +2,7 @@ package dev.forbit.server.interfaces;
 
 import com.google.gson.GsonBuilder;
 import dev.forbit.server.abstracts.Server;
-import dev.forbit.server.utilities.Utilities;
+import dev.forbit.server.exceptions.ServerInitialisationError;
 
 public interface ConnectionServer {
 
@@ -26,11 +26,11 @@ public interface ConnectionServer {
 
     void loop();
 
-    default void begin() {
+    default void begin() throws ServerInitialisationError {
         if (!(init())) {
-            Utilities.getLogger().severe("Error in init phase. class" + getClass().getName());
+            //Utilities.getLogger().severe("Error in init phase. class" + getClass().getName());
             setRunning(false);
-            return;
+            throw new ServerInitialisationError();
         }
 
         setRunning(true);
