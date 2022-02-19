@@ -1,8 +1,12 @@
 package dev.forbit.server.utilities;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import dev.forbit.server.abstracts.Packet;
 import dev.forbit.server.interfaces.ConnectionServer;
 import dev.forbit.server.logging.LogFormatter;
+import dev.forbit.server.networks.gson.GSONPacket;
+import dev.forbit.server.networks.gson.GSONServer;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -139,7 +143,23 @@ public class Utilities {
         }
     }
 
+    public static Optional<GSONPacket> getGSONPacket(String header) {
+        var packet = getPacket(header);
+        if (packet.isEmpty()) { return Optional.empty(); }
+        Packet pck = packet.get();
+        if (pck instanceof GSONPacket gsonPacket) {
+            return Optional.of(gsonPacket);
+        } else {
+            return Optional.empty();
+        }
+    }
+
     public static void loadPacket(ConnectionServer server, GMLInputBuffer buffer, String header, Client client) {
+
+        if (server.getServer() instanceof GSONServer) {
+            loadGsonPacket(server, header, buffer, client);
+        }
+
         Optional<Packet> pck = Utilities.getPacket(header);
         if (pck.isEmpty()) {
             Utilities.getLogger().warning("Unhandled packet with header (" + header + ")");
@@ -156,5 +176,27 @@ public class Utilities {
         Utilities.getLogger().finest("Server " + server.getString() + " received packet (" + packet + ") from client (" + client + ")");
         // trigger the packet event
         packet.receive(client);
+    }
+
+    private static void loadGsonPacket(ConnectionServer server, String header, GMLInputBuffer buffer, Client client) {
+        var packet = getGSONPacket(header);
+        if (packet.isEmpty()) {
+            // throw error
+            return;
+        }
+        Class<? extends GSONPacket> clazz = packet.get().getClass();
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        Optional<String> data = buffer.readString();
+        if (data.isEmpty()) {
+            // throw error
+            return;
+        }
+        var gsonPacket = gson.fromJson(data.get(), clazz);
+
+        // load it up
+        gsonPacket.setServer(server);
+        client.setLastSeen(System.currentTimeMillis());
+        Utilities.getLogger().finest("Server " + server.getString() + " received packet (" + packet + ") from client (" + client + ")");
+        gsonPacket.receive(client);
     }
 }
