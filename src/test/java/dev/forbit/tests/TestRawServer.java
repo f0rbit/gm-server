@@ -36,8 +36,10 @@ public class TestRawServer {
     }
 
     @AfterAll
+    @SneakyThrows
     public static void shutdownServer() {
         server.shutdown();
+        Thread.sleep(20L);
     }
 
     @Test
@@ -98,7 +100,7 @@ public class TestRawServer {
     @ValueSource(ints = {5, 10, 15, 20, 40})
     public void testMassConnections(int nclients) {
         Utilities.getLogger().info("Beginning mass test. # of clients: " + nclients);
-        int cooldown = 2;
+        int cooldown = 1;
         Set<RawMockClient> clients = new HashSet<>();
         for (int i = 0; i < nclients; i++) {
             RawMockClient client = new RawMockClient("localhost", 19238, 18238);
@@ -144,7 +146,7 @@ public class TestRawServer {
         long start = System.currentTimeMillis();
 
         // go for 10 seconds
-        while (System.currentTimeMillis() - start < (5000 + cooldown)) {
+        while (System.currentTimeMillis() - start < (2000 + cooldown)) {
             // do something
             // do a ping
             GMLOutputBuffer buffer = new GMLOutputBuffer();

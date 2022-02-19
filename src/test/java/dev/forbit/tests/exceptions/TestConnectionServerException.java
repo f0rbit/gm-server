@@ -34,5 +34,6 @@ public class TestConnectionServerException {
 
         server.shutdown();
         secondServer.shutdown();
+        Thread.sleep(20L);
     }
 }

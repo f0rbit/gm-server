@@ -3,6 +3,7 @@ package dev.forbit.tests;
 import dev.forbit.server.abstracts.Server;
 import dev.forbit.server.networks.gson.GSONServer;
 import dev.forbit.server.utilities.ServerProperties;
+import dev.forbit.server.utilities.Utilities;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.*;
 
@@ -23,6 +24,7 @@ public class TestGsonServer {
         server = new GSONServer(props);
         server.init();
         Thread.sleep(200L);
+        Utilities.getLogger().info("Finished startup.");
     }
 
     @AfterAll
