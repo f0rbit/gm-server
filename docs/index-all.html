@@ -98,6 +98,12 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="dev/forbit/server/logging/package-summary.html">dev.forbit.server.logging</a> - package dev.forbit.server.logging</dt>
 <dd>&nbsp;</dd>
+<dt><a href="dev/forbit/server/networks/gson/package-summary.html">dev.forbit.server.networks.gson</a> - package dev.forbit.server.networks.gson</dt>
+<dd>&nbsp;</dd>
+<dt><a href="dev/forbit/server/networks/gson/packets/package-summary.html">dev.forbit.server.networks.gson.packets</a> - package dev.forbit.server.networks.gson.packets</dt>
+<dd>&nbsp;</dd>
+<dt><a href="dev/forbit/server/networks/gson/servers/package-summary.html">dev.forbit.server.networks.gson.servers</a> - package dev.forbit.server.networks.gson.servers</dt>
+<dd>&nbsp;</dd>
 <dt><a href="dev/forbit/server/networks/raw/package-summary.html">dev.forbit.server.networks.raw</a> - package dev.forbit.server.networks.raw</dt>
 <dd>&nbsp;</dd>
 <dt><a href="dev/forbit/server/networks/raw/packets/package-summary.html">dev.forbit.server.networks.raw.packets</a> - package dev.forbit.server.networks.raw.packets</dt>
@@ -113,6 +119,8 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Fill the buffer with information you want to send to the client</div>
 </dd>
+<dt><span class="member-name-link"><a href="dev/forbit/server/networks/gson/GSONPacket.html#fillBuffer(dev.forbit.server.utilities.GMLOutputBuffer)">fillBuffer(GMLOutputBuffer)</a></span> - Method in class dev.forbit.server.networks.gson.<a href="dev/forbit/server/networks/gson/GSONPacket.html" title="class in dev.forbit.server.networks.gson">GSONPacket</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="member-name-link"><a href="dev/forbit/server/networks/raw/packets/RawConnectionPacket.html#fillBuffer(dev.forbit.server.utilities.GMLOutputBuffer)">fillBuffer(GMLOutputBuffer)</a></span> - Method in class dev.forbit.server.networks.raw.packets.<a href="dev/forbit/server/networks/raw/packets/RawConnectionPacket.html" title="class in dev.forbit.server.networks.raw.packets">RawConnectionPacket</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="member-name-link"><a href="dev/forbit/server/networks/raw/packets/RawPingPacket.html#fillBuffer(dev.forbit.server.utilities.GMLOutputBuffer)">fillBuffer(GMLOutputBuffer)</a></span> - Method in class dev.forbit.server.networks.raw.packets.<a href="dev/forbit/server/networks/raw/packets/RawPingPacket.html" title="class in dev.forbit.server.networks.raw.packets">RawPingPacket</a></dt>
@@ -166,7 +174,11 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><span class="member-name-link"><a href="dev/forbit/server/abstracts/TCPServer.html#getConnectionPacket()">getConnectionPacket()</a></span> - Method in class dev.forbit.server.abstracts.<a href="dev/forbit/server/abstracts/TCPServer.html" title="class in dev.forbit.server.abstracts">TCPServer</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="member-name-link"><a href="dev/forbit/server/networks/gson/servers/GSONTCPServer.html#getConnectionPacket()">getConnectionPacket()</a></span> - Method in class dev.forbit.server.networks.gson.servers.<a href="dev/forbit/server/networks/gson/servers/GSONTCPServer.html" title="class in dev.forbit.server.networks.gson.servers">GSONTCPServer</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="member-name-link"><a href="dev/forbit/server/networks/raw/servers/RawTCPServer.html#getConnectionPacket()">getConnectionPacket()</a></span> - Method in class dev.forbit.server.networks.raw.servers.<a href="dev/forbit/server/networks/raw/servers/RawTCPServer.html" title="class in dev.forbit.server.networks.raw.servers">RawTCPServer</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="member-name-link"><a href="dev/forbit/server/utilities/Utilities.html#getGSONPacket(java.lang.String)">getGSONPacket(String)</a></span> - Static method in class dev.forbit.server.utilities.<a href="dev/forbit/server/utilities/Utilities.html" title="class in dev.forbit.server.utilities">Utilities</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="member-name-link"><a href="dev/forbit/server/utilities/Utilities.html#getHexBuffer(java.nio.ByteBuffer)">getHexBuffer(ByteBuffer)</a></span> - Static method in class dev.forbit.server.utilities.<a href="dev/forbit/server/utilities/Utilities.html" title="class in dev.forbit.server.utilities">Utilities</a></dt>
 <dd>&nbsp;</dd>
@@ -208,6 +220,8 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">How many milliseconds we should wait before force disconnecting the client from the server.</div>
 </dd>
+<dt><span class="member-name-link"><a href="dev/forbit/server/networks/gson/GSONServer.html#getTimeout()">getTimeout()</a></span> - Method in class dev.forbit.server.networks.gson.<a href="dev/forbit/server/networks/gson/GSONServer.html" title="class in dev.forbit.server.networks.gson">GSONServer</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="member-name-link"><a href="dev/forbit/server/networks/raw/RawServer.html#getTimeout()">getTimeout()</a></span> - Method in class dev.forbit.server.networks.raw.<a href="dev/forbit/server/networks/raw/RawServer.html" title="class in dev.forbit.server.networks.raw">RawServer</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="member-name-link"><a href="dev/forbit/server/interfaces/ServerInterface.html#getUDPServer()">getUDPServer()</a></span> - Method in interface dev.forbit.server.interfaces.<a href="dev/forbit/server/interfaces/ServerInterface.html" title="interface in dev.forbit.server.interfaces">ServerInterface</a></dt>
@@ -223,6 +237,30 @@ loadScripts(document, 'script');</script>
 <dt><a href="dev/forbit/server/utilities/GMLOutputBuffer.html" title="class in dev.forbit.server.utilities"><span class="type-name-link">GMLOutputBuffer</span></a> - Class in <a href="dev/forbit/server/utilities/package-summary.html">dev.forbit.server.utilities</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="member-name-link"><a href="dev/forbit/server/utilities/GMLOutputBuffer.html#%3Cinit%3E()">GMLOutputBuffer()</a></span> - Constructor for class dev.forbit.server.utilities.<a href="dev/forbit/server/utilities/GMLOutputBuffer.html" title="class in dev.forbit.server.utilities">GMLOutputBuffer</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="dev/forbit/server/networks/gson/packets/GsonConnectionPacket.html" title="class in dev.forbit.server.networks.gson.packets"><span class="type-name-link">GsonConnectionPacket</span></a> - Class in <a href="dev/forbit/server/networks/gson/packets/package-summary.html">dev.forbit.server.networks.gson.packets</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="member-name-link"><a href="dev/forbit/server/networks/gson/packets/GsonConnectionPacket.html#%3Cinit%3E()">GsonConnectionPacket()</a></span> - Constructor for class dev.forbit.server.networks.gson.packets.<a href="dev/forbit/server/networks/gson/packets/GsonConnectionPacket.html" title="class in dev.forbit.server.networks.gson.packets">GsonConnectionPacket</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="dev/forbit/server/networks/gson/GSONPacket.html" title="class in dev.forbit.server.networks.gson"><span class="type-name-link">GSONPacket</span></a> - Class in <a href="dev/forbit/server/networks/gson/package-summary.html">dev.forbit.server.networks.gson</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="member-name-link"><a href="dev/forbit/server/networks/gson/GSONPacket.html#%3Cinit%3E()">GSONPacket()</a></span> - Constructor for class dev.forbit.server.networks.gson.<a href="dev/forbit/server/networks/gson/GSONPacket.html" title="class in dev.forbit.server.networks.gson">GSONPacket</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="dev/forbit/server/networks/gson/packets/GsonPingPacket.html" title="class in dev.forbit.server.networks.gson.packets"><span class="type-name-link">GsonPingPacket</span></a> - Class in <a href="dev/forbit/server/networks/gson/packets/package-summary.html">dev.forbit.server.networks.gson.packets</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="member-name-link"><a href="dev/forbit/server/networks/gson/packets/GsonPingPacket.html#%3Cinit%3E()">GsonPingPacket()</a></span> - Constructor for class dev.forbit.server.networks.gson.packets.<a href="dev/forbit/server/networks/gson/packets/GsonPingPacket.html" title="class in dev.forbit.server.networks.gson.packets">GsonPingPacket</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="dev/forbit/server/networks/gson/GSONServer.html" title="class in dev.forbit.server.networks.gson"><span class="type-name-link">GSONServer</span></a> - Class in <a href="dev/forbit/server/networks/gson/package-summary.html">dev.forbit.server.networks.gson</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="member-name-link"><a href="dev/forbit/server/networks/gson/GSONServer.html#%3Cinit%3E(dev.forbit.server.utilities.ServerProperties)">GSONServer(ServerProperties)</a></span> - Constructor for class dev.forbit.server.networks.gson.<a href="dev/forbit/server/networks/gson/GSONServer.html" title="class in dev.forbit.server.networks.gson">GSONServer</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="dev/forbit/server/networks/gson/servers/GSONTCPServer.html" title="class in dev.forbit.server.networks.gson.servers"><span class="type-name-link">GSONTCPServer</span></a> - Class in <a href="dev/forbit/server/networks/gson/servers/package-summary.html">dev.forbit.server.networks.gson.servers</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="member-name-link"><a href="dev/forbit/server/networks/gson/servers/GSONTCPServer.html#%3Cinit%3E(dev.forbit.server.abstracts.Server)">GSONTCPServer(Server)</a></span> - Constructor for class dev.forbit.server.networks.gson.servers.<a href="dev/forbit/server/networks/gson/servers/GSONTCPServer.html" title="class in dev.forbit.server.networks.gson.servers">GSONTCPServer</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="dev/forbit/server/networks/gson/servers/GSONUDPServer.html" title="class in dev.forbit.server.networks.gson.servers"><span class="type-name-link">GSONUDPServer</span></a> - Class in <a href="dev/forbit/server/networks/gson/servers/package-summary.html">dev.forbit.server.networks.gson.servers</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="member-name-link"><a href="dev/forbit/server/networks/gson/servers/GSONUDPServer.html#%3Cinit%3E(dev.forbit.server.abstracts.Server)">GSONUDPServer(Server)</a></span> - Constructor for class dev.forbit.server.networks.gson.servers.<a href="dev/forbit/server/networks/gson/servers/GSONUDPServer.html" title="class in dev.forbit.server.networks.gson.servers">GSONUDPServer</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:I">I</h2>
@@ -248,6 +286,8 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Load information from the input buffer into the class to use</div>
 </dd>
+<dt><span class="member-name-link"><a href="dev/forbit/server/networks/gson/GSONPacket.html#loadBuffer(dev.forbit.server.utilities.GMLInputBuffer)">loadBuffer(GMLInputBuffer)</a></span> - Method in class dev.forbit.server.networks.gson.<a href="dev/forbit/server/networks/gson/GSONPacket.html" title="class in dev.forbit.server.networks.gson">GSONPacket</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="member-name-link"><a href="dev/forbit/server/networks/raw/packets/RawConnectionPacket.html#loadBuffer(dev.forbit.server.utilities.GMLInputBuffer)">loadBuffer(GMLInputBuffer)</a></span> - Method in class dev.forbit.server.networks.raw.packets.<a href="dev/forbit/server/networks/raw/packets/RawConnectionPacket.html" title="class in dev.forbit.server.networks.raw.packets">RawConnectionPacket</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="member-name-link"><a href="dev/forbit/server/networks/raw/packets/RawPingPacket.html#loadBuffer(dev.forbit.server.utilities.GMLInputBuffer)">loadBuffer(GMLInputBuffer)</a></span> - Method in class dev.forbit.server.networks.raw.packets.<a href="dev/forbit/server/networks/raw/packets/RawPingPacket.html" title="class in dev.forbit.server.networks.raw.packets">RawPingPacket</a></dt>
@@ -278,12 +318,16 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Fired when a client is registered on the TCP and UDP server.</div>
 </dd>
+<dt><span class="member-name-link"><a href="dev/forbit/server/networks/gson/GSONServer.html#onConnect(dev.forbit.server.utilities.Client)">onConnect(Client)</a></span> - Method in class dev.forbit.server.networks.gson.<a href="dev/forbit/server/networks/gson/GSONServer.html" title="class in dev.forbit.server.networks.gson">GSONServer</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="member-name-link"><a href="dev/forbit/server/networks/raw/RawServer.html#onConnect(dev.forbit.server.utilities.Client)">onConnect(Client)</a></span> - Method in class dev.forbit.server.networks.raw.<a href="dev/forbit/server/networks/raw/RawServer.html" title="class in dev.forbit.server.networks.raw">RawServer</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="member-name-link"><a href="dev/forbit/server/interfaces/ServerInterface.html#onDisconnect(dev.forbit.server.utilities.Client)">onDisconnect(Client)</a></span> - Method in interface dev.forbit.server.interfaces.<a href="dev/forbit/server/interfaces/ServerInterface.html" title="interface in dev.forbit.server.interfaces">ServerInterface</a></dt>
 <dd>
 <div class="block">Fired when the client disconnects from the server.</div>
 </dd>
+<dt><span class="member-name-link"><a href="dev/forbit/server/networks/gson/GSONServer.html#onDisconnect(dev.forbit.server.utilities.Client)">onDisconnect(Client)</a></span> - Method in class dev.forbit.server.networks.gson.<a href="dev/forbit/server/networks/gson/GSONServer.html" title="class in dev.forbit.server.networks.gson">GSONServer</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="member-name-link"><a href="dev/forbit/server/networks/raw/RawServer.html#onDisconnect(dev.forbit.server.utilities.Client)">onDisconnect(Client)</a></span> - Method in class dev.forbit.server.networks.raw.<a href="dev/forbit/server/networks/raw/RawServer.html" title="class in dev.forbit.server.networks.raw">RawServer</a></dt>
 <dd>&nbsp;</dd>
 </dl>
@@ -344,6 +388,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Method called when the packet is received by the server and information is loaded</div>
 </dd>
+<dt><span class="member-name-link"><a href="dev/forbit/server/networks/gson/packets/GsonConnectionPacket.html#receive(dev.forbit.server.utilities.Client)">receive(Client)</a></span> - Method in class dev.forbit.server.networks.gson.packets.<a href="dev/forbit/server/networks/gson/packets/GsonConnectionPacket.html" title="class in dev.forbit.server.networks.gson.packets">GsonConnectionPacket</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="member-name-link"><a href="dev/forbit/server/networks/gson/packets/GsonPingPacket.html#receive(dev.forbit.server.utilities.Client)">receive(Client)</a></span> - Method in class dev.forbit.server.networks.gson.packets.<a href="dev/forbit/server/networks/gson/packets/GsonPingPacket.html" title="class in dev.forbit.server.networks.gson.packets">GsonPingPacket</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="member-name-link"><a href="dev/forbit/server/networks/raw/packets/RawConnectionPacket.html#receive(dev.forbit.server.utilities.Client)">receive(Client)</a></span> - Method in class dev.forbit.server.networks.raw.packets.<a href="dev/forbit/server/networks/raw/packets/RawConnectionPacket.html" title="class in dev.forbit.server.networks.raw.packets">RawConnectionPacket</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="member-name-link"><a href="dev/forbit/server/networks/raw/packets/RawPingPacket.html#receive(dev.forbit.server.utilities.Client)">receive(Client)</a></span> - Method in class dev.forbit.server.networks.raw.packets.<a href="dev/forbit/server/networks/raw/packets/RawPingPacket.html" title="class in dev.forbit.server.networks.raw.packets">RawPingPacket</a></dt>

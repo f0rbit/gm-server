@@ -3,6 +3,9 @@ dev.forbit.server.exceptions
 dev.forbit.server.interfaces
 dev.forbit.server.interfaces.packets
 dev.forbit.server.logging
+dev.forbit.server.networks.gson
+dev.forbit.server.networks.gson.packets
+dev.forbit.server.networks.gson.servers
 dev.forbit.server.networks.raw
 dev.forbit.server.networks.raw.packets
 dev.forbit.server.networks.raw.servers
