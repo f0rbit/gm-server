@@ -7,6 +7,7 @@ public class RepeatingTask implements Task {
     @Getter final int period;
     @Getter final Runnable action;
     @Getter @Setter int delay;
+    @Getter boolean running = true;
 
     public RepeatingTask(int period, int delay, Runnable action) {
         this.period = period;
@@ -22,6 +23,10 @@ public class RepeatingTask implements Task {
         } else {
             setDelay(getDelay() - 1);
         }
-        return true;
+        return isRunning();
+    }
+
+    public void stop() {
+        running = false;
     }
 }

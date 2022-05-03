@@ -19,9 +19,10 @@ public class TestConnectionServerException {
         ServerProperties properties = new ServerProperties("localhost", 12374, 12375);
         var server = new RawServer(properties);
         server.init();
-        Thread.sleep(200L);
+        Thread.sleep(400L);
         // now force creating of same server on same port
         var secondServer = new RawServer(properties);
+        secondServer.init();
         assertFalse(secondServer.getTCPServer().isRunning());
         assertFalse(secondServer.getUDPServer().isRunning());
         assertTrue(server.getTCPServer().isRunning());

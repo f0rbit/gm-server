@@ -55,8 +55,9 @@ public class TestScheduler {
         });
         assertTrue(server.getScheduler().isPresent());
         server.getScheduler().get().addTask(task);
-        Thread.sleep(1200L);
+        Thread.sleep(1500L);
         assertTrue(count[0] >= 6);
+        task.stop();
     }
 
     @ParameterizedTest
@@ -73,8 +74,10 @@ public class TestScheduler {
         });
         assertTrue(server.getScheduler().isPresent());
         server.getScheduler().get().addTask(task);
-        Thread.sleep(time + 100);
-        assertTrue(count[0] > time / 200);
+        Thread.sleep(time + 300);
+        Utilities.getLogger().info("count: " + count[0] + ", expected: " + time / 200);
+        assertTrue(count[0] >= time / 200);
+        task.stop();
     }
 
     @Test
@@ -83,9 +86,9 @@ public class TestScheduler {
     public void testDelayedTask() throws InterruptedException {
         assertTrue(server.getScheduler().isPresent());
         final int[] count = {0};
-        var task = new ScheduledTask(6, () -> count[0]++);
+        var task = new ScheduledTask(4, () -> count[0]++);
         server.getScheduler().get().addTask(task);
-        Thread.sleep(800L);
+        Thread.sleep(1000L);
         assertEquals(count[0], 1);
     }
 
