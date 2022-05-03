@@ -161,37 +161,42 @@ implements <a href="../interfaces/ServerInterface.html" title="interface in dev.
 <div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Get client from a given UUID</div>
 </div>
-<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#init()">init</a></span>()</code></div>
+<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="../scheduler/Scheduler.html" title="class in dev.forbit.server.scheduler">Scheduler</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#getScheduler()">getScheduler</a></span>()</code></div>
 <div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
+<div class="block">Returns the scheduler object, or optional.null if not created yet</div>
+</div>
+<div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#init()">init</a></span>()</code></div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Method called when booting up the server.</div>
 </div>
-<div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#removeClient(dev.forbit.server.utilities.Client)">removeClient</a></span>&#8203;(<a href="../utilities/Client.html" title="class in dev.forbit.server.utilities">Client</a>&nbsp;client)</code></div>
-<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
+<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#removeClient(dev.forbit.server.utilities.Client)">removeClient</a></span>&#8203;(<a href="../utilities/Client.html" title="class in dev.forbit.server.utilities">Client</a>&nbsp;client)</code></div>
+<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Remove the client from the Server's list.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#run()">run</a></span>()</code></div>
-<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#sendPacketTCP(dev.forbit.server.utilities.Client,dev.forbit.server.abstracts.Packet)">sendPacketTCP</a></span>&#8203;(<a href="../utilities/Client.html" title="class in dev.forbit.server.utilities">Client</a>&nbsp;client,
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#run()">run</a></span>()</code></div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#sendPacketTCP(dev.forbit.server.utilities.Client,dev.forbit.server.abstracts.Packet)">sendPacketTCP</a></span>&#8203;(<a href="../utilities/Client.html" title="class in dev.forbit.server.utilities">Client</a>&nbsp;client,
  <a href="Packet.html" title="class in dev.forbit.server.abstracts">Packet</a>&nbsp;packet)</code></div>
-<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
+<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Send a packet to the client.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#sendPacketUDP(dev.forbit.server.utilities.Client,dev.forbit.server.abstracts.Packet)">sendPacketUDP</a></span>&#8203;(<a href="../utilities/Client.html" title="class in dev.forbit.server.utilities">Client</a>&nbsp;client,
- <a href="Packet.html" title="class in dev.forbit.server.abstracts">Packet</a>&nbsp;packet)</code></div>
-<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#shutdown()">shutdown</a></span>()</code></div>
-<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#sendPacketUDP(dev.forbit.server.utilities.Client,dev.forbit.server.abstracts.Packet)">sendPacketUDP</a></span>&#8203;(<a href="../utilities/Client.html" title="class in dev.forbit.server.utilities">Client</a>&nbsp;client,
+ <a href="Packet.html" title="class in dev.forbit.server.abstracts">Packet</a>&nbsp;packet)</code></div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#shutdown()">shutdown</a></span>()</code></div>
+<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Shutdown all the servers.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#updateClients()">updateClients</a></span>()</code></div>
-<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
+<div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#updateClients()">updateClients</a></span>()</code></div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Update the client set, removing inactive clients if required.</div>
 </div>
 </div>
@@ -373,6 +378,20 @@ implements <a href="../interfaces/ServerInterface.html" title="interface in dev.
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../interfaces/ServerInterface.html#sendPacketUDP(dev.forbit.server.utilities.Client,dev.forbit.server.abstracts.Packet)">sendPacketUDP</a></code>&nbsp;in interface&nbsp;<code><a href="../interfaces/ServerInterface.html" title="interface in dev.forbit.server.interfaces">ServerInterface</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getScheduler()">
+<h3>getScheduler</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="../scheduler/Scheduler.html" title="class in dev.forbit.server.scheduler">Scheduler</a>&gt;</span>&nbsp;<span class="element-name">getScheduler</span>()</div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../interfaces/ServerInterface.html#getScheduler()">ServerInterface</a></code></span></div>
+<div class="block">Returns the scheduler object, or optional.null if not created yet</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../interfaces/ServerInterface.html#getScheduler()">getScheduler</a></code>&nbsp;in interface&nbsp;<code><a href="../interfaces/ServerInterface.html" title="interface in dev.forbit.server.interfaces">ServerInterface</a></code></dd>
+<dt>Returns:</dt>
+<dd>scheduler</dd>
 </dl>
 </section>
 </li>

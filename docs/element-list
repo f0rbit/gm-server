@@ -9,4 +9,5 @@ dev.forbit.server.networks.gson.servers
 dev.forbit.server.networks.raw
 dev.forbit.server.networks.raw.packets
 dev.forbit.server.networks.raw.servers
+dev.forbit.server.scheduler
 dev.forbit.server.utilities

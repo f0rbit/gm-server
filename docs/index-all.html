@@ -63,6 +63,8 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><span class="member-name-link"><a href="dev/forbit/server/utilities/Utilities.html#addLogOutputFile(java.util.logging.Level,java.lang.String)">addLogOutputFile(Level, String)</a></span> - Static method in class dev.forbit.server.utilities.<a href="dev/forbit/server/utilities/Utilities.html" title="class in dev.forbit.server.utilities">Utilities</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="member-name-link"><a href="dev/forbit/server/scheduler/Scheduler.html#addTask(dev.forbit.server.scheduler.Task)">addTask(Task)</a></span> - Method in class dev.forbit.server.scheduler.<a href="dev/forbit/server/scheduler/Scheduler.html" title="class in dev.forbit.server.scheduler">Scheduler</a></dt>
+<dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:B">B</h2>
 <dl class="index">
@@ -109,6 +111,8 @@ loadScripts(document, 'script');</script>
 <dt><a href="dev/forbit/server/networks/raw/packets/package-summary.html">dev.forbit.server.networks.raw.packets</a> - package dev.forbit.server.networks.raw.packets</dt>
 <dd>&nbsp;</dd>
 <dt><a href="dev/forbit/server/networks/raw/servers/package-summary.html">dev.forbit.server.networks.raw.servers</a> - package dev.forbit.server.networks.raw.servers</dt>
+<dd>&nbsp;</dd>
+<dt><a href="dev/forbit/server/scheduler/package-summary.html">dev.forbit.server.scheduler</a> - package dev.forbit.server.scheduler</dt>
 <dd>&nbsp;</dd>
 <dt><a href="dev/forbit/server/utilities/package-summary.html">dev.forbit.server.utilities</a> - package dev.forbit.server.utilities</dt>
 <dd>&nbsp;</dd>
@@ -200,6 +204,12 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><span class="member-name-link"><a href="dev/forbit/server/interfaces/ConnectionServer.html#getPort()">getPort()</a></span> - Method in interface dev.forbit.server.interfaces.<a href="dev/forbit/server/interfaces/ConnectionServer.html" title="interface in dev.forbit.server.interfaces">ConnectionServer</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="member-name-link"><a href="dev/forbit/server/abstracts/Server.html#getScheduler()">getScheduler()</a></span> - Method in class dev.forbit.server.abstracts.<a href="dev/forbit/server/abstracts/Server.html" title="class in dev.forbit.server.abstracts">Server</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="member-name-link"><a href="dev/forbit/server/interfaces/ServerInterface.html#getScheduler()">getScheduler()</a></span> - Method in interface dev.forbit.server.interfaces.<a href="dev/forbit/server/interfaces/ServerInterface.html" title="interface in dev.forbit.server.interfaces">ServerInterface</a></dt>
+<dd>
+<div class="block">Returns the scheduler object, or optional.null if not created yet</div>
+</dd>
 <dt><span class="member-name-link"><a href="dev/forbit/server/interfaces/ConnectionServer.html#getServer()">getServer()</a></span> - Method in interface dev.forbit.server.interfaces.<a href="dev/forbit/server/interfaces/ConnectionServer.html" title="interface in dev.forbit.server.interfaces">ConnectionServer</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="member-name-link"><a href="dev/forbit/server/interfaces/PacketInterface.html#getServer()">getServer()</a></span> - Method in interface dev.forbit.server.interfaces.<a href="dev/forbit/server/interfaces/PacketInterface.html" title="interface in dev.forbit.server.interfaces">PacketInterface</a></dt>
@@ -404,15 +414,29 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Remove the client from the Server's list.</div>
 </dd>
+<dt><a href="dev/forbit/server/scheduler/RepeatingTask.html" title="class in dev.forbit.server.scheduler"><span class="type-name-link">RepeatingTask</span></a> - Class in <a href="dev/forbit/server/scheduler/package-summary.html">dev.forbit.server.scheduler</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="member-name-link"><a href="dev/forbit/server/scheduler/RepeatingTask.html#%3Cinit%3E(int,int,java.lang.Runnable)">RepeatingTask(int, int, Runnable)</a></span> - Constructor for class dev.forbit.server.scheduler.<a href="dev/forbit/server/scheduler/RepeatingTask.html" title="class in dev.forbit.server.scheduler">RepeatingTask</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="member-name-link"><a href="dev/forbit/server/abstracts/Server.html#run()">run()</a></span> - Method in class dev.forbit.server.abstracts.<a href="dev/forbit/server/abstracts/Server.html" title="class in dev.forbit.server.abstracts">Server</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="member-name-link"><a href="dev/forbit/server/abstracts/TCPServer.html#run()">run()</a></span> - Method in class dev.forbit.server.abstracts.<a href="dev/forbit/server/abstracts/TCPServer.html" title="class in dev.forbit.server.abstracts">TCPServer</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="member-name-link"><a href="dev/forbit/server/abstracts/UDPServer.html#run()">run()</a></span> - Method in class dev.forbit.server.abstracts.<a href="dev/forbit/server/abstracts/UDPServer.html" title="class in dev.forbit.server.abstracts">UDPServer</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="member-name-link"><a href="dev/forbit/server/scheduler/Scheduler.html#run()">run()</a></span> - Method in class dev.forbit.server.scheduler.<a href="dev/forbit/server/scheduler/Scheduler.html" title="class in dev.forbit.server.scheduler">Scheduler</a></dt>
+<dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:S">S</h2>
 <dl class="index">
+<dt><a href="dev/forbit/server/scheduler/ScheduledTask.html" title="class in dev.forbit.server.scheduler"><span class="type-name-link">ScheduledTask</span></a> - Class in <a href="dev/forbit/server/scheduler/package-summary.html">dev.forbit.server.scheduler</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="member-name-link"><a href="dev/forbit/server/scheduler/ScheduledTask.html#%3Cinit%3E(int,java.lang.Runnable)">ScheduledTask(int, Runnable)</a></span> - Constructor for class dev.forbit.server.scheduler.<a href="dev/forbit/server/scheduler/ScheduledTask.html" title="class in dev.forbit.server.scheduler">ScheduledTask</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="dev/forbit/server/scheduler/Scheduler.html" title="class in dev.forbit.server.scheduler"><span class="type-name-link">Scheduler</span></a> - Class in <a href="dev/forbit/server/scheduler/package-summary.html">dev.forbit.server.scheduler</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="member-name-link"><a href="dev/forbit/server/scheduler/Scheduler.html#%3Cinit%3E(dev.forbit.server.abstracts.Server)">Scheduler(Server)</a></span> - Constructor for class dev.forbit.server.scheduler.<a href="dev/forbit/server/scheduler/Scheduler.html" title="class in dev.forbit.server.scheduler">Scheduler</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="member-name-link"><a href="dev/forbit/server/abstracts/TCPServer.html#select()">select()</a></span> - Method in class dev.forbit.server.abstracts.<a href="dev/forbit/server/abstracts/TCPServer.html" title="class in dev.forbit.server.abstracts">TCPServer</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="member-name-link"><a href="dev/forbit/server/abstracts/Server.html#sendPacketTCP(dev.forbit.server.utilities.Client,dev.forbit.server.abstracts.Packet)">sendPacketTCP(Client, Packet)</a></span> - Method in class dev.forbit.server.abstracts.<a href="dev/forbit/server/abstracts/Server.html" title="class in dev.forbit.server.abstracts">Server</a></dt>
@@ -463,14 +487,26 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Shutdown all the servers.</div>
 </dd>
+<dt><span class="member-name-link"><a href="dev/forbit/server/scheduler/Scheduler.html#shutdown()">shutdown()</a></span> - Method in class dev.forbit.server.scheduler.<a href="dev/forbit/server/scheduler/Scheduler.html" title="class in dev.forbit.server.scheduler">Scheduler</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="member-name-link"><a href="dev/forbit/server/interfaces/ConnectionServer.html#start()">start()</a></span> - Method in interface dev.forbit.server.interfaces.<a href="dev/forbit/server/interfaces/ConnectionServer.html" title="interface in dev.forbit.server.interfaces">ConnectionServer</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="member-name-link"><a href="dev/forbit/server/scheduler/RepeatingTask.html#stop()">stop()</a></span> - Method in class dev.forbit.server.scheduler.<a href="dev/forbit/server/scheduler/RepeatingTask.html" title="class in dev.forbit.server.scheduler">RepeatingTask</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:T">T</h2>
 <dl class="index">
+<dt><a href="dev/forbit/server/scheduler/Task.html" title="interface in dev.forbit.server.scheduler"><span class="type-name-link">Task</span></a> - Interface in <a href="dev/forbit/server/scheduler/package-summary.html">dev.forbit.server.scheduler</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="dev/forbit/server/abstracts/TCPServer.html" title="class in dev.forbit.server.abstracts"><span class="type-name-link">TCPServer</span></a> - Class in <a href="dev/forbit/server/abstracts/package-summary.html">dev.forbit.server.abstracts</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="member-name-link"><a href="dev/forbit/server/abstracts/TCPServer.html#%3Cinit%3E()">TCPServer()</a></span> - Constructor for class dev.forbit.server.abstracts.<a href="dev/forbit/server/abstracts/TCPServer.html" title="class in dev.forbit.server.abstracts">TCPServer</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="member-name-link"><a href="dev/forbit/server/scheduler/RepeatingTask.html#tick()">tick()</a></span> - Method in class dev.forbit.server.scheduler.<a href="dev/forbit/server/scheduler/RepeatingTask.html" title="class in dev.forbit.server.scheduler">RepeatingTask</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="member-name-link"><a href="dev/forbit/server/scheduler/ScheduledTask.html#tick()">tick()</a></span> - Method in class dev.forbit.server.scheduler.<a href="dev/forbit/server/scheduler/ScheduledTask.html" title="class in dev.forbit.server.scheduler">ScheduledTask</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="member-name-link"><a href="dev/forbit/server/scheduler/Task.html#tick()">tick()</a></span> - Method in interface dev.forbit.server.scheduler.<a href="dev/forbit/server/scheduler/Task.html" title="interface in dev.forbit.server.scheduler">Task</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="member-name-link"><a href="dev/forbit/server/abstracts/Packet.html#toString()">toString()</a></span> - Method in class dev.forbit.server.abstracts.<a href="dev/forbit/server/abstracts/Packet.html" title="class in dev.forbit.server.abstracts">Packet</a></dt>
 <dd>&nbsp;</dd>
