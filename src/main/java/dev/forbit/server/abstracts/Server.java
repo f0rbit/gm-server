@@ -2,6 +2,7 @@ package dev.forbit.server.abstracts;
 
 import com.google.gson.annotations.Expose;
 import dev.forbit.server.interfaces.ServerInterface;
+import dev.forbit.server.scheduler.Scheduler;
 import dev.forbit.server.utilities.Client;
 import dev.forbit.server.utilities.ServerProperties;
 import dev.forbit.server.utilities.Utilities;
@@ -31,13 +32,20 @@ public abstract class Server extends Thread implements ServerInterface {
      */
     @Getter @Setter @Expose ServerProperties serverProperties;
 
+    /**
+     * The server task Scheduler
+     */
+    Scheduler scheduler;
+
     @Override
     public void init() {
+        scheduler = new Scheduler(this);
         this.start();
     }
 
     @Override
     public void shutdown() {
+        getScheduler().ifPresent(Scheduler::shutdown);
         getTCPServer().shutdown();
         getUDPServer().shutdown();
         Utilities.getLogger().info("Shutting down servers...");
@@ -98,7 +106,14 @@ public abstract class Server extends Thread implements ServerInterface {
     }
 
     @Override
+    public Optional<Scheduler> getScheduler() {
+        return Optional.ofNullable(scheduler);
+    }
+
+    @Override
     public void run() {
+        Utilities.getLogger().info("Starting Scheduler...");
+        scheduler.start();
         Utilities.getLogger().info("Starting servers...");
         getTCPServer().start();
         getUDPServer().start();

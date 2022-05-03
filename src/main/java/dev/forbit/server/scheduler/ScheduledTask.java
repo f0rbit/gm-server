@@ -1,10 +1,16 @@
 package dev.forbit.server.scheduler;
 
 import lombok.Getter;
+import lombok.Setter;
 
 public class ScheduledTask implements Task {
-    @Getter Runnable action;
-    @Getter int delay;
+    @Getter @Setter Runnable action;
+    @Getter @Setter int delay;
+
+    public ScheduledTask(int delay, Runnable action) {
+        setDelay(delay);
+        setAction(action);
+    }
 
     @Override
     public boolean tick() {

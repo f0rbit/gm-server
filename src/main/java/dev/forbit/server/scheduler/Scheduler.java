@@ -22,10 +22,15 @@ public class Scheduler extends Thread {
         Utilities.getLogger().info("Started Scheduler.");
         running = true;
         long lastTick = System.currentTimeMillis() - 100;
+        var remove = new HashSet<Task>();
         while (running) {
             if (System.currentTimeMillis() - lastTick < 100) { continue; }
-            tasks.stream().filter(task -> !task.tick()).forEach(tasks::remove);
+            tasks.stream().filter(task -> !task.tick()).forEach(remove::add);
             lastTick = System.currentTimeMillis();
+            if (remove.size() > 0) {
+                tasks.removeAll(remove);
+                remove.clear();
+            }
         }
     }
 

@@ -16,7 +16,7 @@ public class RepeatingTask implements Task {
 
     @Override
     public boolean tick() {
-        if (getDelay() < 0) {
+        if (getDelay() <= 0) {
             getAction().run();
             setDelay(getPeriod());
         } else {

@@ -3,6 +3,7 @@ package dev.forbit.server.interfaces;
 import dev.forbit.server.abstracts.Packet;
 import dev.forbit.server.abstracts.TCPServer;
 import dev.forbit.server.abstracts.UDPServer;
+import dev.forbit.server.scheduler.Scheduler;
 import dev.forbit.server.utilities.Client;
 import dev.forbit.server.utilities.ServerProperties;
 
@@ -153,4 +154,10 @@ public interface ServerInterface {
     void sendPacketTCP(Client client, Packet packet);
 
     void sendPacketUDP(Client client, Packet packet);
+
+    /***
+     * Returns the scheduler object, or optional.null if not created yet
+     * @return scheduler
+     */
+    Optional<Scheduler> getScheduler();
 }
