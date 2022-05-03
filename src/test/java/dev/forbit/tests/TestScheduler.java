@@ -1,7 +1,7 @@
 package dev.forbit.tests;
 
 import dev.forbit.server.abstracts.Server;
-import dev.forbit.server.networks.gson.GSONServer;
+import dev.forbit.server.networks.raw.RawServer;
 import dev.forbit.server.scheduler.RepeatingTask;
 import dev.forbit.server.scheduler.ScheduledTask;
 import dev.forbit.server.utilities.ServerProperties;
@@ -11,7 +11,6 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,7 +27,7 @@ public class TestScheduler {
     @SneakyThrows
     public static void setup() {
         var props = new ServerProperties(address, tcp_port, udp_port);
-        server = new GSONServer(props);
+        server = new RawServer(props);
         server.init();
         Thread.sleep(300L);
         Utilities.getLogger().info("Finished startup.");
@@ -68,7 +67,7 @@ public class TestScheduler {
     @ParameterizedTest
     @Order(3)
     @DisplayName("Test Scheduler timings")
-    @ValueSource(ints = {300, 600, 900, 1200})
+    @ValueSource(ints = {300, 600, 900})
     public void testSchedulerTimings(int time) {
         final int[] count = {0};
         var task = new RepeatingTask(1, 0, new Runnable() {
@@ -79,7 +78,7 @@ public class TestScheduler {
         });
         assertTrue(server.getScheduler().isPresent());
         server.getScheduler().get().addTask(task);
-        await().atMost(time, MILLISECONDS).until(() -> count[0] >= (time / 200));
+        await().atMost(2, SECONDS).until(() -> count[0] >= (time / 200));
         task.stop();
         assertTrue(true);
     }
@@ -92,7 +91,7 @@ public class TestScheduler {
         final int[] count = {0};
         var task = new ScheduledTask(4, () -> count[0]++);
         server.getScheduler().get().addTask(task);
-        await().atMost(1500, MILLISECONDS).until(() -> count[0] == 1);
+        await().atMost(2, SECONDS).until(() -> count[0] == 1);
         assertEquals(count[0], 1);
     }
 
