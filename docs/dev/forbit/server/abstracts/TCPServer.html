@@ -138,19 +138,27 @@ implements <a href="../interfaces/ConnectionServer.html" title="interface in dev
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>abstract <a href="../interfaces/packets/ConnectionPacket.html" title="interface in dev.forbit.server.interfaces.packets">ConnectionPacket</a></code></div>
 <div class="col-second even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#getConnectionPacket()">getConnectionPacket</a></span>()</code></div>
-<div class="col-last even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
+<div class="block">Defines the Packet used for new connections</div>
+</div>
 <div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#init()">init</a></span>()</code></div>
-<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
+<div class="block">Initialise the server.</div>
+</div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#loop()">loop</a></span>()</code></div>
-<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
+<div class="block">The basic loop that happens every tick</div>
+</div>
 <div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#run()">run</a></span>()</code></div>
 <div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#select()">select</a></span>()</code></div>
-<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
+<div class="block">Gets the key ID</div>
+</div>
 </div>
 </div>
 </div>
@@ -204,15 +212,24 @@ implements <a href="../interfaces/ConnectionServer.html" title="interface in dev
 <section class="detail" id="getConnectionPacket()">
 <h3>getConnectionPacket</h3>
 <div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type"><a href="../interfaces/packets/ConnectionPacket.html" title="interface in dev.forbit.server.interfaces.packets">ConnectionPacket</a></span>&nbsp;<span class="element-name">getConnectionPacket</span>()</div>
+<div class="block">Defines the Packet used for new connections</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>ConnectionPacket</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="init()">
 <h3>init</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">init</span>()</div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../interfaces/ConnectionServer.html#init()">ConnectionServer</a></code></span></div>
+<div class="block">Initialise the server.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../interfaces/ConnectionServer.html#init()">init</a></code>&nbsp;in interface&nbsp;<code><a href="../interfaces/ConnectionServer.html" title="interface in dev.forbit.server.interfaces">ConnectionServer</a></code></dd>
+<dt>Returns:</dt>
+<dd>false if an error occured</dd>
 </dl>
 </section>
 </li>
@@ -220,6 +237,8 @@ implements <a href="../interfaces/ConnectionServer.html" title="interface in dev
 <section class="detail" id="loop()">
 <h3>loop</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">loop</span>()</div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../interfaces/ConnectionServer.html#loop()">ConnectionServer</a></code></span></div>
+<div class="block">The basic loop that happens every tick</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../interfaces/ConnectionServer.html#loop()">loop</a></code>&nbsp;in interface&nbsp;<code><a href="../interfaces/ConnectionServer.html" title="interface in dev.forbit.server.interfaces">ConnectionServer</a></code></dd>
@@ -230,6 +249,11 @@ implements <a href="../interfaces/ConnectionServer.html" title="interface in dev
 <section class="detail" id="select()">
 <h3>select</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">select</span>()</div>
+<div class="block">Gets the key ID</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the number of keys, or -1 for an exception</dd>
+</dl>
 </section>
 </li>
 </ul>

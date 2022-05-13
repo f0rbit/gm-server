@@ -80,6 +80,8 @@ loadScripts(document, 'script');</script>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">ConnectionServer</span></div>
+<div class="block">Defines common methods across Connection Servers
+ see <a href="../abstracts/TCPServer.html" title="class in dev.forbit.server.abstracts"><code>TCPServer</code></a> and <a href="../abstracts/UDPServer.html" title="class in dev.forbit.server.abstracts"><code>UDPServer</code></a></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -96,37 +98,59 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code>default void</code></div>
 <div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code><span class="member-name-link"><a href="#begin()">begin</a></span>()</code></div>
-<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">
+<div class="block">Initialises the server and begins the loop</div>
+</div>
 <div class="col-first odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#getAddress()">getAddress</a></span>()</code></div>
-<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
+<div class="block">Gets the address to host the bind the server too.</div>
+</div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#getPort()">getPort</a></span>()</code></div>
-<div class="col-last even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
+<div class="block">Get the port</div>
+</div>
 <div class="col-first odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><a href="../abstracts/Server.html" title="class in dev.forbit.server.abstracts">Server</a></code></div>
 <div class="col-second odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#getServer()">getServer</a></span>()</code></div>
-<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
+<div class="block">Gets the parent <a href="../abstracts/Server.html" title="class in dev.forbit.server.abstracts"><code>Server</code></a> object that the packet was received on</div>
+</div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code>default <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code><span class="member-name-link"><a href="#getString()">getString</a></span>()</code></div>
-<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">
+<div class="block">Returns a GSON serialised string of the object</div>
+</div>
 <div class="col-first odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#init()">init</a></span>()</code></div>
-<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
+<div class="block">Initialise the server.</div>
+</div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#isRunning()">isRunning</a></span>()</code></div>
-<div class="col-last even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
+<div class="block">Returns whether the server is currently running</div>
+</div>
 <div class="col-first odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#loop()">loop</a></span>()</code></div>
-<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
+<div class="block">The basic loop that happens every tick</div>
+</div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#setRunning(boolean)">setRunning</a></span>&#8203;(boolean&nbsp;running)</code></div>
-<div class="col-last even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
+<div class="block">Sets the server running status</div>
+</div>
 <div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code>default void</code></div>
 <div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code><span class="member-name-link"><a href="#shutdown()">shutdown</a></span>()</code></div>
-<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">
+<div class="block">Sets running to false</div>
+</div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#start()">start</a></span>()</code></div>
-<div class="col-last even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
+<div class="block">Start the server</div>
+</div>
 </div>
 </div>
 </div>
@@ -145,54 +169,87 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="start()">
 <h3>start</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">start</span>()</div>
+<div class="block">Start the server</div>
 </section>
 </li>
 <li>
 <section class="detail" id="getPort()">
 <h3>getPort</h3>
 <div class="member-signature"><span class="return-type">int</span>&nbsp;<span class="element-name">getPort</span>()</div>
+<div class="block">Get the port</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>port to host server on</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getServer()">
 <h3>getServer</h3>
 <div class="member-signature"><span class="return-type"><a href="../abstracts/Server.html" title="class in dev.forbit.server.abstracts">Server</a></span>&nbsp;<span class="element-name">getServer</span>()</div>
+<div class="block">Gets the parent <a href="../abstracts/Server.html" title="class in dev.forbit.server.abstracts"><code>Server</code></a> object that the packet was received on</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>Server that packet was received on</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getAddress()">
 <h3>getAddress</h3>
 <div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getAddress</span>()</div>
+<div class="block">Gets the address to host the bind the server too.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>Address to host on.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="shutdown()">
 <h3>shutdown</h3>
 <div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">shutdown</span>()</div>
+<div class="block">Sets running to false</div>
 </section>
 </li>
 <li>
 <section class="detail" id="isRunning()">
 <h3>isRunning</h3>
 <div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">isRunning</span>()</div>
+<div class="block">Returns whether the server is currently running</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true if running</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setRunning(boolean)">
 <h3>setRunning</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">setRunning</span>&#8203;<span class="parameters">(boolean&nbsp;running)</span></div>
+<div class="block">Sets the server running status</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>running</code> - running status</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="init()">
 <h3>init</h3>
 <div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">init</span>()</div>
+<div class="block">Initialise the server.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>false if an error occured</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="loop()">
 <h3>loop</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">loop</span>()</div>
+<div class="block">The basic loop that happens every tick</div>
 </section>
 </li>
 <li>
@@ -200,9 +257,10 @@ loadScripts(document, 'script');</script>
 <h3>begin</h3>
 <div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">begin</span>()
             throws <span class="exceptions"><a href="../exceptions/ServerInitialisationError.html" title="class in dev.forbit.server.exceptions">ServerInitialisationError</a></span></div>
+<div class="block">Initialises the server and begins the loop</div>
 <dl class="notes">
 <dt>Throws:</dt>
-<dd><code><a href="../exceptions/ServerInitialisationError.html" title="class in dev.forbit.server.exceptions">ServerInitialisationError</a></code></dd>
+<dd><code><a href="../exceptions/ServerInitialisationError.html" title="class in dev.forbit.server.exceptions">ServerInitialisationError</a></code> - throws if there was an error in the initialisation phase.</dd>
 </dl>
 </section>
 </li>
@@ -210,6 +268,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getString()">
 <h3>getString</h3>
 <div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getString</span>()</div>
+<div class="block">Returns a GSON serialised string of the object</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>GSON string</dd>
+</dl>
 </section>
 </li>
 </ul>
