@@ -65,6 +65,13 @@ public abstract class UDPServer extends Thread implements ConnectionServer {
         getBuffer().clear();
     }
 
+    /**
+     * Handles either a new connection or a packet.
+     *
+     * @param remoteAddress the address that the packet was received from
+     * @param header        The header ID
+     * @param input         InputBuffer with the header already read
+     */
     private void acceptInput(SocketAddress remoteAddress, String header, GMLInputBuffer input) {
         if (Utilities.REGISTER_PACKET_IDENTIFIER.equals(header)) {
             // register client
@@ -79,6 +86,14 @@ public abstract class UDPServer extends Thread implements ConnectionServer {
         }
     }
 
+    /**
+     * Registers a client on the parent server.
+     * Should already be registered on the TCP server.
+     * The input buffer should contain the UUID returned by the TCP Server Connection Protocol.
+     *
+     * @param remoteAddress the address that the packet was received from
+     * @param input         InputBuffer with the header already read
+     */
     private void registerClient(SocketAddress remoteAddress, GMLInputBuffer input) {
         Optional<String> uuid = input.readString();
         if (uuid.isEmpty()) {

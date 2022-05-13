@@ -35,6 +35,11 @@ public abstract class TCPServer extends Thread implements ConnectionServer {
         begin();
     }
 
+    /**
+     * Defines the Packet used for new connections
+     *
+     * @return ConnectionPacket
+     */
     public abstract ConnectionPacket getConnectionPacket();
 
     @Override
@@ -67,6 +72,11 @@ public abstract class TCPServer extends Thread implements ConnectionServer {
         }
     }
 
+    /**
+     * Gets the key ID
+     *
+     * @return the number of keys, or -1 for an exception
+     */
     public int select() {
         try {
             return this.getSelector().select();
@@ -76,6 +86,12 @@ public abstract class TCPServer extends Thread implements ConnectionServer {
         }
     }
 
+    /**
+     * Handles the SelectionKey.
+     * Sends the server to either {@link #acceptKey()} if its a new connection, or {@link #readKey(SelectionKey)} if the key contains readable data.
+     *
+     * @param key the received key
+     */
     private void handleKey(SelectionKey key) {
         try {
             if (key.isAcceptable()) {
@@ -89,11 +105,23 @@ public abstract class TCPServer extends Thread implements ConnectionServer {
         }
     }
 
+    /**
+     * Accept a new connection
+     *
+     * @throws IOException exception from {@link ServerSocketChannel#accept()}
+     */
     private void acceptKey() throws IOException {
         SocketChannel channel = getChannel().accept();
         if (channel != null) { acceptConnection(channel); }
     }
 
+    /**
+     * Accepts a new connection from a socket channel
+     *
+     * @param channel the socket channel where the connection is coming from
+     *
+     * @throws IOException Exceptions from multiple channel methods.
+     */
     private void acceptConnection(SocketChannel channel) throws IOException {
         Utilities.getLogger().fine("Accepting connection from " + channel);
         channel.configureBlocking(false);
@@ -108,6 +136,11 @@ public abstract class TCPServer extends Thread implements ConnectionServer {
 
     }
 
+    /**
+     * Reads data off of a key
+     *
+     * @param key the received key
+     */
     private void readKey(SelectionKey key) {
         // get the channel
         SocketChannel channel = (SocketChannel) key.channel();
@@ -124,6 +157,13 @@ public abstract class TCPServer extends Thread implements ConnectionServer {
 
     }
 
+    /**
+     * Handles a packet
+     *
+     * @param channel the channel it was received on
+     * @param buffer  the ByteBuffer, with the header already read.
+     * @param client  The client that sent the packet
+     */
     private void receivePacket(SocketChannel channel, ByteBuffer buffer, Client client) {
         // check channel status
         if (!channel.isConnected()) { return; }

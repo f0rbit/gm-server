@@ -4,6 +4,9 @@ import dev.forbit.server.utilities.Client;
 
 import java.nio.ByteBuffer;
 
+/**
+ * The common methods across all packets
+ */
 public interface PacketInterface {
 
     /**

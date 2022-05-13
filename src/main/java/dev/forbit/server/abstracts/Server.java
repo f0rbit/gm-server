@@ -14,6 +14,10 @@ import java.net.SocketAddress;
 import java.nio.channels.SocketChannel;
 import java.util.*;
 
+/**
+ * Base Server class that defines common methods and functionality for all server types.
+ * For implementation see {@link dev.forbit.server.networks.raw.RawServer} or {@link dev.forbit.server.networks.gson.GSONServer}
+ */
 public abstract class Server extends Thread implements ServerInterface {
     /**
      * Set of connected clients

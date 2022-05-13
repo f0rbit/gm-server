@@ -10,6 +10,9 @@ import lombok.Setter;
 
 import java.nio.ByteBuffer;
 
+/**
+ * Parent packet class. Defines common behaviour across packets.
+ */
 public abstract class Packet implements PacketInterface {
     /**
      * The server that received the packet.
@@ -50,6 +53,11 @@ public abstract class Packet implements PacketInterface {
         return output.getBuffer();
     }
 
+    /**
+     * Returns a GSON serialised string of the object
+     *
+     * @return GSON string
+     */
     @Override
     public String toString() {
         var gson = new GsonBuilder().create();
