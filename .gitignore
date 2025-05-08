@@ -3,3 +3,5 @@ build/
 .gradle/
 !.gradle-wrapper.jar
 out/
+bin/
+node_modules/

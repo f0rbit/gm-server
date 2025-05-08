@@ -1,0 +1,6 @@
+printWidth: 180
+semi: true
+useTabs: true
+tabWidth: 4
+plugins:
+- prettier-plugin-java
